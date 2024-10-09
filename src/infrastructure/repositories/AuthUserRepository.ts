@@ -23,7 +23,6 @@ class UserRepository {
         name: user.name,
         email: user.email,
         password: hashPassword,
-        role: user.role ?? 'user',
         profession: user.profession ?? '',
         country: user.country ?? '',
         avatar: user.avatar ?? ''
@@ -57,6 +56,18 @@ class UserRepository {
 
   }
 
+
+  async verifyOTP(email:string):Promise<any>{
+    const otp = await this.prisma.otp.findUnique({
+      where:{email}
+    })
+    return otp
+  }
+
+  async deleteOTP(email:string):Promise<any>{
+    await this.prisma.otp.delete({where:{email}})
+    return true
+  }
 
 
 

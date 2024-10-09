@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import userRoutes from './infrastructure/routes/userRoutes'; 
+import adminRouter from './infrastructure/routes/adminRoute';
 
 // configure .env file
 dotenv.config();
@@ -21,6 +22,8 @@ app.use(cors({
   // Middleware to parse JSON bodies
 
 app.use('/api/user',userRoutes);
+
+app.use('/api/admin',adminRouter)
 
 const PORT = 3000;
 app.listen(PORT, () => {

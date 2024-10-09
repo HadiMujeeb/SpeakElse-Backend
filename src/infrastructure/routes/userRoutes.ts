@@ -18,7 +18,7 @@ const usecase = new userUsecase(userRepository,mailerServices);
 const AuthuserController = new userController(usecase,mailusecase)
 
 router.post('/register',AuthuserController.register.bind(AuthuserController))
-router.post('/generateOtp',AuthuserController.sentOtp.bind(AuthuserController))
+router.post('/verifyOtp',AuthuserController.verifyOTP.bind(AuthuserController))
 
 
 export default router

@@ -1,11 +1,17 @@
-
 model User {
-    id        String    @id @default(auto()) @map("_id") @db.ObjectId
-    name      String
-   password   String
-   email      String  @unique
-   role       String?
-   country    String?
-   profession String?
-   avatar     String?
-} 
+    id         String  @id @default(auto()) @map("_id") @db.ObjectId
+    name       String
+    password   String
+    email      String  @unique
+    role       Role @default(USER)
+    country    String?
+    profession String?
+    avatar     String?
+    isVerified Boolean @default(false)
+}
+
+enum Role {
+    USER
+    ADMIN
+    MENTOR
+}

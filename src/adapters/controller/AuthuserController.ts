@@ -3,6 +3,7 @@ import UserUsecase from '../../useCase/userUsecase';
 import MailUseCase from '../../useCase/MailUsecase';
 import { User } from '../../domain/entities/user';
 
+
 export default class UserController {
 
     private userUsecase: UserUsecase;
@@ -12,7 +13,6 @@ export default class UserController {
         this.mailUseCase = MailUseCase;
     }
 
-    // Express route handler for user registration
     async register(req: Request, res: Response): Promise<void> {
         try {
             const user: User = req.body;
@@ -22,9 +22,11 @@ export default class UserController {
                 res.status(400).json({ userExists: userExists.data.message });
                 return;
             }
-            // Create the user
             const result = await this.userUsecase.CreateUser(user);
-            res.status(201).json(result);
+            await this.userUsecase.sentOTP(user.email)
+            res.status(200).json({ 
+                message: 'OTP sent successfully',
+             });
         } catch (error: any) {
             console.error('Error registering user:', error);
             res.status(500).json({ message: 'Failed to register user.' });
@@ -32,17 +34,15 @@ export default class UserController {
     }
 
 
-    async sentOtp(req: Request, res: Response): Promise<void> {
-        const email  = 'hadimujeeb300@gmail.com'
-        if (!email) {
-            res.status(400).json({ message: 'Email is required' });
-            return;
-        }
+    async verifyOTP(req: Request, res: Response): Promise<void> {
+        const { email, enterotp } = req.body;
+
         try {
-            await this.userUsecase.sentOTP(email)
-            res.status(200).json({ message: 'OTP sent successfully' });
+            const result = await this.userUsecase.verifyOTP(email, enterotp);
+            res.status(result.status).json({ message: result.message });
         } catch (error) {
-            res.status(500).json({ message: 'Failed to send OTP' });
+            console.error("Error verifying OTP:", error);
+            res.status(500).json({ message: "Internal server error" });
         }
     }
 
