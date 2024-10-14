@@ -13,7 +13,7 @@ export default class AdminUseCase {
     }
 
     async verifyPassword(email: string, password: string): Promise<boolean> {
-        return this.adminRepository.verifyAdminPassword(email, password);
+        return this.adminRepository.verifyPassword(email, password);
     }
 
 }

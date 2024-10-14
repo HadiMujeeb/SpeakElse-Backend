@@ -1,12 +1,13 @@
-export interface User {
+export interface IUser {
   id: string;
   email: string;
   password: string;
-  name: string ;
+  name: string;
   role?: string | null;
   avatar?: string | null;
   profession?: string | null;
   country?: string | null;
+  isVerified?: Boolean;
 }
 
 export interface LoginRequest {
@@ -20,5 +21,4 @@ export interface OTP {
   otp: string;
   expiresAt: Date;
   createdAt: Date;
-
 }

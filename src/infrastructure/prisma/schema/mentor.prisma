@@ -1,0 +1,9 @@
+model MentorApplication {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String   @db.ObjectId
+  proficiencyLevel  String?
+  applicationFeedback String?
+  submittedAt       DateTime @default(now())
+  applicationStatus  String?
+  reviewedAt        DateTime?
+}

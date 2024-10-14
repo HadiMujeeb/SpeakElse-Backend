@@ -1,31 +1,39 @@
-import express, { Request, Response } from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import morgan from 'morgan';
-import userRoutes from './infrastructure/routes/userRoutes'; 
-import adminRouter from './infrastructure/routes/adminRoute';
+import express, { Request, Response } from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import morgan from "morgan";
+import cookieParse from "cookie-parser";
 
-// configure .env file
+// Routes
+import UserAuthRoutes from "./infrastructure/routes/user.AuthRoutes";
+import adminRouter from "./infrastructure/routes/adminRoute";
+
+// middlewire
+import { errorHandler } from "./infrastructure/middlewares/errorResponder";
+
 dotenv.config();
-// Initialize Express app
 const app = express();
-
-// app.use(cors());    
 app.use(express.json());
-// log all requests
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
-app.use(cors({
-    origin: 'http://localhost:4200',
-    credentials: true
-}))
-  // Middleware to parse JSON bodies
 
-app.use('/api/user',userRoutes);
 
-app.use('/api/admin',adminRouter)
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+    credentials: true,
+  })
+);
+
+app.use(cookieParse());
+
+app.use("/api/user/auth", UserAuthRoutes);
+app.use("/api/admin", adminRouter);
+
+// Use error handler middleware
+app.use(errorHandler)
 
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
