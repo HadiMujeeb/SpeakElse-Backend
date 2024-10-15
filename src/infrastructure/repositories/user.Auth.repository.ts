@@ -56,4 +56,28 @@ export class userAuthRepository implements IUserAuthRepository {
       throw err;
     }
   }
+
+  async findUserById(id: string): Promise<IUser | null> {
+    try {
+      const userData = await this.prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
+      return userData;
+    } catch (err) {
+      throw err
+    }
+  }
+
+  async getUserByGoogleId(googleId: string): Promise<IUser | null> {
+    try {
+      return await this.prisma.user.findUnique({
+        where: { googleId },
+      });
+    } catch (err) {
+      throw err
+    }
+  }
+ 
 }

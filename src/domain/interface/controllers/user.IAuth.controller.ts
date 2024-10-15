@@ -1,10 +1,13 @@
 import {Request,Response, NextFunction } from "express";
+import { IUser } from "../../entities/user";
 
 export interface IuserAuthenticationController {
    UserRegistrationRequest(req:Request,res:Response,next:NextFunction):Promise<void>;
    confirmOtpRequest(req:Request,res:Response,next:NextFunction):Promise<void>;
    UserLoginRequest(req:Request,res:Response,next:NextFunction):Promise<void>
    UserLogoutRequest(req:Request,res:Response,next:NextFunction):Promise<void>
+   authenticateTokenRequest(req:Request,res:Response,next:NextFunction):Promise<IUser|void>;
+   resendOTPRequest(req:Request,res:Response,next:NextFunction):Promise<void|never>
 }
 
 export interface IUserLoginCredentials {
@@ -19,7 +22,7 @@ export interface IUserRegisterCredentials {
     confirmPassword: string;
 }
 
-export interface OTPData {
+export interface IOTPData {
     email: string;        
     enteredOtp: string;   
   }

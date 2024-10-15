@@ -22,6 +22,7 @@
     "nodemailer": "^6.9.15",
     "nodemon": "^3.1.7",
     "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.1",
     "prisma": "^5.20.0",
     "prisma-multischema": "^1.1.4",
@@ -37,6 +38,8 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/morgan": "^1.9.9",
     "@types/nodemailer": "^6.4.16",
+    "@types/passport": "^1.0.16",
+    "@types/passport-google-oauth20": "^2.0.16",
     "@types/socket.io": "^3.0.2",
     "ts-node": "^10.9.2"
   }

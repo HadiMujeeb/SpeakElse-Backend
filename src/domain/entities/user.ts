@@ -1,14 +1,16 @@
 export interface IUser {
   id: string;
   email: string;
-  password: string;
+  password: string | null; 
   name: string;
   role?: string | null;
+  googleId?: string | null;
   avatar?: string | null;
   profession?: string | null;
   country?: string | null;
   isVerified?: Boolean;
 }
+
 
 export interface LoginRequest {
   Email: string;

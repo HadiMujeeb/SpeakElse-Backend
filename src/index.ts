@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParse from "cookie-parser";
+import passport from "passport";
 
 // Routes
 import UserAuthRoutes from "./infrastructure/routes/user.AuthRoutes";
@@ -24,6 +25,12 @@ app.use(
     credentials: true,
   })
 );
+
+
+app.use(passport.initialize());
+app.use(passport.session())
+
+
 
 app.use(cookieParse());
 

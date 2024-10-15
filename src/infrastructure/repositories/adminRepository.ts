@@ -25,6 +25,6 @@ export default class adminRepository {
     if (!user) {
       return false; // User not found
     }
-    return await bcrypt.compare(password, user.password);
+    return await bcrypt.compare(password, user.password||"");
   }
 }

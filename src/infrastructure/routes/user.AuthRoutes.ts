@@ -30,13 +30,12 @@ const ProfileController = new profileController(ProfileUsecase);
 
 // Routes
 router.post("/registerUser",AuthuserController.UserRegistrationRequest.bind(AuthuserController));
-router.post("/verifyOtp",AuthuserController.confirmOtpRequest.bind(AuthuserController));
+router.post("/verify-Otp",AuthuserController.confirmOtpRequest.bind(AuthuserController));
 router.post("/login", AuthuserController.UserLoginRequest.bind(AuthuserController));
-// router.get(
-//   "/verifyToken",
-//   AuthuserController.verifyToken.bind(AuthuserController)
-// );
 router.get("/logout", AuthuserController.UserLogoutRequest.bind(AuthuserController));
+router.get("/verify-Token", AuthuserController.authenticateTokenRequest.bind(AuthuserController));
+router.post("/resend-OTP", AuthuserController.resendOTPRequest.bind(AuthuserController))
+
 // router.put("/profile", ProfileController.editprofile.bind(ProfileController));
 
 export default router;
