@@ -8,9 +8,11 @@ import passport from "passport";
 // Routes
 import UserAuthRoutes from "./infrastructure/routes/user.AuthRoutes";
 import adminRouter from "./infrastructure/routes/adminRoute";
+import profileRoute from "./infrastructure/routes/profile.userRoute";
 
 // middlewire
 import { errorHandler } from "./infrastructure/middlewares/errorResponder";
+
 
 dotenv.config();
 const app = express();
@@ -27,8 +29,8 @@ app.use(
 );
 
 
-app.use(passport.initialize());
-app.use(passport.session())
+// app.use(passport.initialize());
+// app.use(passport.session())
 
 
 
@@ -36,7 +38,7 @@ app.use(cookieParse());
 
 app.use("/api/user/auth", UserAuthRoutes);
 app.use("/api/admin", adminRouter);
-
+app.use("/api/user",profileRoute)
 // Use error handler middleware
 app.use(errorHandler)
 

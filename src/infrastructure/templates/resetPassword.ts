@@ -1,4 +1,4 @@
-function getResetPasswordEmailTemplate(userName:string, resetLink:string) {
+export const getResetPasswordEmailTemplate = (userName: string, resetLink: string) => {
     return `
     <!DOCTYPE html>
     <html>

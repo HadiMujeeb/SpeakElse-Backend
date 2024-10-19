@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { otpTemplate } from "../../infrastructure/templates/otpTemplate";
+import { getResetPasswordEmailTemplate } from "../../infrastructure/templates/resetPassword";
 import IOTPCredentials from "../interface/controllers/IOTP.controller";
 export class MailerServices {
   private transporter;
@@ -30,6 +31,20 @@ export class MailerServices {
       html: templates.html,
     };
 
+    return await this.transporter.sendMail(mailOptions);
+  }
+
+  async sendRestPasswordLink(name:string,email:string,token:string){
+    const link = `${process.env.FRONTEND_URL}?token=${token}`;
+
+    const templates = getResetPasswordEmailTemplate(name,link);
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Password Reset Request',
+      html: templates,
+    };
     return await this.transporter.sendMail(mailOptions);
   }
 }

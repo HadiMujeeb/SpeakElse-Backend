@@ -6,14 +6,14 @@ import prisma from "../config/PrismaCient";
 import { PasswordService } from "../../domain/thirdParty/passwordServices";
 
 import { MailerServices } from "../../domain/thirdParty/emailService";
-import profileController from "../../adapters/controller/profileController";
-import profileRepository from "../repositories/profileRepository";
-import profileUsecase from "../../usecase/profileUsecase";
+
+import profileUsecase from "../../usecase/userProfileUsecase";
 import OTPRepository from "../repositories/Otp.Repository";
+import { authorize } from "passport";
 const router: Router = express.Router();
 
 // Instantiate services and use cases
-const mailerServices= new MailerServices();
+const mailerServices = new MailerServices();
 const OtpRepository = new OTPRepository(prisma);
 const UserAuthRepository = new userAuthRepository(prisma);
 const passwordService = new PasswordService();
@@ -23,19 +23,43 @@ const userAuthUseCase = new UserAuthUseCase(
   passwordService,
   OtpRepository
 );
+
 const AuthuserController = new UserAuthController(userAuthUseCase);
-const ProfileRepository = new profileRepository();
-const ProfileUsecase = new profileUsecase(ProfileRepository);
-const ProfileController = new profileController(ProfileUsecase);
+
 
 // Routes
-router.post("/registerUser",AuthuserController.UserRegistrationRequest.bind(AuthuserController));
-router.post("/verify-Otp",AuthuserController.confirmOtpRequest.bind(AuthuserController));
-router.post("/login", AuthuserController.UserLoginRequest.bind(AuthuserController));
-router.get("/logout", AuthuserController.UserLogoutRequest.bind(AuthuserController));
-router.get("/verify-Token", AuthuserController.authenticateTokenRequest.bind(AuthuserController));
-router.post("/resend-OTP", AuthuserController.resendOTPRequest.bind(AuthuserController))
+router.post(
+  "/registerUser",
+  AuthuserController.UserRegistrationRequest.bind(AuthuserController)
+);
+router.post(
+  "/verifyOtp",
+  AuthuserController.confirmOtpRequest.bind(AuthuserController)
+);
+router.post(
+  "/loginUser",
+  AuthuserController.UserLoginRequest.bind(AuthuserController)
+);
+router.get(
+  "/logout",
+  AuthuserController.UserLogoutRequest.bind(AuthuserController)
+);
+router.get(
+  "/verify-Token",
+  AuthuserController.authenticateTokenRequest.bind(AuthuserController)
+);
+router.post(
+  "/resend-OTP",
+  AuthuserController.resendOTPRequest.bind(AuthuserController)
+);
+router.post(
+  "/sendEmailReset",
+  AuthuserController.requestSentMailResetPassword.bind(AuthuserController)
+);
+router.post(
+  "/resetPassword",
+  AuthuserController.requestResetPassword.bind(AuthuserController)
+);
 
-// router.put("/profile", ProfileController.editprofile.bind(ProfileController));
 
 export default router;

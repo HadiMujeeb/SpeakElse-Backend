@@ -7,7 +7,9 @@ export interface IuserAuthenticationController {
    UserLoginRequest(req:Request,res:Response,next:NextFunction):Promise<void>
    UserLogoutRequest(req:Request,res:Response,next:NextFunction):Promise<void>
    authenticateTokenRequest(req:Request,res:Response,next:NextFunction):Promise<IUser|void>;
-   resendOTPRequest(req:Request,res:Response,next:NextFunction):Promise<void|never>
+   resendOTPRequest(req:Request,res:Response,next:NextFunction):Promise<void|never>;
+   requestSentMailResetPassword(req:Request,res:Response,next:NextFunction):Promise<void|never>;
+   requestResetPassword(req:Request,res:Response,next:NextFunction):Promise<void|never>;
 }
 
 export interface IUserLoginCredentials {
@@ -24,5 +26,5 @@ export interface IUserRegisterCredentials {
 
 export interface IOTPData {
     email: string;        
-    enteredOtp: string;   
+    enteredotp: string;   
   }

@@ -16,6 +16,7 @@ import { SuccessMessages } from "../../domain/StatusMessages/SuccessMessages";
 // Error messages import 
 import { ErrorMessages } from "../../domain/StatusMessages/ErrorMessages";
 import { IUser } from "../../domain/entities/user";
+import { token } from "morgan";
 
 export default class UserAuthController implements IuserAuthenticationController {
 
@@ -32,18 +33,19 @@ export default class UserAuthController implements IuserAuthenticationController
       await this.userAuthUseCase.registerUser(newUserData);
       res.status(HttpStatus.CREATED).json({ message: SuccessMessages.OTP_SENT });
     } catch (error: any) {
-      next({
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
-        message: error || ErrorMessages.INTERNAL_SERVER_ERROR,
-      });
+      next(error)
     }
   } 
 
   // Confirms the OTP provided by the user
   async confirmOtpRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
+    try {  
       const OtpData: IOTPData = req.body;
-      const token = await this.userAuthUseCase.handleOtpConfirmation(OtpData);
+      const email = OtpData.email; 
+    const enteredOtp = OtpData.enteredotp
+      console.log(OtpData,"data") 
+      const token = await this.userAuthUseCase.handleOtpConfirmation(email,enteredOtp);
+      console.log("token",token)
       if (token) {
         res.cookie("authToken", token, {
           maxAge: 3600000,
@@ -56,10 +58,7 @@ export default class UserAuthController implements IuserAuthenticationController
       }
       res.status(HttpStatus.OK).json({ message: SuccessMessages.USER_VERIFIED });
     } catch (error: any) {
-      next({
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
-        message: error || ErrorMessages.INTERNAL_SERVER_ERROR,
-      });
+    next(error)
     }
   }
 
@@ -75,15 +74,15 @@ export default class UserAuthController implements IuserAuthenticationController
           secure: process.env.NODE_ENV === "production",
           sameSite: "lax",
         });
-        res.status(HttpStatus.OK).json({ message: SuccessMessages.LOGIN_SUCCESS });
+        
+        res.status(HttpStatus.OK).json({
+           message: SuccessMessages.LOGIN_SUCCESS
+          });
       } else {
         res.status(HttpStatus.UNAUTHORIZED).json({ message: ErrorMessages.INVALID_PASSWORD });
       }
     } catch (error: any) {
-      next({
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
-        message: error || ErrorMessages.INTERNAL_SERVER_ERROR,
-      });
+      next(error);
     }
   }
 
@@ -92,18 +91,16 @@ export default class UserAuthController implements IuserAuthenticationController
     try {
       const token = req.cookies.authToken || req.headers.authorization?.split(" ")[1];
       if (!token) {
-        throw new Error(ErrorMessages.TOKEN_MISSING);
+        throw {status:HttpStatus.UNAUTHORIZED,message:ErrorMessages.TOKEN_MISSING}
       }
       const userData = await this.userAuthUseCase.validateAccessToken(token);
       res.status(HttpStatus.OK).json({
         message: SuccessMessages.ACCESS_GRANTED,
         user: userData,
+        status:HttpStatus.OK
       });
     } catch (error) {
-      next({
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
-        message: error || ErrorMessages.INTERNAL_SERVER_ERROR,
-      });
+      next(error);
     }
   }
 
@@ -116,10 +113,10 @@ export default class UserAuthController implements IuserAuthenticationController
         sameSite: "lax",
       });
       res.status(HttpStatus.OK).json({ message: SuccessMessages.LOGOUT_SUCCESS });
-    } catch (error) {
+    } catch (err:any) {
       next({
         status: HttpStatus.INTERNAL_SERVER_ERROR,
-        message: error || ErrorMessages.INTERNAL_SERVER_ERROR,
+        message: err.message || ErrorMessages.INTERNAL_SERVER_ERROR,
       });
     }
   }
@@ -135,6 +132,33 @@ export default class UserAuthController implements IuserAuthenticationController
         status: HttpStatus.INTERNAL_SERVER_ERROR,
         message: error || ErrorMessages.INTERNAL_SERVER_ERROR,
       });
+    }
+  }
+
+ async requestSentMailResetPassword(req: Request, res: Response, next: NextFunction): Promise<void | never> {
+    try {
+       const {email} = req.body;
+       console.log("email",email)
+       await this.userAuthUseCase.sentEmailResetPassword(email);
+       res.status(HttpStatus.OK).json({message:SuccessMessages.PASSWORD_RESET_EMAIL_SENT})
+    } catch (error) {
+      next(error)
+    }
+  };
+
+
+  async requestResetPassword(req: Request, res: Response, next: NextFunction): Promise<void | never> {
+    try {
+     
+      const {token,password} = req.body;
+      console.log(password)
+      if(!token){
+        throw {status:HttpStatus.NOT_FOUND,message:ErrorMessages.TOKEN_MISSING};
+      }
+      await this.userAuthUseCase.handleResetPassword(password,token);
+      res.status(HttpStatus.OK).json({message:SuccessMessages.PASSWORD_CHANGED})
+    } catch (error) {
+      next(error)
     }
   }
 }

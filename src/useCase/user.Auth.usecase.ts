@@ -49,16 +49,17 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
   async handleUserLogin(credentials: IUserLoginCredentials): Promise<string | void> {
     try {
       const { email, password } = credentials;
+      
       const isEmailExisted = await this.UserAuthRepository.findUserByEmail(email);
       if (isEmailExisted && !isEmailExisted.isVerified || !isEmailExisted) {
-        throw new Error("Email is not existed");
+        throw { status:HttpStatus.NOT_FOUND,message:ErrorMessages.USER_NOT_FOUND}
       }
       const isPasswordMatch = await this.PasswordService.verifyPassword(password, isEmailExisted.password||'');
       if (isPasswordMatch) {
         const userToken = await JWT.generateToken(isEmailExisted.id);
         return userToken;
       } else {
-        throw new Error("Password not matched");
+        throw { status:HttpStatus.UNAUTHORIZED,message:ErrorMessages.INVALID_PASSWORD}
       }
     } catch (err) {
       throw err;
@@ -70,7 +71,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
     try {
       const isEmailExisted = await this.UserAuthRepository.findUserByEmail(newUserData.email);
       if (isEmailExisted && isEmailExisted.isVerified) {
-        throw new Error("Email already exists");
+        throw {status:HttpStatus.BAD_REQUEST,message:ErrorMessages.EMAIL_ALREADY_EXISTS}
       }
       const hashPassword: string = await this.PasswordService.hashPassword(newUserData.password);
       newUserData.password = hashPassword;
@@ -96,30 +97,38 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
   }
 
   // Confirms the OTP entered by the user
-  async handleOtpConfirmation(sentedData: IOTPData): Promise<string | void> {
+  async handleOtpConfirmation(email:string,enteredOtp:string): Promise<string | void> {
     try {
-      const recordOtp = await this.OTPRepository.findOTPByEmail(sentedData.email);
-      const userData = await this.UserAuthRepository.findUserByEmail(sentedData.email);
-      if (!recordOtp) {
-        throw new Error("Record OTP is expired");
+   
+            console.log(email)
+      if (!enteredOtp || !email) {
+        throw new Error("Entered OTP or email is missing");
       }
-
-      const { otp, expiresAt } = recordOtp;
-      if (new Date() < expiresAt) {
-        if (recordOtp.otp == sentedData.enteredOtp) {
-          await this.UserAuthRepository.markUserAsVerified(sentedData.email);
-          await this.OTPRepository.removeOTPByEmail(sentedData.email);
-          const userToken = await JWT.generateToken(userData!.id);
-          return userToken;
-        }
+  
+      const recordOtp = await this.OTPRepository.findOTPByEmail(email);
+      const userData = await this.UserAuthRepository.findUserByEmail(email);
+  
+      if (!recordOtp) {
+        throw {status:HttpStatus.UNAUTHORIZED,message:ErrorMessages.OTP_EXPIRED}
+      }
+  
+  
+      if (enteredOtp === recordOtp.otp) {  
+        console.log("working-4");
+        await this.UserAuthRepository.markUserAsVerified(email);
+        await this.OTPRepository.removeOTPByEmail(email);
+        
+        const userToken = await JWT.generateToken(userData!.id);
+        return userToken;
       } else {
-        await this.OTPRepository.removeOTPByEmail(sentedData.email);
+        await this.OTPRepository.removeOTPByEmail(email);
+        throw new Error("Invalid OTP");
       }
     } catch (err) {
       throw err;
     }
   }
- 
+  
 
   async resendVerificationOTP(email: string): Promise<void | never> {
     try {
@@ -153,19 +162,36 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
     }
   }
 
-async requestPasswordResetEmail(email: string): Promise<void> {
+async sentEmailResetPassword(email: string): Promise<void> {
   try {
     const user = await this.UserAuthRepository.findUserByEmail(email);
     if (!user) {
-      throw new Error("User not found");
+      throw {status:HttpStatus.NOT_FOUND,message:ErrorMessages.USER_NOT_FOUND}
     }
+    const userToken = await JWT.generateToken(user.id);
+    const expiresAt = new Date();
+    expiresAt.setHours(expiresAt.getHours() + 1);
 
-    
-    
-
+    await this.OTPRepository.saveResetToken(user.email, userToken, expiresAt);
+    await this.mailerServices.sendRestPasswordLink(user.name,user.email,userToken);
 
   } catch (err) {
     throw err
+  }
+}
+
+async handleResetPassword(password:string,token:string):Promise<void>{
+  try {
+    const user = await this.validateAccessToken(token);
+    if(user){
+      const hashPassword = await this.PasswordService.hashPassword(password);
+
+      await this.OTPRepository.resetPassword(user.id,hashPassword); 
+    }else{
+      throw {status:HttpStatus.NOT_FOUND,message:ErrorMessages.USER_NOT_FOUND}
+    }
+  } catch (error) {
+    throw error
   }
 }
 

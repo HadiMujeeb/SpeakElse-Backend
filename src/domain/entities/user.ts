@@ -1,14 +1,17 @@
+import { Role } from "@prisma/client";
+
 export interface IUser {
   id: string;
   email: string;
   password: string | null; 
   name: string;
-  role?: string | null;
+  role?: Role;
   googleId?: string | null;
   avatar?: string | null;
   profession?: string | null;
   country?: string | null;
-  isVerified?: Boolean;
+  isVerified?: boolean;
+  isBlocked?: boolean;
 }
 
 

@@ -1,19 +1,19 @@
 model User {
-    id         String    @id @default(auto()) @map("_id") @db.ObjectId
-    name       String
-    password   String?
-    email      String    @unique
-    googleId   String?   @unique
-    role       Role      @default(USER)
-    country    String?
-    profession String?
-    avatar     String?
-    isVerified Boolean   @default(false)
-    createdAt  DateTime  @default(now())
-    updatedAt  DateTime  @updatedAt
-    comment    comment[]
+    id                String    @id @default(auto()) @map("_id") @db.ObjectId
+    name              String
+    password          String?
+    email             String    @unique
+    googleId          String?   @unique
+    role              Role      @default(USER)
+    country           String?
+    profession        String?
+    avatar            String?
+    isVerified        Boolean   @default(false)
+    isBlocked         Boolean   @default(false) // Add isBlocked property
+    resetToken        String? 
+    resetTokenExpiry  DateTime?
+    comment           comment[]
 }
-
 
 enum Role {
     USER

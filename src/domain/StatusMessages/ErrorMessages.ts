@@ -5,6 +5,6 @@ export const ErrorMessages = {
     OTP_EXPIRED: "Your OTP has expired. Please request a new one.",
     EMAIL_ALREADY_EXISTS: "Email already exists.",
     INVALID_TOKEN: "Invalid token. Please try again or log in.",
-    TOKEN_MISSING: "Access denied. Missing authorization token.",
+    TOKEN_MISSING: "Access denied. Your Cookie has expired. Please log in again to continue.",
     INTERNAL_SERVER_ERROR: "An unexpected error occurred. Please try again later.",
 };
