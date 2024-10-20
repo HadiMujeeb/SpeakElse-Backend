@@ -7,4 +7,5 @@ export const ErrorMessages = {
     INVALID_TOKEN: "Invalid token. Please try again or log in.",
     TOKEN_MISSING: "Access denied. Your Cookie has expired. Please log in again to continue.",
     INTERNAL_SERVER_ERROR: "An unexpected error occurred. Please try again later.",
+    USER_BLOCKED: "Access denied. Your account has been blocked. Please contact support for further assistance.",
 };

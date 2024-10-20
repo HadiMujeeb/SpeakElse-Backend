@@ -27,24 +27,26 @@ export default class AdminUserMgmtRepository implements IAdminUserMgmtRepo {
         }
     }
 
-    async createMember(newMember: IUser): Promise<void | never> {
-        try {
-            await this.prisma.user.create({
-                data: {
-                    email: newMember.email,
-                    password: newMember.password,
-                    name: newMember.name,
-                    role:newMember.role??Role.USER,
-                    avatar: newMember.avatar||null,
-                    profession: newMember.profession,
-                    country: newMember.country,
-                    isVerified:newMember.isVerified,
-                }
-                })
-        } catch (error) {
-            throw error
-        }
+   async createMember(newMember: IUser): Promise<void | never> {
+    try {
+        await this.prisma.user.create({
+            data: {
+                email: newMember.email,
+                password: newMember.password,
+                name: newMember.name,
+                avatar: newMember.avatar,
+                profession: newMember.profession,
+                country: newMember.country,
+                role: newMember.role ?? Role.USER,
+                isVerified: newMember.isVerified,  
+                description: newMember.description 
+            }
+        });
+    } catch (error) {
+        throw error;
     }
+}
+
 
     async editMember(memberId: string, userDetails: Partial<IUser>): Promise<IUser> {
         try {

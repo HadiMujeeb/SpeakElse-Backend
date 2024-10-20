@@ -153,7 +153,12 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
       const decodedToken = await JWT.verifyToken(token);
       if (typeof decodedToken === "object" && decodedToken !== null && "id" in decodedToken) {
         const userData = await this.UserAuthRepository.findUserById(decodedToken.id);
-        return userData ? userData : null;
+        if(userData&&!userData.isBlocked){
+          return userData ? userData : null;
+        }else{
+          throw {status:HttpStatus.FORBIDDEN,message:ErrorMessages.USER_BLOCKED}
+        }
+  
       } else {
         throw new Error(ErrorMessages.INVALID_TOKEN);
       }

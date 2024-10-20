@@ -1,16 +1,17 @@
 model User {
     id                String    @id @default(auto()) @map("_id") @db.ObjectId
     name              String
-    password          String?
     email             String    @unique
+    password          String?
     googleId          String?   @unique
+    avatar            String?
     role              Role      @default(USER)
     country           String?
     profession        String?
-    avatar            String?
+    description       String?
     isVerified        Boolean   @default(false)
-    isBlocked         Boolean   @default(false) // Add isBlocked property
-    resetToken        String? 
+    isBlocked         Boolean   @default(false)
+    resetToken        String?
     resetTokenExpiry  DateTime?
     comment           comment[]
 }
