@@ -6,13 +6,14 @@ import cookieParse from "cookie-parser";
 import passport from "passport";
 
 // Routes
-import UserAuthRoutes from "./infrastructure/routes/user.AuthRoutes";
-import adminRouter from "./infrastructure/routes/adminRoute";
-import profileRoute from "./infrastructure/routes/profile.userRoute";
+import UserAuthRoutes from "./infrastructure/routes/user.auth.route";
+import adminRouter from "./infrastructure/routes/admin.route";
+import profileRoute from "./infrastructure/routes/userProfile.route";
+import MentorAuthRoute from "./infrastructure/routes/mentor.auth.route";
 
 // middlewire
-import { errorHandler } from "./infrastructure/middlewares/errorResponder";
-
+import { errorHandler } from "./infrastructure/middlewares/error.middleware";
+import MentorProfileRoute from "./infrastructure/routes/mentor.profile.route";
 
 dotenv.config();
 const app = express();
@@ -39,6 +40,8 @@ app.use(cookieParse());
 app.use("/api/user/auth", UserAuthRoutes);
 app.use("/api/admin", adminRouter);
 app.use("/api/user",profileRoute)
+app.use("/api/mentor",MentorProfileRoute);
+app.use("/api/mentor/auth",MentorAuthRoute);
 // Use error handler middleware
 app.use(errorHandler)
 

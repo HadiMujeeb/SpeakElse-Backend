@@ -1,10 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
 // interface
-import IOTPRepository from "../../domain/interface/repositories/IOtp.repository";
-import IOTPCredentials from "../../domain/interface/controllers/IOTP.controller";
-import IPasswordTokenCredentials from "../../domain/interface/usecase/user.IAuth.usecase";
-
+import IOTPRepository from "../../interface/Irepositories/Iotp.repository";
+import IOTPCredentials from "../../interface/Icontrollers/IOTP.controller";
+import IPasswordTokenCredentials from "../../interface/Iusecase/Iuser.auth.usecase";
 
 export default class OTPRepository implements IOTPRepository {
   private prisma: PrismaClient;
@@ -15,7 +14,7 @@ export default class OTPRepository implements IOTPRepository {
 
   async saveOTPForEmail(OtpData: IOTPCredentials): Promise<void | never> {
     try {
-        await this.prisma.otp.create({
+      await this.prisma.otp.create({
         data: {
           email: OtpData.email,
           otp: OtpData.otp,
@@ -50,9 +49,12 @@ export default class OTPRepository implements IOTPRepository {
     }
   }
 
-  async saveResetToken(email: string, token: string, expiresAt: Date): Promise<void> {
+  async saveResetToken(
+    email: string,
+    token: string,
+    expiresAt: Date
+  ): Promise<void> {
     try {
-
       await this.prisma.user.update({
         where: { email },
         data: {
@@ -65,23 +67,27 @@ export default class OTPRepository implements IOTPRepository {
     }
   }
 
-  async findResetToken(email: string): Promise<IPasswordTokenCredentials | null> {
+  async findResetToken(
+    email: string
+  ): Promise<IPasswordTokenCredentials | null> {
     try {
-        const user = await this.prisma.user.findUnique({
-            where: { email },
-            select: {
-                resetToken: true,
-                resetTokenExpiry: true,
-            },
-        });
-        return user ? {
+      const user = await this.prisma.user.findUnique({
+        where: { email },
+        select: {
+          resetToken: true,
+          resetTokenExpiry: true,
+        },
+      });
+      return user
+        ? {
             resetToken: user.resetToken,
             resetTokenExpiry: user.resetTokenExpiry,
-        } : null;
+          }
+        : null;
     } catch (err) {
-        throw err; 
+      throw err;
     }
-}
+  }
 
   async removeResetToken(email: string): Promise<void> {
     try {
@@ -97,17 +103,16 @@ export default class OTPRepository implements IOTPRepository {
     }
   }
 
-  async resetPassword(id:string,password:string):Promise<void>{
+  async resetPassword(id: string, password: string): Promise<void> {
     try {
       await this.prisma.user.update({
-        where:{id},
-        data:{
-        password
-        }
-      })
+        where: { id },
+        data: {
+          password,
+        },
+      });
     } catch (error) {
-      throw error
+      throw error;
     }
   }
-
 }

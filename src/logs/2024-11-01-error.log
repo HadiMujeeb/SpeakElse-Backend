@@ -1,0 +1,42 @@
+{
+  status: 401,
+  message: 'The OTP you entered is incorrect. Please try again.',
+  level: 'error',
+  timestamp: '2024-11-01T04:47:34.802Z'
+}
+{
+  status: 401,
+  message: 'The OTP you entered is incorrect. Please try again.',
+  level: 'error',
+  timestamp: '2024-11-01T04:48:08.033Z'
+}
+{
+  status: 401,
+  message: 'Your OTP has expired. Please request a new one.',
+  level: 'error',
+  timestamp: '2024-11-01T04:50:56.932Z'
+}
+{
+  status: 401,
+  message: 'Your OTP has expired. Please request a new one.',
+  level: 'error',
+  timestamp: '2024-11-01T04:54:23.740Z'
+}
+{
+  status: 401,
+  message: 'Your OTP has expired. Please request a new one.',
+  level: 'error',
+  timestamp: '2024-11-01T04:55:26.248Z'
+}
+{
+  status: 401,
+  message: 'The OTP you entered is incorrect. Please try again.',
+  level: 'error',
+  timestamp: '2024-11-01T05:07:40.426Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-01T05:08:17.353Z'
+}

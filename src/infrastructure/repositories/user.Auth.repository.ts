@@ -1,18 +1,24 @@
 import { PrismaClient } from "@prisma/client";
-
-// interface
-import { IUser } from "../../domain/entities/user";
-import IUserAuthRepository from "../../domain/interface/repositories/user.IAuth.repository";
-import { IUserRegisterCredentials } from "../../domain/interface/controllers/user.IAuth.controller";
+const cron = require("node-cron");
+// Interface imports
+import { IUser } from "../../domain/entities/user.entities";
+import IUserAuthRepository from "../../interface/Irepositories/Iuser.auth.repository";
+import { IUserRegisterCredentials } from "../../interface/Icontrollers/Iuser.auth.controller";
 
 export class userAuthRepository implements IUserAuthRepository {
   private prisma: PrismaClient;
+
   constructor(prisma: PrismaClient) {
     this.prisma = prisma;
+
+    // Schedule the cron job to delete expired sessions
+    cron.schedule("*/2 * * * *", async () => {
+      console.log("Checking for expired sessions...");
+      await this.deleteExpiredOtp();
+    });
   }
 
-  async createNewUser(
-    newUserData: IUserRegisterCredentials): Promise<void | never> {
+  async createNewUser(newUserData: IUserRegisterCredentials): Promise<void> {
     try {
       await this.prisma.user.upsert({
         where: {
@@ -66,18 +72,25 @@ export class userAuthRepository implements IUserAuthRepository {
       });
       return userData;
     } catch (err) {
-      throw err
+      throw err;
     }
   }
 
-  async getUserByGoogleId(googleId: string): Promise<IUser | null> {
+  private async deleteExpiredOtp(): Promise<void> {
+    const now = new Date();
+
     try {
-      return await this.prisma.user.findUnique({
-        where: { googleId },
+      const result = await this.prisma.otp.deleteMany({
+        where: {
+          expiresAt: {
+            lt: now,
+          },
+        },
       });
+
+      console.log(`Deleted ${result.count} expired sessions.`);
     } catch (err) {
-      throw err
+      console.error("Error deleting expired sessions:", err);
     }
   }
- 
 }

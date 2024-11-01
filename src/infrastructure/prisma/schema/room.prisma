@@ -1,0 +1,19 @@
+enum Privacy {
+    PUBLIC
+    PRIVATE
+}
+
+
+model  Room  {
+    id   String @id @default(auto()) @map("_id") @db.ObjectId
+    creator String @db.ObjectId
+    roomName  String
+    roomDescription String?
+    privacy   Privacy @default(PUBLIC)
+    password String?
+    user    User   @relation("RoomParticipants",fields: [participants], references: [id])
+    participants String[] @db.ObjectId
+    moderators String[] @db.ObjectId
+    isLocked Boolean
+    createdAt DateTime @default(now()) @db.Timestamp
+}
