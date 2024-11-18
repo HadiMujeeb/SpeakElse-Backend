@@ -12,6 +12,7 @@ import adminRouter from "./infrastructure/routes/admin.route";
 import profileRoute from "./infrastructure/routes/userProfile.route";
 import MentorAuthRoute from "./infrastructure/routes/mentor.auth.route";
 import userRoomRoute from "./infrastructure/routes/userRoom.route";
+import FriendRatingsRoute from "./infrastructure/routes/friendRating.route";
 // middlewire
 import { errorHandler } from "./infrastructure/middlewares/error.middleware";
 import MentorProfileRoute from "./infrastructure/routes/mentor.profile.route";
@@ -42,6 +43,7 @@ app.use("/api/user", profileRoute);
 app.use("/api/mentor", MentorProfileRoute);
 app.use("/api/mentor/auth", MentorAuthRoute);
 app.use("/api/user",userRoomRoute)
+app.use("/api/user",FriendRatingsRoute)
 // Use error handler middleware
 app.use(errorHandler);
 

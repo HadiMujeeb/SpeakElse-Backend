@@ -31,7 +31,7 @@ export interface OTP {
 }
 
 export interface IComment {
-  id: string;
+  userId: string;
   feedback: string;
   rating: number;
   givenBy: string;
