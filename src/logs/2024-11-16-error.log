@@ -1,0 +1,109 @@
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T08:36:50.455Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T08:36:51.512Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T08:41:57.013Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T08:42:08.974Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T12:05:25.799Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T12:05:28.094Z'
+}
+{ level: 'error', timestamp: '2024-11-16T12:05:34.466Z' }
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T12:06:20.143Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T12:06:21.520Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T12:10:35.538Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T12:10:38.100Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T12:22:17.654Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T12:22:17.680Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T12:27:32.987Z'
+}
+{ level: 'error', timestamp: '2024-11-16T12:27:38.228Z' }
+{ level: 'error', timestamp: '2024-11-16T12:28:30.208Z' }
+{ level: 'error', timestamp: '2024-11-16T12:29:19.084Z' }
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T14:11:37.707Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T14:11:38.878Z'
+}
+{ level: 'error', timestamp: '2024-11-16T14:11:43.740Z' }
+{ level: 'error', timestamp: '2024-11-16T14:11:54.395Z' }
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T14:13:36.316Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-16T14:14:26.222Z'
+}
+{ level: 'error', timestamp: '2024-11-16T14:14:34.111Z' }

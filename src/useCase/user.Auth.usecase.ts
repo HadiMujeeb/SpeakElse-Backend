@@ -1,12 +1,15 @@
 // interface
 
-import { IUserAuthUseCase } from "../interface/Iusecase/Iuser.auth.usecase";
+import {
+  ITokenResponse,
+  IUserAuthUseCase,
+} from "../interface/Iusecase/Iuser.auth.usecase";
 import {
   IUserLoginCredentials,
   IUserRegisterCredentials,
+  TokenResponse,
 } from "../interface/Icontrollers/Iuser.auth.controller";
 import IOTPCredentials from "../interface/Icontrollers/IOTP.controller";
-import { IOTPData } from "../interface/Icontrollers/Iuser.auth.controller";
 import { IUser } from "../domain/entities/user.entities";
 
 // Repository
@@ -26,6 +29,7 @@ import { HttpStatus } from "../domain/responseStatus/httpcode";
 
 // error Messages
 import { ErrorMessages } from "../domain/responseMessages/errorMessages";
+import { JwtPayload } from "jsonwebtoken";
 
 export default class UserAuthUseCase implements IUserAuthUseCase {
   private UserAuthRepository: userAuthRepository;
@@ -48,7 +52,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
   // Handles user login and returns a token if successful
   async handleUserLogin(
     credentials: IUserLoginCredentials
-  ): Promise<string | void> {
+  ): Promise<{ accessToken: string; refreshToken: string } | void> {
     try {
       const { email, password } = credentials;
 
@@ -66,8 +70,9 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
         isEmailExisted.password || ""
       );
       if (isPasswordMatch) {
-        const userToken = await JWT.generateToken(isEmailExisted.id);
-        return userToken;
+        const refreshToken = await JWT.refreshToken(isEmailExisted.id);
+        const accessToken = await JWT.generateToken(isEmailExisted.id);
+        return { accessToken, refreshToken };
       } else {
         throw {
           status: HttpStatus.UNAUTHORIZED,
@@ -128,10 +133,13 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
   async handleOtpConfirmation(
     email: string,
     enteredOtp: string
-  ): Promise<string | void> {
+  ): Promise<TokenResponse | void> {
     try {
       if (!enteredOtp || !email) {
-        throw {status:HttpStatus.NOT_FOUND,message:ErrorMessages.OTP_INCORRECT};
+        throw {
+          status: HttpStatus.NOT_FOUND,
+          message: ErrorMessages.OTP_INCORRECT,
+        };
       }
       const recordOtp = await this.OTPRepository.findOTPByEmail(email);
       const userData = await this.UserAuthRepository.findUserByEmail(email);
@@ -145,8 +153,10 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
 
       if (enteredOtp === recordOtp.otp) {
         await this.UserAuthRepository.markUserAsVerified(email);
-        const userToken = await JWT.generateToken(userData!.id);
-        return userToken;
+        const accessToken = await JWT.generateToken(userData!.id);
+        const refreshToken = await JWT.refreshToken(userData!.id);
+        return { accessToken, refreshToken };
+        
       } else {
         throw {
           status: HttpStatus.UNAUTHORIZED,
@@ -164,6 +174,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
       if (!user) {
         throw new Error("User not found");
       }
+      await this.OTPRepository.removeOTPByEmail(email);
       await this.sendVerificationOTP(user.name, email);
     } catch (err) {
       throw err;
@@ -171,19 +182,20 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
   }
 
   // Validates the access token and returns user data
-  async validateAccessToken(token: string): Promise<IUser | null> {
+  async validateAccessToken(
+    accessToken: string,
+    refreshToken: string
+  ): Promise<{ accessToken: string; userData: IUser|null }> {
     try {
-      const decodedToken = await JWT.verifyToken(token);
-      if (
-        typeof decodedToken === "object" &&
-        decodedToken !== null &&
-        "id" in decodedToken
-      ) {
-        const userData = await this.UserAuthRepository.findUserById(
-          decodedToken.id
-        );
+      let userData: IUser | null = null;
+
+      // Verify access token
+      const decodedToken = await JWT.verifyToken(accessToken);
+      if (typeof decodedToken === 'object' && decodedToken !== null&&"id" in decodedToken) {
+        userData = await this.UserAuthRepository.findUserById(decodedToken.id);
+
         if (userData && !userData.isBlocked) {
-          return userData ? userData : null;
+          return { accessToken, userData };
         } else {
           throw {
             status: HttpStatus.FORBIDDEN,
@@ -191,10 +203,56 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
           };
         }
       } else {
-        throw new Error(ErrorMessages.INVALID_TOKEN);
+        // If access token is invalid, try refreshing with the refresh token
+        const refreshResponse = await this.refreshAccessToken(refreshToken);
+        if (refreshResponse.accessToken) {
+          userData = await this.UserAuthRepository.findUserById(
+            refreshResponse.userId
+          );
+          if (userData && !userData.isBlocked) {
+            return { accessToken: refreshResponse.accessToken, userData };
+          }
+        }
+
+        throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.INVALID_REFRESH_TOKEN };
       }
-    } catch (err) {
-      throw err;
+    } catch (err: any) {
+      let userData: IUser | null = null;
+      if (err.name === 'TokenExpiredError') {
+      
+        const refreshResponse = await this.refreshAccessToken(refreshToken);
+        if (refreshResponse.accessToken) {
+          console.log('refresh token working');
+          userData = await this.UserAuthRepository.findUserById(refreshResponse.userId);
+          return { accessToken: refreshResponse.accessToken, userData };
+        }
+
+        throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.INVALID_REFRESH_TOKEN };
+      }
+      throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.INVALID_TOKEN };
+    }
+  }
+
+  // Refreshes the access token using the refresh token
+  async refreshAccessToken(refreshToken: string): Promise<{ accessToken: string, userId: string }> {
+    try {
+      const decodedRefreshToken = await JWT.verifyToken(refreshToken);
+
+      if (typeof decodedRefreshToken === 'object' && decodedRefreshToken !== null&&"id" in decodedRefreshToken) {
+        const userId = decodedRefreshToken.id;
+        const userData = await this.UserAuthRepository.findUserById(userId);
+
+        if (userData && !userData.isBlocked) {
+          const newAccessToken = JWT.generateToken(userId);
+          return { accessToken: newAccessToken, userId };
+        } else {
+          throw { status: HttpStatus.FORBIDDEN, message: ErrorMessages.USER_BLOCKED };
+        }
+      } else {
+        throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.INVALID_REFRESH_TOKEN };
+      }
+    } catch (error) {
+      throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.INVALID_REFRESH_TOKEN };
     }
   }
 
@@ -222,28 +280,28 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
     }
   }
 
-  async handleResetPassword(password: string, token: string): Promise<void> {
-    try {
-      const user = await this.validateAccessToken(token);
-      if (user) {
-        if (user.resetToken == null) {
-          throw {
-            status: HttpStatus.UNAUTHORIZED,
-            message: ErrorMessages.TOKEN_MISSING,
-          };
-        }
-        const hashPassword = await this.PasswordService.hashPassword(password);
+  // async handleResetPassword(password: string, token: string): Promise<void> {
+  //   try {
+  //     const user = await this.validateAccessToken(token,'');
+  //     if (user) {
+  //       if (user.resetToken == null) {
+  //         throw {
+  //           status: HttpStatus.UNAUTHORIZED,
+  //           message: ErrorMessages.TOKEN_MISSING,
+  //         };
+  //       }
+  //       const hashPassword = await this.PasswordService.hashPassword(password);
 
-        await this.OTPRepository.resetPassword(user.id, hashPassword);
-        await this.OTPRepository.removeResetToken(user.email);
-      } else {
-        throw {
-          status: HttpStatus.NOT_FOUND,
-          message: ErrorMessages.USER_NOT_FOUND,
-        };
-      }
-    } catch (error) {
-      throw error;
-    }
-  }
+  //       await this.OTPRepository.resetPassword(user.id, hashPassword);
+  //       await this.OTPRepository.removeResetToken(user.email);
+  //     } else {
+  //       throw {
+  //         status: HttpStatus.NOT_FOUND,
+  //         message: ErrorMessages.USER_NOT_FOUND,
+  //       };
+  //     }
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 }

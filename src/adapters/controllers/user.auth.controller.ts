@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 // Interface imports
-import { IUserRegisterCredentials } from "../../interface/Icontrollers/Iuser.auth.controller";
+import { IUserRegisterCredentials, TokenResponse } from "../../interface/Icontrollers/Iuser.auth.controller";
 import { IuserAuthenticationController } from "../../interface/Icontrollers/Iuser.auth.controller";
 import { IOTPData } from "../../interface/Icontrollers/Iuser.auth.controller";
 import { IUserLoginCredentials } from "../../interface/Icontrollers/Iuser.auth.controller";
@@ -35,6 +35,13 @@ export default class UserAuthController
   ): Promise<void> {
     try {
       const newUserData: IUserRegisterCredentials = req.body;
+      if(newUserData.password !== newUserData.confirmPassword){
+        throw {
+          status: HttpStatus.BAD_REQUEST,
+          message: ErrorMessages.PASSWORD_MISMATCH
+      }
+        
+      }
       await this.userAuthUseCase.registerUser(newUserData);
       res
         .status(HttpStatus.CREATED)
@@ -61,8 +68,8 @@ export default class UserAuthController
       );
       console.log("token", token);
       if (token) {
-        res.cookie("authToken", token, {
-          maxAge: 3600000,
+        res.cookie("refreshToken", token.refreshToken, {
+          maxAge: 604800000,
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
           sameSite: "lax",
@@ -72,7 +79,7 @@ export default class UserAuthController
       }
       res
         .status(HttpStatus.OK)
-        .json({ message: SuccessMessages.USER_VERIFIED });
+        .json({ message: SuccessMessages.USER_VERIFIED,accessToken:token.accessToken });
     } catch (error: any) {
       next(error);
     }
@@ -86,17 +93,18 @@ export default class UserAuthController
   ): Promise<void> {
     try {
       const credentials: IUserLoginCredentials = req.body;
-      const Token = await this.userAuthUseCase.handleUserLogin(credentials);
+      const Token:void|TokenResponse = await this.userAuthUseCase.handleUserLogin(credentials);
       if (Token) {
-        res.cookie("authToken", Token, {
-          maxAge: 3600000,
+        res.cookie("refreshToken", Token.refreshToken, {
+          maxAge: 604800000, // 7 days
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
-          sameSite: "lax",
+          // sameSite: "lax",
         });
 
         res.status(HttpStatus.OK).json({
           message: SuccessMessages.LOGIN_SUCCESS,
+          accessToken: Token.accessToken,
         });
       } else {
         res
@@ -115,18 +123,25 @@ export default class UserAuthController
     next: NextFunction
   ): Promise<void> {
     try {
-      const token =
-        req.cookies.authToken || req.headers.authorization?.split(" ")[1];
-      if (!token) {
-        throw {
-          status: HttpStatus.UNAUTHORIZED,
-          message: ErrorMessages.TOKEN_MISSING,
-        };
-      }
-      const userData = await this.userAuthUseCase.validateAccessToken(token);
+      const accessToken = req.header('Authorization')?.replace('Bearer ', '');
+      const refreshToken = req.cookies.refreshToken;
+      console.log("working the funcitn")
+        if(!accessToken || !refreshToken){
+          console.log("token not found");
+          throw {
+            status: HttpStatus.UNAUTHORIZED,
+            message: ErrorMessages.TOKEN_MISSING,
+          };
+        }
+
+      const userData = await this.userAuthUseCase.validateAccessToken(accessToken,refreshToken);
+
+       
+
       res.status(HttpStatus.OK).json({
         message: SuccessMessages.ACCESS_GRANTED,
-        user: userData,
+        user: userData.userData,
+        accessToken:userData.accessToken,
         status: HttpStatus.OK,
       });
     } catch (error) {
@@ -141,11 +156,12 @@ export default class UserAuthController
     next: NextFunction
   ): Promise<void> {
     try {
-      res.clearCookie("authToken", {
+      res.clearCookie("refreshToken", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
       });
+
       res
         .status(HttpStatus.OK)
         .json({ message: SuccessMessages.LOGOUT_SUCCESS });
@@ -204,7 +220,7 @@ export default class UserAuthController
           message: ErrorMessages.TOKEN_MISSING,
         };
       }
-      await this.userAuthUseCase.handleResetPassword(password, token);
+      // await this.userAuthUseCase.handleResetPassword(password, token);
       res
         .status(HttpStatus.OK)
         .json({ message: SuccessMessages.PASSWORD_CHANGED });

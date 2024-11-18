@@ -30,4 +30,7 @@ export default class userProfileUseCase implements IUserProfileUseCase {
       throw error;
     }
   }
+
+
+  
 }

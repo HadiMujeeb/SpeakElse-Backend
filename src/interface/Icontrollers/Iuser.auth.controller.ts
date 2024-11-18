@@ -60,3 +60,8 @@ export interface IOTPData {
   email: string;
   enteredotp: string;
 }
+
+export interface TokenResponse {
+  accessToken: string;
+  refreshToken: string;
+}

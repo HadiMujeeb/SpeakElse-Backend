@@ -16,7 +16,7 @@ model User {
     comments            Comment[]             // Pluralized for consistency
     rooms               Room[]                @relation("RoomParticipants")
     mentorApplications   MentorApplication[]
-   
+    createdRooms   Room[]   @relation("RoomCreator")
     @@map("users")
 }
 

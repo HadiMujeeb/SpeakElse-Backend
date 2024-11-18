@@ -11,6 +11,7 @@ export const SuccessMessages = {
     USERS_RETRIEVED: 'All users retrieved successfully.',
     USER_BLOCKED: 'User has been blocked successfully.',
     USER_UNBLOCKED: 'User has been unblocked successfully.',
-    USER_UPDATED: 'User has been updated successfully.',  // New message for user update
-    APPLICATION_CREATED: 'Application created successfully.'  // New message for application creation
+    USER_UPDATED: 'User has been updated successfully.', 
+    APPLICATION_CREATED: 'Application created successfully.' ,
+     ROOM_CREATED: 'Room created successfully.'
 };
