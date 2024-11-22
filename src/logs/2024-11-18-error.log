@@ -1,0 +1,63 @@
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2024-11-18T05:21:21.980Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2024-11-18T05:21:27.265Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2024-11-18T05:21:28.574Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2024-11-18T05:21:41.407Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2024-11-18T06:13:35.626Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2024-11-18T06:13:41.199Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-18T06:21:25.698Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-11-18T06:21:27.363Z'
+}
+{ level: 'error', timestamp: '2024-11-18T15:00:22.765Z' }
+{ level: 'error', timestamp: '2024-11-18T15:06:07.617Z' }
+{
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: ' "userId":"671cc20e5f1138ab1097b5c6"',
+  type: 'entity.parse.failed',
+  level: 'error',
+  timestamp: '2024-11-18T17:19:42.857Z'
+}
+{ level: 'error', timestamp: '2024-11-18T18:07:18.287Z' }
+{ level: 'error', timestamp: '2024-11-18T18:07:22.212Z' }
+{ level: 'error', timestamp: '2024-11-18T18:07:43.286Z' }
+{ level: 'error', timestamp: '2024-11-18T18:08:44.551Z' }

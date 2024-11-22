@@ -1,0 +1,40 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "C:\\Users\\ADMIN\\Desktop\\backend\\backend\\src\\logs\\.8293dbc2bf9b1da7a26885148296f2e19e1ba98b-audit.json",
+    "files": [
+        {
+            "date": 1731349824285,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\backend\\src\\logs\\2024-11-12-error.log",
+            "hash": "7f600028ec40ba4e800a35c89ff2677c806aca229ffb86cbb63560b867368e65"
+        },
+        {
+            "date": 1731471873788,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\backend\\src\\logs\\2024-11-13-error.log",
+            "hash": "c18b5a5c250100bece303b11d4ec74649c35d4cd148817aace319bb106785c7b"
+        },
+        {
+            "date": 1731652741858,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\backend\\src\\logs\\2024-11-15-error.log",
+            "hash": "f80b9e24d4ec6ed4cd9504c7b5706036894ce9cf6dbe3b968c401d22bf5d811f"
+        },
+        {
+            "date": 1731746169657,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\backend\\src\\logs\\2024-11-16-error.log",
+            "hash": "978aa12450d78b7e029c7da9050305d58bf5be9ae7afaac6a6738c1226d77fa1"
+        },
+        {
+            "date": 1731818344827,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\backend\\src\\logs\\2024-11-17-error.log",
+            "hash": "9753ea41326b36be2b8fc2da9b18010967c7e47b20f3a90ec9a1fb816c90d5d6"
+        },
+        {
+            "date": 1731868834288,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\backend\\src\\logs\\2024-11-18-error.log",
+            "hash": "81b03d46021ca066c12350d440cc795dd15d26b890e838eff2158a5b68419983"
+        }
+    ],
+    "hashType": "sha256"
+}

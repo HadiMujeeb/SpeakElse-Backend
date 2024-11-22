@@ -1,0 +1,89 @@
+model User {
+    id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+    name                String
+    email               String                @unique
+    password            String?
+    avatar              String?
+    role                Role                  @default(USER)
+    country             String?
+    language            String?
+    profession          String?
+    description         String?
+    isVerified          Boolean               @default(false)
+    isBlocked           Boolean               @default(false)
+    resetToken          String?
+    resetTokenExpiry    DateTime?
+    comments            Comment[]             // Pluralized for consistency
+    rooms               Room[]                @relation("RoomParticipants")
+    mentorApplications   MentorApplication[]
+    createdRooms   Room[]   @relation("RoomCreator")
+    following           String[]    @db.ObjectId
+    followers           String[]    @db.ObjectId
+    // user                User                  @relation(fields: [followers], references: [id])
+   
+    @@map("users")
+}
+
+enum Role {
+    USER
+    ADMIN
+    MENTOR
+}
+
+model Comment {
+    id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+    feedback            String
+    rating              Int
+    givenBy             String                @db.ObjectId
+    userId              String                @db.ObjectId
+
+    // Relations
+    user                User                  @relation(fields: [userId], references: [id])
+    
+    @@map("comments")  // Pluralized for clarity
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+model MentorApplication {
+    id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+    userId              String                @db.ObjectId
+    name                String
+    email               String
+    subject             String
+    message             String
+    proficiencyLevel    String
+    ratings             Int
+    feedbacks           String[]
+    applicationFeedback  String?
+    submittedAt        DateTime              @default(now())
+    applicationStatus   ApplicationStatus     @default(PENDING)
+    reviewedAt         DateTime?
+    resume              String?
+
+    // Relations
+    user                User                  @relation(fields: [userId], references: [id])
+
+    @@map("mentorApplications")
+}
+
+enum ApplicationStatus {
+    PENDING
+    APPROVED
+    REJECTED
+}

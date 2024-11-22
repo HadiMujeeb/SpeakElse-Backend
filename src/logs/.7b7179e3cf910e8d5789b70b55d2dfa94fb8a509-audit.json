@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "C:\\Users\\ADMIN\\Downloads\\SpeakElse-Backend-main\\SpeakElse-Backend-main\\src\\logs\\.7b7179e3cf910e8d5789b70b55d2dfa94fb8a509-audit.json",
+    "files": [
+        {
+            "date": 1732254457701,
+            "name": "C:\\Users\\ADMIN\\Downloads\\SpeakElse-Backend-main\\SpeakElse-Backend-main\\src\\logs\\2024-11-22-error.log",
+            "hash": "8fd27b1cfeecefce2f71649e845797f5044e4bc735456a55980cd38af0258ac5"
+        }
+    ],
+    "hashType": "sha256"
+}

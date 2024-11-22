@@ -1,0 +1,7 @@
+model otp {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    otp       String
+    email     String  @unique
+    expiresAt DateTime
+    createdAt DateTime @default(now())
+}

@@ -1,0 +1,28 @@
+enum Privacy {
+    PUBLIC
+    PRIVATE
+}
+
+enum Level {
+  ANYLEVEL
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+model Room {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  creatorId    String   @db.ObjectId
+  language     String  
+  topic        String?
+  maxPeople    String
+  level        Level    @default(BEGINNER)
+  privacy      Privacy  @default(PUBLIC)
+  participants String[] @db.ObjectId
+  moderators   String[] @db.ObjectId
+  createdAt    DateTime @default(now()) 
+ user         User     @relation("RoomParticipants", fields: [participants], references: [id])
+ creator      User     @relation("RoomCreator", fields: [creatorId], references: [id])
+  @@map("rooms")
+}
+
