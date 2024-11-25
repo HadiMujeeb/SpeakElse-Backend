@@ -1,10 +1,9 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { createServer } from 'http';
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParse from "cookie-parser";
-import passport from "passport";
 import { SocketService } from "./domain/services/socket.service";
 // Routes
 import UserAuthRoutes from "./infrastructure/routes/user.auth.route";
@@ -12,16 +11,23 @@ import adminRouter from "./infrastructure/routes/admin.route";
 import profileRoute from "./infrastructure/routes/userProfile.route";
 import MentorAuthRoute from "./infrastructure/routes/mentor.auth.route";
 import userRoomRoute from "./infrastructure/routes/userRoom.route";
-import FriendRatingsRoute from "./infrastructure/routes/friendRating.route";
 // middlewire
 import { errorHandler } from "./infrastructure/middlewares/error.middleware";
 import MentorProfileRoute from "./infrastructure/routes/mentor.profile.route";
+import { RoomSocketioRepository } from "./infrastructure/repository/room.socketio.repository";
+import { roomSocketioUseCase } from "./usecase/room.socketio.usecase";
+import { RoomSocketioController } from "./adapters/controllers/room.socketio.controller";
 
 
 dotenv.config();
 const app = express();
 const server = createServer(app);
 const socketService = new SocketService(server);
+// const roomSocketioRepository = new RoomSocketioRepository();
+// const RoomSocketioUseCase = new roomSocketioUseCase(roomSocketioRepository);
+// const roomSocketioController = new RoomSocketioController(server,RoomSocketioUseCase);
+
+
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -43,7 +49,6 @@ app.use("/api/user", profileRoute);
 app.use("/api/mentor", MentorProfileRoute);
 app.use("/api/mentor/auth", MentorAuthRoute);
 app.use("/api/user",userRoomRoute)
-app.use("/api/user",FriendRatingsRoute)
 // Use error handler middleware
 app.use(errorHandler);
 

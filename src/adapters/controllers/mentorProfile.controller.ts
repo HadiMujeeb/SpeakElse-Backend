@@ -12,18 +12,12 @@ export default class mentorProfileController
     this.MentorProfileUseCase = MentorProfileUseCase;
   }
 
-  async requestEditMentorData(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async requestEditMentorData(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {
       const updatedData = {
-        ...req.body,
-        avatar: req.file ? req.file.path : null,
+        ...req.body,avatar: req.file ? req.file.path : null,
       };
       await this.MentorProfileUseCase.handleEditmentorData(updatedData);
-
       res.status(HttpStatus.OK).json({ message: SuccessMessages.USER_UPDATED });
     } catch (error) {
       next(error);

@@ -22,5 +22,5 @@ export interface IRoom {
     participants: string[];
     moderators: string[];
     createdAt: Date;
-    creator?: IUser; // Include the creator details here
+    creator?: IUser; 
   }

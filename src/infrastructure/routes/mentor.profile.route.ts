@@ -12,10 +12,6 @@ const MentorProfileController = new mentorProfileController(
   MentorProfileUseCase
 );
 
-MentorProfileRoute.put(
-  "/updateMentorData",
-  upload.single("image"),
-  MentorProfileController.requestEditMentorData.bind(MentorProfileController)
-);
+MentorProfileRoute.put("/updateMentorData",upload.single("image"),MentorProfileController.requestEditMentorData.bind(MentorProfileController));
 
 export default MentorProfileRoute;

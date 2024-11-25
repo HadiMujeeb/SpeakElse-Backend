@@ -13,9 +13,9 @@ export default class UserAuthController implements IuserAuthenticationController
 
   async UserRegistrationRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const newUserData: IRegistrationRequest = req.body;
-      if (newUserData.password !== newUserData.confirmPassword) throw { status: HttpStatus.BAD_REQUEST, message: ErrorMessages.PASSWORD_MISMATCH };
-      await this.userAuthUseCase.registerUser(newUserData);
+      const userData: IRegistrationRequest = req.body;
+      if (userData.password !== userData.confirmPassword) throw { status: HttpStatus.BAD_REQUEST, message: ErrorMessages.PASSWORD_MISMATCH };
+      await this.userAuthUseCase.registerUser(userData);
       res.status(HttpStatus.CREATED).json({ message: SuccessMessages.OTP_SENT });
     } catch (error: any) {
       next(error);
@@ -53,9 +53,11 @@ export default class UserAuthController implements IuserAuthenticationController
   async authenticateTokenRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const accessToken = req.header('Authorization')?.replace('Bearer ', '');
+      console.log(accessToken,"accessToken");
       const refreshToken = req.cookies.refreshToken;
       if (!accessToken || !refreshToken) throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.TOKEN_MISSING };
       const userData = await this.userAuthUseCase.validateAccessToken(accessToken, refreshToken);
+      console.log(userData,"userData");
       res.status(HttpStatus.OK).json({ message: SuccessMessages.ACCESS_GRANTED, user: userData.userData, accessToken: userData.accessToken, status: HttpStatus.OK });
     } catch (error) {
       next(error);

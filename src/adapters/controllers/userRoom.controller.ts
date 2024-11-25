@@ -11,7 +11,7 @@ export default class userRoomController implements IuserRoomController {
     constructor(userRoomUseCase: userRoomUseCase) {
         this.userRoomUseCase = userRoomUseCase
     }
-    async requestCreateRoom(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async requestCreateRoom(req: Request, res: Response, next: NextFunction): Promise<void> {
          try {
             const data: IRoom = req.body
             console.log("room data",data)
@@ -21,7 +21,7 @@ export default class userRoomController implements IuserRoomController {
             next(error)
          }
      }
-   async  requestRetrieveAllRooms(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async  requestRetrieveAllRooms(req: Request, res: Response, next: NextFunction): Promise<void> {
           try {
             const rooms = await this.userRoomUseCase.retriveUserRoom();
             res.status(HttpStatus.OK).json(rooms)

@@ -1,0 +1,27 @@
+model MentorApplication {
+    id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+    userId              String                @db.ObjectId
+    name                String
+    email               String
+    subject             String
+    message             String
+    proficiencyLevel    String
+    ratings             Int
+    feedbacks           String[]
+    applicationFeedback  String?
+    submittedAt        DateTime              @default(now())
+    applicationStatus   ApplicationStatus     @default(PENDING)
+    reviewedAt         DateTime?
+    resume              String?
+
+    // Relations
+    user                User                  @relation(fields: [userId], references: [id])
+
+    @@map("mentorApplications")
+}
+
+enum ApplicationStatus {
+    PENDING
+    APPROVED
+    REJECTED
+}

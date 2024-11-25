@@ -9,6 +9,21 @@
             "date": 1732257034751,
             "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-11-22-error.log",
             "hash": "cf8d3934bfe4e7c406b3887f75d8e11ffe93449bedbb90451a7915d936aa4419"
+        },
+        {
+            "date": 1732300791917,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-11-23-error.log",
+            "hash": "cb2a13dbad6b1f5ca4cb6483159ebd7033507acb130d17600e5f7eabef1d90dd"
+        },
+        {
+            "date": 1732423158439,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-11-24-error.log",
+            "hash": "ca0fe567df13504ab436b2df7436a8d750e77760bcbae8749c4849ca1734aa60"
+        },
+        {
+            "date": 1732528922768,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-11-25-error.log",
+            "hash": "fd1349dc5cbd826d06b76a0b0b2097f2cb04ea60cdc07701a2ce89551874503d"
         }
     ],
     "hashType": "sha256"

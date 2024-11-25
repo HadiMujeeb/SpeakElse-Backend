@@ -17,10 +17,10 @@ export interface IUser {
   comments?: IComment[];
 }
 
-export interface LoginRequest {
-  Email: string;
-  password: string;
-}
+// export interface LoginRequest {
+//   Email: string;
+//   password: string;
+// }
 
 export interface OTP {
   id: string;
@@ -35,4 +35,15 @@ export interface IComment {
   feedback: string;
   rating: number;
   givenBy: string;
+}
+
+export interface IuserRating {
+  feedback: string;
+  rating: number;
+  givenBy:{
+    id:string
+    name:string,
+    avatar:string
+  }
+  createdAt: Date;
 }

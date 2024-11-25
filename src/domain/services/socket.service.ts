@@ -8,7 +8,7 @@ export class SocketService {
   constructor(httpServer: HttpServer) {
     this.io = new Server(httpServer, {
       cors: {
-        origin: ['http://localhost:4200'],
+        origin: 'http://localhost:4200',
         credentials: true
       }
     });
@@ -31,7 +31,7 @@ export class SocketService {
           }));
           console.log("other users",otherUsers);
         socket.emit('all users', otherUsers, roomID);
-        socket.to(roomID).emit('user joined',  this.users[socket.id] );
+        // socket.to(roomID).emit('user joined',  this.users[socket.id] );
       });
 
       socket.on('chat message', (message: string, roomID: string) => {

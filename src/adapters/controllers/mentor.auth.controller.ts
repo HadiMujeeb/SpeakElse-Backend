@@ -11,21 +11,12 @@ export default class MentorAuthController implements IMentorAuthController {
     this.mentorAuthUsecase = mentorAuthUsecase;
   }
 
-  async MentorApplicationRequest(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async MentorApplicationRequest(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {
-      const credentials: IApplication = {
-        ...req.body,
-        resume: req.file?.path,
-      };
+      const credentials: IApplication = {...req.body,resume: req.file?.path};
       console.log(req.file?.path, "working", credentials.id);
       await this.mentorAuthUsecase.registerMentorApplication(credentials);
-      res
-        .status(HttpStatus.CREATED)
-        .json({ message: SuccessMessages.APPLICATION_CREATED });
+      res.status(HttpStatus.CREATED).json({ message: SuccessMessages.APPLICATION_CREATED });
     } catch (error) {
       next(error);
     }

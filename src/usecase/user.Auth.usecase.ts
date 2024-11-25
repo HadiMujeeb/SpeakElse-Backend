@@ -1,8 +1,6 @@
-import {  IUserAuthUseCase } from "../interface/Iusecase/Iuser.auth.usecase"; 
+import {  IOTPCredentials, IUserAuthUseCase } from "../interface/Iusecase/Iuser.auth.usecase"; 
 import { IAuthTokens, ILoginRequest, IRegistrationRequest } from "../interface/Icontrollers/Iuser.auth.controller"; 
-import IOTPCredentials from "../interface/Icontrollers/IOTP.controller"; 
 import { IUser } from "../domain/entities/user.entities"; 
-import OTPRepository from "../infrastructure/repository/Otp.Repository"; 
 import { userAuthRepository } from "../infrastructure/repository/user.Auth.repository"; 
 import { MailerServices } from "../domain/services/email.service"; 
 import { JWT } from "../domain/services/jwt.service"; 
@@ -13,7 +11,6 @@ import { ErrorMessages } from "../domain/responseMessages/errorMessages";
 
 export default class UserAuthUseCase implements IUserAuthUseCase { 
   private UserAuthRepository: userAuthRepository; 
-  private OTPRepository: OTPRepository; 
   private mailerServices: MailerServices; 
   private PasswordService: PasswordService;
 
@@ -21,12 +18,10 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
     UserAuthRepository: userAuthRepository, 
     mailerServices: MailerServices, 
     PasswordService: PasswordService, 
-    OTPRepository: OTPRepository 
   ) { 
     this.UserAuthRepository = UserAuthRepository; 
     this.mailerServices = mailerServices; 
     this.PasswordService = PasswordService; 
-    this.OTPRepository = OTPRepository; 
   }
 
   async handleUserLogin(credentials: ILoginRequest): Promise<{ accessToken: string; refreshToken: string } | void> { 
@@ -49,7 +44,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
     } 
   }
 
-  async registerUser(newUserData: IRegistrationRequest): Promise<void | never> { 
+  async registerUser(newUserData: IRegistrationRequest): Promise<void> { 
     try { 
       const isEmailExisted = await this.UserAuthRepository.findUserByEmail(newUserData.email); 
       if (isEmailExisted && isEmailExisted.isVerified) { 
@@ -64,12 +59,12 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
     } 
   }
 
-  async sendVerificationOTP(name: string, email: string): Promise<void | never> { 
+  async sendVerificationOTP(name: string, email: string): Promise<void> { 
     try { 
       const otp = await generateOTP.generate(); 
       const expiresAt = await generateOTP.ExpireDate(); 
       const otpData: IOTPCredentials = { name, email, otp, expiresAt }; 
-      await this.OTPRepository.saveOTPForEmail(otpData); 
+      await this.UserAuthRepository.saveOTPForEmail(otpData); 
       await this.mailerServices.sendEmail(otpData); 
     } catch (err) { 
       throw err; 
@@ -81,7 +76,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
       if (!enteredOtp || !email) { 
         throw { status: HttpStatus.NOT_FOUND, message: ErrorMessages.OTP_INCORRECT }; 
       }
-      const recordOtp = await this.OTPRepository.findOTPByEmail(email); 
+      const recordOtp = await this.UserAuthRepository.findOTPByEmail(email); 
       const userData = await this.UserAuthRepository.findUserByEmail(email);
       if (!recordOtp) { 
         throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.OTP_EXPIRED }; 
@@ -99,13 +94,13 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
     } 
   }
 
-  async resendVerificationOTP(email: string): Promise<void | never> { 
+  async resendVerificationOTP(email: string): Promise<void> { 
     try { 
       const user = await this.UserAuthRepository.findUserByEmail(email); 
       if (!user) { 
         throw new Error("User not found"); 
       }
-      await this.OTPRepository.removeOTPByEmail(email); 
+      await this.UserAuthRepository.removeOTPByEmail(email); 
       await this.sendVerificationOTP(user.name, email); 
     } catch (err) { 
       throw err; 
@@ -176,7 +171,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
       const userToken = await JWT.generateToken(user.id); 
       const expiresAt = new Date(); 
       expiresAt.setHours(expiresAt.getHours() + 1); 
-      await this.OTPRepository.saveResetToken(user.email, userToken, expiresAt); 
+      await this.UserAuthRepository.saveResetToken(user.email, userToken, expiresAt); 
       await this.mailerServices.sendRestPasswordLink(user.name, user.email, userToken); 
     } catch (err) { 
       throw err; 
@@ -197,8 +192,8 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
   //       }
   //       const hashPassword = await this.PasswordService.hashPassword(password);
 
-  //       await this.OTPRepository.resetPassword(user.id, hashPassword);
-  //       await this.OTPRepository.removeResetToken(user.email);
+  //       await this.UserAuthRepository.resetPassword(user.id, hashPassword);
+  //       await this.UserAuthRepository.removeResetToken(user.email);
   //     } else {
   //       throw {
   //         status: HttpStatus.NOT_FOUND,

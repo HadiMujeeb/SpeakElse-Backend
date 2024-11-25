@@ -10,13 +10,8 @@ const UserRoomRepository = new userRoomRepository(prisma);
 const UserRoomUseCase = new userRoomUseCase(UserRoomRepository);
 const UserRoomController = new userRoomController(UserRoomUseCase);
 
-userRoomRoute.post(
-  "/createRoom",
-  UserRoomController.requestCreateRoom.bind(UserRoomController)
-);
-userRoomRoute.get(
-  "/retrieveAllRooms",
-  UserRoomController.requestRetrieveAllRooms.bind(UserRoomController)
+userRoomRoute.post("/createRoom",UserRoomController.requestCreateRoom.bind(UserRoomController));
+userRoomRoute.get("/retrieveAllRooms",UserRoomController.requestRetrieveAllRooms.bind(UserRoomController)
 );
 
 export default userRoomRoute;

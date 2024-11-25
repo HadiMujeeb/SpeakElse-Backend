@@ -1,5 +1,10 @@
-import { IUser } from "../../domain/entities/user.entities";
+import { IComment, IUser, IuserRating } from "../../domain/entities/user.entities";
 
 export default interface IUserProfileUseCase {
-  handleEditmemberData(memberData: IUser): Promise<void | never>;
+  handleEditUserData(memberData: IUser): Promise<void>;
+  followUnfollow(userId: string, friendId: string): Promise<void>;
+  // followerUnfollower(userId: string, friendId: string): Promise<void>;
+  retriveFollowerFollowing(userId: string): Promise<{following:IUser[],followers:IUser[]}>;
+  giveRating(comment: IComment): Promise<void>;
+  retrieveRatings(userId: string): Promise<IuserRating[]>
 }

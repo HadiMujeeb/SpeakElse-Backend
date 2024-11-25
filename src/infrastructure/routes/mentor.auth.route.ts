@@ -12,10 +12,6 @@ const mentorAuthController = new MentorAuthController(mentorAuthUseCase);
 
 const MentorAuthRoute: Router = express.Router();
 
-MentorAuthRoute.post(
-  "/registerApplication",
-  upload.single("resume"),
-  mentorAuthController.MentorApplicationRequest.bind(mentorAuthController)
-);
+MentorAuthRoute.post("/registerApplication",upload.single("resume"),mentorAuthController.MentorApplicationRequest.bind(mentorAuthController));
 
 export default MentorAuthRoute;

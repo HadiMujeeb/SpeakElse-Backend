@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import { otpTemplate } from "../../infrastructure/templates/otp.template";
 import { getResetPasswordEmailTemplate } from "../../infrastructure/templates/resetPassword.template";
-import IOTPCredentials from "../../interface/Icontrollers/IOTP.controller";
+import { IOTPCredentials } from "../../interface/Iusecase/Iuser.auth.usecase";
 export class MailerServices {
   private transporter;
 

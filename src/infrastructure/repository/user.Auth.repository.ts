@@ -4,6 +4,7 @@ const cron = require("node-cron");
 import { IUser } from "../../domain/entities/user.entities";
 import IUserAuthRepository from "../../interface/Irepositories/Iuser.auth.repository";
 import { IRegistrationRequest } from "../../interface/Icontrollers/Iuser.auth.controller";
+import IPasswordTokenCredentials, { IOTPCredentials } from "../../interface/Iusecase/Iuser.auth.usecase";
 
 
 export class userAuthRepository implements IUserAuthRepository {
@@ -92,6 +93,74 @@ export class userAuthRepository implements IUserAuthRepository {
       console.log(`Deleted ${result.count} expired sessions.`);
     } catch (err) {
       console.error("Error deleting expired sessions:", err);
+    }
+  }
+
+  async saveOTPForEmail(OtpData: IOTPCredentials): Promise<void | never> {
+    try {
+      await this.prisma.otp.create({
+        data: { email: OtpData.email, otp: OtpData.otp, expiresAt: OtpData.expiresAt },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async findOTPByEmail(email: string): Promise<IOTPCredentials | null> {
+    try {
+      return await this.prisma.otp.findUnique({ where: { email } });
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async removeOTPByEmail(email: string): Promise<void> {
+    try {
+      await this.prisma.otp.delete({ where: { email } });
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async saveResetToken(email: string, token: string, expiresAt: Date): Promise<void> {
+    try {
+      await this.prisma.user.update({
+        where: { email },
+        data: { resetToken: token, resetTokenExpiry: expiresAt },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async findResetToken(email: string): Promise<IPasswordTokenCredentials | null> {
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: { email },
+        select: { resetToken: true, resetTokenExpiry: true },
+      });
+      return user ? { resetToken: user.resetToken, resetTokenExpiry: user.resetTokenExpiry } : null;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async removeResetToken(email: string): Promise<void> {
+    try {
+      await this.prisma.user.update({
+        where: { email },
+        data: { resetToken: null, resetTokenExpiry: null },
+      });
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async resetPassword(id: string, password: string): Promise<void> {
+    try {
+      await this.prisma.user.update({ where: { id }, data: { password } });
+    } catch (error) {
+      throw error;
     }
   }
 }

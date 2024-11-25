@@ -1,4 +1,4 @@
-import { IUser } from "../domain/entities/user.entities";
+import { IComment, IUser, IuserRating } from "../domain/entities/user.entities";
 import IUserProfileUseCase from "../interface/Iusecase/IuserProfile.usecase";
 import ProfileRepository from "../infrastructure/repository/userProfile.repository";
 import cloudinaryServices from "../domain/services/cloudinary.services";
@@ -12,7 +12,7 @@ export default class userProfileUseCase implements IUserProfileUseCase {
     this.profileRepository = profileRepository;
   }
 
-  async handleEditmemberData(MemberData: IUser): Promise<void | never> {
+  async handleEditUserData(MemberData: IUser): Promise<void> {
     try {
       if (MemberData.id) {
         const isMemberExist = await this.profileRepository.doesUserExist(
@@ -26,6 +26,58 @@ export default class userProfileUseCase implements IUserProfileUseCase {
         }
       }
       await this.profileRepository.updateUserData(MemberData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async followUnfollow(userId: string, friendId: string): Promise<void> {
+    try {
+      await this.profileRepository.followUnfollow(userId, friendId);
+      await this.profileRepository.followerUnfollower(friendId, userId);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // async followerUnfollower(userId: string, friendId: string): Promise<void> {
+  //     try {
+  //         await this.profileRepository.followerUnfollower(userId,friendId);
+  //     } catch (error) {
+  //         throw error
+  //     }
+  // }
+
+  async retriveFollowerFollowing(
+    userId: string
+  ): Promise<{ following: IUser[]; followers: IUser[] }> {
+    try {
+      const followingId: string[] =
+        await this.profileRepository.findAllfollowings(userId);
+      const followersId: string[] =
+        await this.profileRepository.findAllfollowers(userId);
+        const followingUser = await this.profileRepository.findAllFriends(followingId);
+        const followersUser = await this.profileRepository.findAllFriends(followersId);
+      return {
+        following: followingUser,
+        followers: followersUser,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async giveRating(comment: IComment): Promise<void> {
+    try {
+      await this.profileRepository.giveRating(comment);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async retrieveRatings(userId: string): Promise<IuserRating[]> {
+    try {
+      return await this.profileRepository.findAllRatings(userId);
     } catch (error) {
       throw error;
     }

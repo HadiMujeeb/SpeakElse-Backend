@@ -1,0 +1,18 @@
+model Chat {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String     @db.ObjectId
+  friendId   String     @db.ObjectId 
+  messages   Message[]  @relation("ChatMessages") 
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+model Message {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  chatId    String  @db.ObjectId
+  senderId  String  @db.ObjectId
+  chat      Chat    @relation("ChatMessages", fields: [chatId], references: [id], onDelete: Cascade)
+  content   String
+  createdAt DateTime @default(now())
+}
+

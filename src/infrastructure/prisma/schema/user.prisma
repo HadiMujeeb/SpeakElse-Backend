@@ -13,14 +13,12 @@ model User {
     isBlocked           Boolean               @default(false)
     resetToken          String?
     resetTokenExpiry    DateTime?
-    comments            Comment[]             // Pluralized for consistency
+    comments            Comment[] 
     rooms               Room[]                @relation("RoomParticipants")
     mentorApplications   MentorApplication[]
     createdRooms   Room[]   @relation("RoomCreator")
     following           String[]    @db.ObjectId
     followers           String[]    @db.ObjectId
-    // user                User                  @relation(fields: [followers], references: [id])
-   
     @@map("users")
 }
 
@@ -38,52 +36,9 @@ model Comment {
     userId              String                @db.ObjectId
 
     // Relations
-    user                User                  @relation(fields: [userId], references: [id])
+    givenUser                User             @relation(fields: [givenBy], references: [id])
+    createdAt    DateTime  
     
-    @@map("comments")  // Pluralized for clarity
+    @@map("comments")  
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-model MentorApplication {
-    id                  String                @id @default(auto()) @map("_id") @db.ObjectId
-    userId              String                @db.ObjectId
-    name                String
-    email               String
-    subject             String
-    message             String
-    proficiencyLevel    String
-    ratings             Int
-    feedbacks           String[]
-    applicationFeedback  String?
-    submittedAt        DateTime              @default(now())
-    applicationStatus   ApplicationStatus     @default(PENDING)
-    reviewedAt         DateTime?
-    resume              String?
-
-    // Relations
-    user                User                  @relation(fields: [userId], references: [id])
-
-    @@map("mentorApplications")
-}
-
-enum ApplicationStatus {
-    PENDING
-    APPROVED
-    REJECTED
-}

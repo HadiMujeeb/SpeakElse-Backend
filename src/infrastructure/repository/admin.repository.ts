@@ -10,6 +10,19 @@ export default class adminRepository {
     });
   }
 
+  async findUserById(id: string): Promise<IUser | null> {
+    try {
+      const userData = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
+      return userData;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   async isAdmin(email: string): Promise<IUser | null> {
     try {
       const user = await this.findUserByEmail(email);
