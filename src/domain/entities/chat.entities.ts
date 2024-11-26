@@ -1,10 +1,13 @@
 export interface IChat {
     id: string;
-    userId: string;
-    friendId: string;
-    messages: IMessage[]|null;
+    messages?: IMessage[];
     createdAt: Date;
     updatedAt: Date;
+    friend?:{
+      id: string,
+      name: string,
+      avatar: string,
+    }
   }
   
   export interface IMessage {

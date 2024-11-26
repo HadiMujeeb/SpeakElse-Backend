@@ -19,6 +19,7 @@ model User {
     createdRooms   Room[]   @relation("RoomCreator")
     following           String[]    @db.ObjectId
     followers           String[]    @db.ObjectId
+       
     @@map("users")
 }
 

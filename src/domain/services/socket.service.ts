@@ -1,9 +1,10 @@
 import { Server } from 'socket.io';
 import { Server as HttpServer } from 'http';
+import { IMessage } from '../entities/chat.entities';
 
 export class SocketService {
   private io: Server;
-  private users: { [key: string]: { userId: string, username: string, avatar: string ,socketId: string} } = {};
+  private users: { [key: string]: { userId: string, username: string, avatar: string ,socketId: string} } = {}; 
 
   constructor(httpServer: HttpServer) {
     this.io = new Server(httpServer, {
@@ -16,7 +17,9 @@ export class SocketService {
   }
 
   private initializeSocketEvents(): void {
+
     this.io.on('connection', (socket) => {
+      console.log('A user connected', socket.id);
       socket.on('set user data', (userData: { userId: string, username: string, avatar: string, }) => {
         this.users[socket.id] = { ...userData, socketId: socket.id };
         // socket.emit('user data attached', this.users[socket.id]);
@@ -79,6 +82,26 @@ export class SocketService {
         socket.leave(roomID);
         socket.to(roomID).emit('user left', { userId: socket.id });
       });
+   
+
+    socket.on('join private chat',(chatId:string)=>{
+      const user = this.io.sockets.adapter.rooms.get(chatId);
+      if(user?.size === 2){
+        return;
+      }
+      socket.join(chatId);
+      socket.to(chatId).emit('friend online',"online");
+    })
+
+    socket.on('private chat message', (message:IMessage) => {
+      socket.to(message.chatId).emit('private chat message', message);
+    });
+
+    socket.on('leave private chat', (chatId: string,lastTime:string) => {
+      socket.leave(chatId);
+      socket.to(chatId).emit('friend offline',lastTime);
+    });
+
     });
   }
 }

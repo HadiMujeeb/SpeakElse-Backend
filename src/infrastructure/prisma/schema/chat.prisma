@@ -1,10 +1,10 @@
 model Chat {
   id         String     @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String     @db.ObjectId
-  friendId   String     @db.ObjectId 
+  participaceId String[] @db.ObjectId  
   messages   Message[]  @relation("ChatMessages") 
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+  
 }
 
 model Message {

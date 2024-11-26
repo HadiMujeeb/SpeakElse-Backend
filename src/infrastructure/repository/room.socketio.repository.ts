@@ -65,27 +65,22 @@ export class RoomSocketioRepository implements IroomSocketioRepository {
       delete this.rooms[roomID];
     }
   }
-  getUserAllChats(userId: string): Promise<IChat[]> {
-    try {
-      const chats = this.prisma.chat.findMany({
-        where:{
-          userId:userId,
-        },include:{messages:true}
-      })
-      return chats
-    } catch (error) {
-      throw error
-    }
-  }
+  // getUserAllChats(userId: string): Promise<IChat[]> {
+  //   try {
+     
+  //   } catch (error) {
+  //     throw error
+  //   }
+  // }
 
-  async createNewChat(userId: string, friendId: string): Promise<IChat> {  
-    try {
-      const newChat = await this.prisma.chat.create({
-        data:{userId:userId,friendId:friendId},include:{messages:true}
-      })
-      return newChat
-    } catch (error) {
-      throw error
-    }
-  }
+  // async createNewChat(userId: string, friendId: string): Promise<IChat> {  
+  //   try {
+  //     const newChat = await this.prisma.chat.create({
+  //       data:{userId:userId,friendId:friendId},include:{messages:true}
+  //     })
+  //     return newChat
+  //   } catch (error) {
+  //     throw error
+  //   }
+  // }
 }

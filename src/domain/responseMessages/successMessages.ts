@@ -11,7 +11,11 @@ export const SuccessMessages = {
     USERS_RETRIEVED: 'All users retrieved successfully.',
     USER_BLOCKED: 'User has been blocked successfully.',
     USER_UNBLOCKED: 'User has been unblocked successfully.',
-    USER_UPDATED: 'User has been updated successfully.', 
-    APPLICATION_CREATED: 'Application created successfully.' ,
-     ROOM_CREATED: 'Room created successfully.'
+    USER_UPDATED: 'User has been updated successfully.',
+    APPLICATION_CREATED: 'Application created successfully.',
+    ROOM_CREATED: 'Room created successfully.',
+    CHAT_CREATED: 'Chat created successfully.',
+    CHAT_RETRIEVED: 'Chat retrieved successfully.',
+    CHATS_RETRIEVED: 'All chats retrieved successfully.', // New message added
+    MESSAGE_SENT: 'Message sent successfully',
 };
