@@ -53,11 +53,9 @@ export default class UserAuthController implements IuserAuthenticationController
   async authenticateTokenRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const accessToken = req.header('Authorization')?.replace('Bearer ', '');
-      console.log(accessToken,"accessToken");
       const refreshToken = req.cookies.refreshToken;
       if (!accessToken || !refreshToken) throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.TOKEN_MISSING };
       const userData = await this.userAuthUseCase.validateAccessToken(accessToken, refreshToken);
-      console.log(userData,"userData");
       res.status(HttpStatus.OK).json({ message: SuccessMessages.ACCESS_GRANTED, user: userData.userData, accessToken: userData.accessToken, status: HttpStatus.OK });
     } catch (error) {
       next(error);

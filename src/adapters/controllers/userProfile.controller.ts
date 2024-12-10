@@ -4,6 +4,7 @@ import IuserProfileController from "../../interface/Icontrollers/IuserProfile.co
 import { IComment, IUser, IuserRating } from "../../domain/entities/user.entities";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
+import { IQuestions } from "../../domain/entities/tests.entites";
 
 export default class userProfileController implements IuserProfileController {
   constructor(private profileUsecase: ProfileUsecase) {}
@@ -24,7 +25,6 @@ export default class userProfileController implements IuserProfileController {
   async requestFollowUnfollow(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { userId, friendId } = req.body;
-      console.log("working",userId, friendId);
       await this.profileUsecase.followUnfollow(userId, friendId);
       res.status(HttpStatus.OK).json({ message: "Following relationship updated." });
     }catch (error) {
@@ -37,9 +37,7 @@ export default class userProfileController implements IuserProfileController {
 async requestRetrieveFollowingsFollowers(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const  userId  = req.query.userId as string;
-      console.log("userid",userId);
       const { following, followers } = await this.profileUsecase.retriveFollowerFollowing(userId);
-       console.log(following,followers);
       res.status(HttpStatus.OK).json({ following, followers });
     } catch (error) {
       next(error);
@@ -49,7 +47,6 @@ async requestRetrieveFollowingsFollowers(req: Request, res: Response, next: Next
   async requestGiveRating(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const  comment: IComment  = req.body;
-      console.log("rewrfeeww",comment);
       await this.profileUsecase.giveRating(comment);
       res.status(HttpStatus.OK).json({ message: "Rating given successfully." });
     } catch (error) {
@@ -61,10 +58,19 @@ async requestRetrieveFollowingsFollowers(req: Request, res: Response, next: Next
     try {
       const { userId } = req.body;
       const ratings: IuserRating[] = await this.profileUsecase.retrieveRatings(userId);
-      console.log(ratings);
       res.status(HttpStatus.OK).json(ratings);
     } catch (error) {
       next(error);
     }
   }
+
+  async requestgetAllQuestions(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const questions: IQuestions[] | [] = await this.profileUsecase.getAllQuestions();
+      res.status(HttpStatus.OK).json({ message: SuccessMessages.QUESTIONS_RETRIEVED, data: questions });
+    } catch (error) {
+      next(error);
+    }
+  }
+
 }

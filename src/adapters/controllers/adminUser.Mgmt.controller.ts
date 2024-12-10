@@ -13,7 +13,6 @@ export default class AdminUserMgmtController implements IAdminUserMgmtController
   async requestAddMember(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const newMember = { ...req.body, avatar: req.file ? req.file.path : null };
-      console.log(req.file?.path, "workingg");
       await this.AdminUserMgmtUseCase.addMemberToSystem(newMember);
       res.status(HttpStatus.OK).json({ message: SuccessMessages.USER_CREATED });
     } catch (error) { next(error); }

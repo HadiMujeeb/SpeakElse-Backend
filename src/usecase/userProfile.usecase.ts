@@ -4,6 +4,7 @@ import ProfileRepository from "../infrastructure/repository/userProfile.reposito
 import cloudinaryServices from "../domain/services/cloudinary.services";
 import { HttpStatus } from "../domain/responseStatus/httpcode";
 import { ErrorMessages } from "../domain/responseMessages/errorMessages";
+import { IQuestions } from "../domain/entities/tests.entites";
 
 export default class userProfileUseCase implements IUserProfileUseCase {
   private profileRepository: ProfileRepository;
@@ -78,6 +79,23 @@ export default class userProfileUseCase implements IUserProfileUseCase {
   async retrieveRatings(userId: string): Promise<IuserRating[]> {
     try {
       return await this.profileRepository.findAllRatings(userId);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllQuestions(): Promise<IQuestions[] | []> {
+    try {
+      const questions = await this.profileRepository.getAllQuestions();
+
+      if (questions) {
+        questions.forEach((question:any) => {
+          question.questions = JSON.parse(question.questions);
+        })
+      }
+
+
+      return questions;
     } catch (error) {
       throw error;
     }

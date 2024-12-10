@@ -1,0 +1,10 @@
+model Questions {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  testType   String
+  title      String   // Title of the question set
+  story      String   // Additional context or description
+  questions  Json     // JSON field to store an array of question objects
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+

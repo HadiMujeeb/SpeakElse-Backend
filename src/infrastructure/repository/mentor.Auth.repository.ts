@@ -2,45 +2,47 @@ import { PrismaClient } from "@prisma/client";
 import IApplication from "../../domain/entities/mentor.entities";
 import IMentorAuthRepository from "../../interface/Irepositories/Imentor.auth.repository";
 import { IComment, IUser } from "../../domain/entities/user.entities";
-
+import bcrypt from "bcryptjs";
 export default class mentorAuthRepository implements IMentorAuthRepository {
   private prisma: PrismaClient;
   constructor(prisma: PrismaClient) {
     this.prisma = prisma;
   }
-  async findUserById(id: string): Promise<IComment[]> {
-    try {
-      const userComments = await this.prisma.user.findUnique({
-        where: {
-          id,
-        },
-        include: {
-          comments: true,
-        },
-      });
-      return userComments?.comments ?? [];
-    } catch (err) {
-      throw err;
-    }
-  }
 
   async createMentorshipApplication(data: IApplication): Promise<void> {
     try {
-      await this.prisma.mentorApplication.create({
-        data: {
-          userId: data.id,
-          email: data.email,
-          name: data.name,
-          subject: data.subject,
-          message: data.message,
-          proficiencyLevel: "beginner",
-          ratings: data.ratings,
-          feedbacks: data.feedbacks,
-          resume: data.resume,
+      await this.prisma.mentor.upsert({
+        where: {
+          email: data.email, 
         },
+        update: {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          country: data.country,
+          mentorRole: data.mentorRole,
+          avatar: data.avatar,
+          language: data.language,
+          description: data.description,
+          resume: data.resume,
+          userId: data.userId
+        },
+        create: {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          country: data.country,
+          mentorRole: data.mentorRole,
+          avatar: data.avatar,
+          language: data.language,
+          description: data.description,
+          resume: data.resume,
+          userId: data.userId
+        }
       });
     } catch (error) {
-      throw error;
+      throw error; 
     }
   }
+  
 }

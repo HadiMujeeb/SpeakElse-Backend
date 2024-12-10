@@ -12,21 +12,21 @@ import profileRoute from "./infrastructure/routes/userProfile.route";
 import MentorAuthRoute from "./infrastructure/routes/mentor.auth.route";
 import userRoomRoute from "./infrastructure/routes/userRoom.route";
 import FriendChatRoute from "./infrastructure/routes/user.chat.route";
+import languageTestRoute from "./infrastructure/routes/admin.languageTest.route";
 // middlewire
 import { errorHandler } from "./infrastructure/middlewares/error.middleware";
 import MentorProfileRoute from "./infrastructure/routes/mentor.profile.route";
-import { RoomSocketioRepository } from "./infrastructure/repository/room.socketio.repository";
-import { roomSocketioUseCase } from "./usecase/room.socketio.usecase";
-import { RoomSocketioController } from "./adapters/controllers/room.socketio.controller";
+import { SocketioRepository } from "./infrastructure/repository/socketio.repository";
+import { socketioUseCase } from "./usecase/socketio.usecase";
+import { SocketioController } from "./adapters/controllers/socketio.controller";
+import prisma from "./infrastructure/config/prismaCient.config";
 
 
 dotenv.config();
 const app = express();
 const server = createServer(app);
-const socketService = new SocketService(server);
-// const roomSocketioRepository = new RoomSocketioRepository();
-// const RoomSocketioUseCase = new roomSocketioUseCase(roomSocketioRepository);
-// const roomSocketioController = new RoomSocketioController(server,RoomSocketioUseCase);
+// const socketService = new SocketService(server);
+const SocketioControllerInstance = new SocketioController(server);
 
 
 app.use(express.json());
@@ -51,6 +51,7 @@ app.use("/api/mentor", MentorProfileRoute);
 app.use("/api/mentor/auth", MentorAuthRoute);
 app.use("/api/user",userRoomRoute)
 app.use("/api/user",FriendChatRoute)
+app.use("/api/admin/languageTest",languageTestRoute)
 // Use error handler middleware
 app.use(errorHandler);
 

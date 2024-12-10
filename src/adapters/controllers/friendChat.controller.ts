@@ -22,7 +22,7 @@ export default class FriendChatController implements IFriendChatController {
    async requestRetrieveAllChats(req: Request, res: Response, next: NextFunction): Promise<void> {
        try {
            const  {userId } = req.query as {userId: string};
-           console.log("working",userId);
+        //    console.log("working",userId);
            const chats: IChat[] = await this.FriendChatUsecase.retrieveAllChats(userId);
            res.status(HttpStatus.OK).json({message:SuccessMessages.CHATS_RETRIEVED,chats});
        } catch (error) {
@@ -41,7 +41,6 @@ async requestRetrieveChat(req: Request, res: Response, next: NextFunction): Prom
 async requestSendMessage(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
         const messageData:IMessage = req.body;
-        console.log(messageData);
         await this.FriendChatUsecase.sendMessage(messageData);
         res.status(HttpStatus.OK).json({message:SuccessMessages.MESSAGE_SENT});
     } catch (error) {

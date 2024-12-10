@@ -1,27 +1,29 @@
-model MentorApplication {
-    id                  String                @id @default(auto()) @map("_id") @db.ObjectId
-    userId              String                @db.ObjectId
-    name                String
-    email               String
-    subject             String
-    message             String
-    proficiencyLevel    String
-    ratings             Int
-    feedbacks           String[]
-    applicationFeedback  String?
-    submittedAt        DateTime              @default(now())
-    applicationStatus   ApplicationStatus     @default(PENDING)
-    reviewedAt         DateTime?
-    resume              String?
 
-    // Relations
-    user                User                  @relation(fields: [userId], references: [id])
 
-    @@map("mentorApplications")
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
-enum ApplicationStatus {
-    PENDING
-    APPROVED
-    REJECTED
+model Mentor {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String        @unique
+  password     String
+  avatar       String?
+  country      String
+  language     String
+  mentorRole   String
+  description  String
+  resume       String
+  userId       String        @db.ObjectId
+  user         User          @relation(fields: [userId], references: [id])
+  isVerified   Boolean       @default(false)
+  isBlocked    Boolean       @default(false)
+  followers    String[]      @db.ObjectId
+  following    String[]      @db.ObjectId
+  comments     Comment[]
+  approvalStatus ApprovalStatus @default(PENDING)
+  createdAt    DateTime      @default(now())
 }

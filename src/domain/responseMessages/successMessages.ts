@@ -16,6 +16,10 @@ export const SuccessMessages = {
     ROOM_CREATED: 'Room created successfully.',
     CHAT_CREATED: 'Chat created successfully.',
     CHAT_RETRIEVED: 'Chat retrieved successfully.',
-    CHATS_RETRIEVED: 'All chats retrieved successfully.', // New message added
-    MESSAGE_SENT: 'Message sent successfully',
+    CHATS_RETRIEVED: 'All chats retrieved successfully.',
+    MESSAGE_SENT: 'Message sent successfully.',
+    QUESTIONS_RETRIEVED: 'All questions retrieved successfully.',
+    QUESTION_ADDED: 'Question added successfully.',
+    QUESTION_UPDATED: 'Question updated successfully.',
+    QUESTION_DELETED: 'Question deleted successfully.', // New message for deleting questions
 };

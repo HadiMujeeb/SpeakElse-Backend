@@ -30,7 +30,6 @@ export default class AdminController {
   async adminAuthTokenRequest(req: Request, res: Response, next: NextFunction): Promise<void>{
     try {
       const accessToken = req.header('Authorization')?.replace('Bearer ', '');
-      console.log("accessToken",accessToken);
       const refreshToken = req.cookies.adminRefreshToken;
       if (!accessToken || !refreshToken) throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.TOKEN_MISSING };
       const adminData = await this.AdminUseCase.validateAdminAccessToken(accessToken, refreshToken);

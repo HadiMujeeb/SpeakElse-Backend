@@ -20,6 +20,13 @@ export class JWT {
         })
     }
 
+
+    static mentorRefreshToken(mentorId:string){
+        return jwt.sign({id:mentorId},JWT_SECRET||'default_secret',{
+            expiresIn:"7d",
+        })
+    }
+
    static verifyToken(token: string) {
         return jwt.verify(token, JWT_SECRET || 'default_secret');
     };

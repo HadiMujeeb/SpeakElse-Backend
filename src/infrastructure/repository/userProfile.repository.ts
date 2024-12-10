@@ -53,7 +53,6 @@ export default class userProfileRepository implements IUserProfileRepository {
   }
 async followUnfollow(userId: string, friendId: string): Promise<void> {
     try {
-      console.log("follwering",userId, friendId);
         let friendExist = await this.findFriendinFollowing(userId)
         const isExisted = friendExist.find((id)=>id==friendId)
         if(!isExisted){
@@ -75,10 +74,8 @@ async followUnfollow(userId: string, friendId: string): Promise<void> {
 }
  async followerUnfollower(userId: string, friendId: string): Promise<void> {
     try {
-      console.log("follwer",userId, friendId);
         let friendExist = await this.findAllfollowers(userId)
         const isExisted = friendExist.find((id)=>id==friendId)
-        console.log("working",isExisted);
         if(!isExisted){
            await this.prisma.user.update({
                 where:{id:userId},
@@ -172,5 +169,24 @@ async findAllRatings(userId: string): Promise<IuserRating[]> {
     throw error;
   }
 }
+
+async getAllQuestions(): Promise<any> {
+  try {
+      const data = await this.prisma.questions.findMany({
+          select: {
+              id: true,
+              testType: true,
+              title: true,
+              story: true,
+              questions: true,
+          },
+      });
+  
+ return data
+  } catch (error) {
+      throw error;
+  }
+}
+
 
 }

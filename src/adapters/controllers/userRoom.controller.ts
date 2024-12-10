@@ -14,7 +14,6 @@ export default class userRoomController implements IuserRoomController {
   async requestCreateRoom(req: Request, res: Response, next: NextFunction): Promise<void> {
          try {
             const data: IRoom = req.body
-            console.log("room data",data)
            const createRoom = await this.userRoomUseCase.createUserRoom(data);
             res.status(HttpStatus.CREATED).json({message: SuccessMessages.ROOM_CREATED,room:createRoom})
          } catch (error) {

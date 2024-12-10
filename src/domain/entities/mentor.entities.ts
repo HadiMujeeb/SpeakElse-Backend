@@ -1,10 +1,17 @@
 export default interface IApplication {
-    id: string          
-    name:string
-    email:string
-    subject:string
-    message:string
-    ratings:number
-    feedbacks:string[]
-    resume:string
+    name      :   string
+    email     :   string   
+    password  :   string
+    avatar    :   string|null
+    country   :   string
+    language  :   string
+    mentorRole :  string
+    description :  string
+    resume     :  string
+    userId     :  string
+    isVerified? :  boolean
+    isBlocked?  :  boolean
+    followers?  :  string[]
+    following?  :  string[]
+    ratings?    :  string[]
 }

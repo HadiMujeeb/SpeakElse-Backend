@@ -13,12 +13,21 @@ export default class MentorAuthController implements IMentorAuthController {
 
   async MentorApplicationRequest(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {
-      const credentials: IApplication = {...req.body,resume: req.file?.path};
-      console.log(req.file?.path, "working", credentials.id);
+      const files = req.files as { resume: Express.Multer.File[]; avatar: Express.Multer.File[] };
+      const credentials: IApplication = {
+        ...req.body,
+        resume: files.resume?.[0]?.path, 
+        avatar: files.avatar?.[0]?.path 
+      };
+      console.log("data ",credentials.resume,"file",credentials.avatar);
       await this.mentorAuthUsecase.registerMentorApplication(credentials);
       res.status(HttpStatus.CREATED).json({ message: SuccessMessages.APPLICATION_CREATED });
     } catch (error) {
       next(error);
     }
   }
+
+  
+
+
 }

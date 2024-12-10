@@ -15,5 +15,6 @@ profileRoute.post("/requestFollowUnfollow", UserProfileController.requestFollowU
 profileRoute.get("/requestRetrieveFriends", UserProfileController.requestRetrieveFollowingsFollowers.bind(UserProfileController));
 profileRoute.post("/requestGiveRating", UserProfileController.requestGiveRating.bind(UserProfileController));
 profileRoute.get("/requestRetrieveRatings", UserProfileController.requestRetrieveRatings.bind(UserProfileController));
+profileRoute.get("/getAllQuestions", UserProfileController.requestgetAllQuestions.bind(UserProfileController));
 
 export default profileRoute

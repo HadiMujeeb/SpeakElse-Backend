@@ -1,0 +1,221 @@
+{
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: '{\r\n' +
+    '  "testType": "Reading",\r\n' +
+    '  "title": "General Knowledge Quiz",\r\n' +
+    '  "story": "This quiz tests your general knowledge across various topics.",\r\n' +
+    '  "questions": [\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the capital of France?",\r\n' +
+    '      "options": ["Paris", "London", "Berlin", "Rome"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "Which planet is known as the Red Planet?",\r\n' +
+    '      "options": ["Earth", "Mars", "Jupiter", "Venus"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    `      "questionText": "Who wrote 'Romeo and Juliet'?",\r\n` +
+    '      "options": ["William Shakespeare", "Charles Dickens", "Leo Tolstoy", "Mark Twain"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the largest mammal in the world?",\r\n' +
+    '      "options": ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    }\r\n' +
+    '  ],\r\n' +
+    '}\r\n',
+  type: 'entity.parse.failed',
+  level: 'error',
+  timestamp: '2024-12-03T19:47:08.912Z'
+}
+{
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: '{\r\n' +
+    '  "testType": "Reading",\r\n' +
+    '  "title": "General Knowledge Quiz",\r\n' +
+    '  "story": "This quiz tests your general knowledge across various topics.",\r\n' +
+    '  "questions": [\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the capital of France?",\r\n' +
+    '      "options": ["Paris", "London", "Berlin", "Rome"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "Which planet is known as the Red Planet?",\r\n' +
+    '      "options": ["Earth", "Mars", "Jupiter", "Venus"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    `      "questionText": "Who wrote 'Romeo and Juliet'?",\r\n` +
+    '      "options": ["William Shakespeare", "Charles Dickens", "Leo Tolstoy", "Mark Twain"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the largest mammal in the world?",\r\n' +
+    '      "options": ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    }\r\n' +
+    '  ],\r\n' +
+    '}\r\n',
+  type: 'entity.parse.failed',
+  level: 'error',
+  timestamp: '2024-12-03T19:48:11.693Z'
+}
+{
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: '{\r\n' +
+    '  "testType": "Reading",\r\n' +
+    '  "title": "General Knowledge Quiz",\r\n' +
+    '  "story": "This quiz tests your general knowledge across various topics.",\r\n' +
+    '  "questions": [\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the capital of France?",\r\n' +
+    '      "options": ["Paris", "London", "Berlin", "Rome"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "Which planet is known as the Red Planet?",\r\n' +
+    '      "options": ["Earth", "Mars", "Jupiter", "Venus"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    `      "questionText": "Who wrote 'Romeo and Juliet'?",\r\n` +
+    '      "options": ["William Shakespeare", "Charles Dickens", "Leo Tolstoy", "Mark Twain"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the largest mammal in the world?",\r\n' +
+    '      "options": ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    }\r\n' +
+    '  ],\r\n' +
+    '}\r\n',
+  type: 'entity.parse.failed',
+  level: 'error',
+  timestamp: '2024-12-03T19:49:18.498Z'
+}
+{
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: '{\r\n' +
+    '  "testType": "Reading",\r\n' +
+    '  "title": "General Knowledge Quiz",\r\n' +
+    '  "story": "This quiz tests your general knowledge across various topics.",\r\n' +
+    '  "questions": [\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the capital of France?",\r\n' +
+    '      "options": ["Paris", "London", "Berlin", "Rome"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "Which planet is known as the Red Planet?",\r\n' +
+    '      "options": ["Earth", "Mars", "Jupiter", "Venus"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    `      "questionText": "Who wrote 'Romeo and Juliet'?",\r\n` +
+    '      "options": ["William Shakespeare", "Charles Dickens", "Leo Tolstoy", "Mark Twain"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the largest mammal in the world?",\r\n' +
+    '      "options": ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    }\r\n' +
+    '  ],\r\n' +
+    '}\r\n',
+  type: 'entity.parse.failed',
+  level: 'error',
+  timestamp: '2024-12-03T19:49:21.296Z'
+}
+{
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: '{\r\n' +
+    '  "testType": "Reading",\r\n' +
+    '  "title": "General Knowledge Quiz",\r\n' +
+    '  "story": "This quiz tests your general knowledge across various topics.",\r\n' +
+    '  "questions": [\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the capital of France?",\r\n' +
+    '      "options": ["Paris", "London", "Berlin", "Rome"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "Which planet is known as the Red Planet?",\r\n' +
+    '      "options": ["Earth", "Mars", "Jupiter", "Venus"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    `      "questionText": "Who wrote 'Romeo and Juliet'?",\r\n` +
+    '      "options": ["William Shakespeare", "Charles Dickens", "Leo Tolstoy", "Mark Twain"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the largest mammal in the world?",\r\n' +
+    '      "options": ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    }\r\n' +
+    '  ],\r\n' +
+    '}\r\n',
+  type: 'entity.parse.failed',
+  level: 'error',
+  timestamp: '2024-12-03T19:49:53.985Z'
+}
+{
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: '{\r\n' +
+    '  "testType": "Reading",\r\n' +
+    '  "title": "General Knowledge Quiz",\r\n' +
+    '  "story": "This quiz tests your general knowledge across various topics.",\r\n' +
+    '  "questions": [\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the capital of France?",\r\n' +
+    '      "options": ["Paris", "London", "Berlin", "Rome"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "Which planet is known as the Red Planet?",\r\n' +
+    '      "options": ["Earth", "Mars", "Jupiter", "Venus"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    `      "questionText": "Who wrote 'Romeo and Juliet'?",\r\n` +
+    '      "options": ["William Shakespeare", "Charles Dickens", "Leo Tolstoy", "Mark Twain"],\r\n' +
+    '      "correctAnswer": 0\r\n' +
+    '    },\r\n' +
+    '    {\r\n' +
+    '      "questionText": "What is the largest mammal in the world?",\r\n' +
+    '      "options": ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"],\r\n' +
+    '      "correctAnswer": 1\r\n' +
+    '    }\r\n' +
+    '  ],\r\n' +
+    '}\r\n',
+  type: 'entity.parse.failed',
+  level: 'error',
+  timestamp: '2024-12-03T19:50:22.771Z'
+}
+{ level: 'error', timestamp: '2024-12-03T20:07:08.737Z' }
+{ level: 'error', timestamp: '2024-12-03T20:08:15.892Z' }
+{ level: 'error', timestamp: '2024-12-03T20:08:30.446Z' }
+{
+  name: 'PrismaClientKnownRequestError',
+  code: 'P2025',
+  clientVersion: '5.21.1',
+  meta: { modelName: 'Questions', cause: 'Record to delete does not exist.' },
+  level: 'error',
+  timestamp: '2024-12-03T21:31:18.572Z'
+}

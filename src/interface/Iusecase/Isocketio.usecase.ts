@@ -1,7 +1,7 @@
 // src/usecase/socket.usecase.interface.ts
 import { Socket } from 'socket.io';
 
-export interface IroomScoketioUsecase {
+export interface ISocketioUsecase {
   handleUserData(socket: Socket, userData: { userId: string, username: string, avatar: string }): void;
   handleJoinRoom(socket: Socket, roomID: string): void;
   handleChatMessage(socket: Socket, message: string, roomID: string): void;

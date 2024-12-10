@@ -15,7 +15,7 @@ model User {
     resetTokenExpiry    DateTime?
     comments            Comment[] 
     rooms               Room[]                @relation("RoomParticipants")
-    mentorApplications   MentorApplication[]
+    mentorApplications  Mentor[]     
     createdRooms   Room[]   @relation("RoomCreator")
     following           String[]    @db.ObjectId
     followers           String[]    @db.ObjectId
@@ -38,6 +38,7 @@ model Comment {
 
     // Relations
     givenUser                User             @relation(fields: [givenBy], references: [id])
+    mentor       Mentor       @relation(fields: [givenBy], references: [id])
     createdAt    DateTime  
     
     @@map("comments")  
