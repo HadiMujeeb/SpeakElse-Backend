@@ -1,5 +1,5 @@
 import { Request, response, NextFunction } from "express";
-import { IComment, IUser, IuserRating } from "../../domain/entities/user.entities";
+import { IComment, IReport, IUser, IuserRating } from "../../domain/entities/user.entities";
 
 export default interface IUserProfileRepository {
   updateUserData(MemberData: IUser): Promise<void> | never;
@@ -10,4 +10,5 @@ export default interface IUserProfileRepository {
     findAllfollowers(userId: string): Promise<string[]>
     giveRating(comment: IComment): Promise<void>;
     findAllRatings(userId: string): Promise<IuserRating[]>
+    reportUser(report:IReport): Promise<void>
 }

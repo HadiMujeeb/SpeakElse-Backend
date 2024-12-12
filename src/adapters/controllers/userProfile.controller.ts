@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import ProfileUsecase from "../../usecase/userProfile.usecase";
 import IuserProfileController from "../../interface/Icontrollers/IuserProfile.controller";
-import { IComment, IUser, IuserRating } from "../../domain/entities/user.entities";
+import { IComment, IReport, IUser, IuserRating } from "../../domain/entities/user.entities";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
 import { IQuestions } from "../../domain/entities/tests.entites";
@@ -68,6 +68,18 @@ async requestRetrieveFollowingsFollowers(req: Request, res: Response, next: Next
     try {
       const questions: IQuestions[] | [] = await this.profileUsecase.getAllQuestions();
       res.status(HttpStatus.OK).json({ message: SuccessMessages.QUESTIONS_RETRIEVED, data: questions });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async requestReportUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const report: IReport = {...req.body, proof: req.file ? req.file.path : null};
+      console.log(req.file);
+      console.log(report);
+      await this.profileUsecase.reportUser(report);
+      res.status(HttpStatus.OK).json({ message: "Report submitted successfully." });
     } catch (error) {
       next(error);
     }

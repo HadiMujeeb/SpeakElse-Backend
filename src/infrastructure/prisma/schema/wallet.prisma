@@ -1,0 +1,46 @@
+model MentorWallet {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  mentorId    String     @db.ObjectId
+  balance     Float      @default(0)  
+  createdAt   DateTime   @default(now()) 
+  mentor      Mentor     @relation(fields: [mentorId], references: [id]) 
+  @@unique([mentorId])
+
+
+}
+
+
+model UserWallet {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String       @db.ObjectId
+  balance     Float        @default(0) 
+  createdAt   DateTime     @default(now())
+  transactions Transaction[]
+  user        User         @relation(fields: [userId], references: [id])
+   @@unique([userId]) 
+}
+
+
+
+model Transaction {
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String      @db.ObjectId
+  fundReceiverId String      @db.ObjectId
+  amount         Float       
+  type           String    
+  status         String
+  transactionId  String     
+  paymentMethod  String    
+  sessionId      String    
+  description    String    
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  userWallet     UserWallet  @relation(fields: [userId], references: [userId])
+}
+
+enum TransactionStatus {
+  PENDING    
+  COMPLETED 
+  FAILED  
+  REFUNDED 
+}

@@ -13,5 +13,5 @@ const MentorProfileController = new mentorProfileController(
 );
 
 MentorProfileRoute.put("/updateMentorData",upload.single("image"),MentorProfileController.requestEditMentorData.bind(MentorProfileController));
-
+MentorProfileRoute.get("/getFeedbackRatings",MentorProfileController.requestGetFeedbackRatings.bind(MentorProfileController));  
 export default MentorProfileRoute;

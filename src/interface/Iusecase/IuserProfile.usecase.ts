@@ -1,4 +1,4 @@
-import { IComment, IUser, IuserRating } from "../../domain/entities/user.entities";
+import { IComment, IReport, IUser, IuserRating } from "../../domain/entities/user.entities";
 
 export default interface IUserProfileUseCase {
   handleEditUserData(memberData: IUser): Promise<void>;
@@ -7,4 +7,5 @@ export default interface IUserProfileUseCase {
   retriveFollowerFollowing(userId: string): Promise<{following:IUser[],followers:IUser[]}>;
   giveRating(comment: IComment): Promise<void>;
   retrieveRatings(userId: string): Promise<IuserRating[]>
+  reportUser(report:IReport): Promise<void>
 }

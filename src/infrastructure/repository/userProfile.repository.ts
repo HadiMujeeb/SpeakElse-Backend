@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import IUserProfileRepository from "../../interface/Irepositories/IuserProfile.repository";
-import { IComment, IUser, IuserRating } from "../../domain/entities/user.entities";
+import { IComment, IReport, IUser, IuserRating } from "../../domain/entities/user.entities";
 
 export default class userProfileRepository implements IUserProfileRepository {
   private prisma: PrismaClient;
@@ -188,5 +188,18 @@ async getAllQuestions(): Promise<any> {
   }
 }
 
-
+async reportUser(report:IReport): Promise<void> {
+  try {
+    await this.prisma.report.create({
+      data: {
+        reporterId: report.reporterId,
+        reportedId: report.reportedId,
+        content: report.content,
+        proof: report.proof
+      },
+    })
+  } catch (error) {
+    throw error
+  }
+}
 }

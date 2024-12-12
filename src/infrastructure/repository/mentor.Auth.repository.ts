@@ -1,8 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { ApprovalStatus, PrismaClient } from "@prisma/client";
 import IApplication from "../../domain/entities/mentor.entities";
 import IMentorAuthRepository from "../../interface/Irepositories/Imentor.auth.repository";
 import { IComment, IUser } from "../../domain/entities/user.entities";
 import bcrypt from "bcryptjs";
+import prisma from "../config/prismaCient.config";
 export default class mentorAuthRepository implements IMentorAuthRepository {
   private prisma: PrismaClient;
   constructor(prisma: PrismaClient) {
@@ -25,7 +26,8 @@ export default class mentorAuthRepository implements IMentorAuthRepository {
           language: data.language,
           description: data.description,
           resume: data.resume,
-          userId: data.userId
+          userId: data.userId,
+          approvalStatus: ApprovalStatus.PENDING
         },
         create: {
           name: data.name,
@@ -37,11 +39,44 @@ export default class mentorAuthRepository implements IMentorAuthRepository {
           language: data.language,
           description: data.description,
           resume: data.resume,
-          userId: data.userId
+          userId: data.userId,
+          approvalStatus: ApprovalStatus.PENDING,
+          mentorWallet:{
+            create:{
+              balance:0
+            }
+          }
+          
         }
       });
     } catch (error) {
       throw error; 
+    }
+  }
+  
+  async findMentorByEmail(email: string): Promise<IApplication | null> {
+    try {
+      const userData = await this.prisma.mentor.findUnique({
+        where: {
+          email,
+        },
+      });
+      return userData;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async findMentorById(id: string): Promise<IApplication | null> {
+    try {
+      const userData = await this.prisma.mentor.findUnique({
+        where: {
+          id,
+        },
+      });
+      return userData;
+    } catch (err) {
+      throw err;
     }
   }
   

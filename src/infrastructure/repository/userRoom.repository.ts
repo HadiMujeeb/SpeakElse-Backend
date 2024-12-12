@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import IuserRoomRepository from "../../interface/Irepositories/IuserRoom.repository";
 import { IRoom } from "../../domain/entities/room.entities";
 import { IUser } from "../../domain/entities/user.entities";
+import { ITransaction } from "../../domain/entities/mentor.entities";
 
 
 export default class userRoomRepository  implements IuserRoomRepository{
@@ -55,6 +56,36 @@ async retrieveAllRooms(): Promise<IRoom[]> {
     return roomData;
   } catch (error) {
     throw error;
+  }
+}
+async createPaymentTransaction(data: ITransaction): Promise<void> {
+  try {
+    await this.prisma.transaction.create({
+      data: {
+        userId: data.userId,
+        fundReceiverId: data.fundReceiverId,
+        amount: data.amount,
+        type: data.type,
+        status: data.status,
+        transactionId: data.transactionId,
+        paymentMethod: data.paymentMethod,
+        sessionId: data.sessionId,
+        description: data.description
+      }
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+async bookedMentorRoom(roomId: string, userId: string): Promise<void> {
+  try {
+    const joinMentorRoom = await this.prisma.mentorSession.update({
+      where:{ id:roomId },
+      data:{ participants: { push: userId } }
+    })  
+  } catch (error) {
+      throw error
   }
 }
 }

@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import IUserProfileRepository from "../../interface/Irepositories/IuserProfile.repository";
-import { IUser } from "../../domain/entities/user.entities";
+import { IComment, IUser } from "../../domain/entities/user.entities";
 import IMentorProfileRepository from "../../interface/Irepositories/Imentor.profile.repository";
+import IApplication from "../../domain/entities/mentor.entities";
 
 export default class mentorProfileRepository
   implements IMentorProfileRepository
@@ -12,31 +12,41 @@ export default class mentorProfileRepository
     this.prisma = new PrismaClient();
   }
 
-  async doesUserExist(memberId: string): Promise<boolean> {
+  async updateMentorData(mentorData: IApplication): Promise<IApplication> {
     try {
-      return !!this.prisma.user.findUnique({
-        where: { id: memberId },
-        select: { id: true },
+     return await this.prisma.mentor.update({
+        where: { email: mentorData.email },
+        data: {
+          name: mentorData.name,
+          country: mentorData.country,
+          mentorRole: mentorData.mentorRole,
+          avatar: mentorData.avatar,
+          language: mentorData.language,
+          description: mentorData.description,
+        },
       });
     } catch (error) {
       throw error;
     }
   }
-
-  async updateMentorData(MemberData: IUser): Promise<void | never> {
+  async getfeedbackRatings(mentorId: string): Promise<IComment[]> {
     try {
-      await this.prisma.user.update({
-        where: { id: MemberData.id },
-        data: {
-          name: MemberData.name,
-          email: MemberData.email,
-          country: MemberData.country,
-          profession: MemberData.profession,
-          avatar: MemberData.avatar,
-          language: MemberData.language,
-          description: MemberData.description,
-        },
+      const comments = await this.prisma.comment.findMany({
+        where: { userId: mentorId },
+        include: { givenUser: true },
       });
+      const ratings = comments.forEach((comment) => {
+        if (comment.rating > 0) {
+          return {
+            userId: comment.userId,
+            feedback: comment.feedback,
+            rating: comment.rating,
+            givenBy: comment.givenUser.name,
+            createdAt: comment.createdAt,
+          };
+        }
+      })
+      return ratings??[];
     } catch (error) {
       throw error;
     }

@@ -16,5 +16,6 @@ profileRoute.get("/requestRetrieveFriends", UserProfileController.requestRetriev
 profileRoute.post("/requestGiveRating", UserProfileController.requestGiveRating.bind(UserProfileController));
 profileRoute.get("/requestRetrieveRatings", UserProfileController.requestRetrieveRatings.bind(UserProfileController));
 profileRoute.get("/getAllQuestions", UserProfileController.requestgetAllQuestions.bind(UserProfileController));
+profileRoute.post("/requestreportUser",upload.single("proof"), UserProfileController.requestReportUser.bind(UserProfileController));
 
 export default profileRoute

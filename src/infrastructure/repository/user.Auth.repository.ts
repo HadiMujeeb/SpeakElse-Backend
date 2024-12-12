@@ -34,6 +34,11 @@ export class userAuthRepository implements IUserAuthRepository {
           name: newUserData.name,
           email: newUserData.email,
           password: newUserData.password,
+          userWallet:{
+            create:{
+              balance:0
+            }
+          }
         },
       });
     } catch (err: any) {

@@ -7,9 +7,9 @@ enum ApprovalStatus {
 }
 
 model Mentor {
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  id           String          @id @default(auto()) @map("_id") @db.ObjectId
   name         String
-  email        String        @unique
+  email        String          @unique
   password     String
   avatar       String?
   country      String
@@ -17,13 +17,34 @@ model Mentor {
   mentorRole   String
   description  String
   resume       String
-  userId       String        @db.ObjectId
-  user         User          @relation(fields: [userId], references: [id])
-  isVerified   Boolean       @default(false)
-  isBlocked    Boolean       @default(false)
-  followers    String[]      @db.ObjectId
-  following    String[]      @db.ObjectId
+  userId       String          @db.ObjectId
+  user         User            @relation(fields: [userId], references: [id])
+  isVerified   Boolean         @default(false)
+  isBlocked    Boolean         @default(false)
+  followers    String[]        @db.ObjectId
+  following    String[]        @db.ObjectId
   comments     Comment[]
   approvalStatus ApprovalStatus @default(PENDING)
-  createdAt    DateTime      @default(now())
+  createdAt    DateTime        @default(now())
+  sessions     MentorSession[] 
+  mentorWallet   MentorWallet?
+}
+
+
+
+
+
+
+model MentorSession {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  mentorId    String   @db.ObjectId
+  language    String
+  topic       String
+  limit       Int
+  participants String[] 
+  startTime   DateTime
+  endTime     DateTime
+  createdAt   DateTime @default(now())
+  bookingFee   Float
+  mentor  Mentor @relation(fields: [mentorId],references: [id])
 }

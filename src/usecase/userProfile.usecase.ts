@@ -1,4 +1,4 @@
-import { IComment, IUser, IuserRating } from "../domain/entities/user.entities";
+import { IComment, IReport, IUser, IuserRating } from "../domain/entities/user.entities";
 import IUserProfileUseCase from "../interface/Iusecase/IuserProfile.usecase";
 import ProfileRepository from "../infrastructure/repository/userProfile.repository";
 import cloudinaryServices from "../domain/services/cloudinary.services";
@@ -100,4 +100,14 @@ export default class userProfileUseCase implements IUserProfileUseCase {
       throw error;
     }
   }
+
+  async reportUser(report: IReport): Promise<void> {
+    try {
+      await this.profileRepository.reportUser(report);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  
 }

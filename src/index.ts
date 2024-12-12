@@ -13,6 +13,9 @@ import MentorAuthRoute from "./infrastructure/routes/mentor.auth.route";
 import userRoomRoute from "./infrastructure/routes/userRoom.route";
 import FriendChatRoute from "./infrastructure/routes/user.chat.route";
 import languageTestRoute from "./infrastructure/routes/admin.languageTest.route";
+import adminMentorFormRouter from "./infrastructure/routes/admin.mentorform.route";
+import adminReportsRoute from "./infrastructure/routes/admin.reports.route";
+import mentorRoomRoute from "./infrastructure/routes/mentor.room.route";
 // middlewire
 import { errorHandler } from "./infrastructure/middlewares/error.middleware";
 import MentorProfileRoute from "./infrastructure/routes/mentor.profile.route";
@@ -52,6 +55,9 @@ app.use("/api/mentor/auth", MentorAuthRoute);
 app.use("/api/user",userRoomRoute)
 app.use("/api/user",FriendChatRoute)
 app.use("/api/admin/languageTest",languageTestRoute)
+app.use("/api/admin/mentorform",adminMentorFormRouter)
+app.use("/api/admin/reports",adminReportsRoute);
+app.use("/api/mentor",mentorRoomRoute)
 // Use error handler middleware
 app.use(errorHandler);
 

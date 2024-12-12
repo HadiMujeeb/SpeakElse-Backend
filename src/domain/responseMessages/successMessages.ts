@@ -21,5 +21,14 @@ export const SuccessMessages = {
     QUESTIONS_RETRIEVED: 'All questions retrieved successfully.',
     QUESTION_ADDED: 'Question added successfully.',
     QUESTION_UPDATED: 'Question updated successfully.',
-    QUESTION_DELETED: 'Question deleted successfully.', // New message for deleting questions
+    QUESTION_DELETED: 'Question deleted successfully.',
+    APPLICATIONS_RETRIEVED: 'All applications retrieved successfully.',
+    MENTOR_STATUS_UPDATED: 'Mentor status updated successfully.',
+    APPLICATION_STATUS_UPDATED: 'Application status updated successfully.',
+    ROOM_UPDATED : 'Room updated successfully.',
+    ROOMS_RETRIEVED: 'All rooms retrieved successfully.',
+    MENTOR_UPDATED:'Mentor updated successfully.',
+    RATINGS_RETRIEVED:'Ratings retrieved successfully.',
+    PAYMENT_SUCCESS:'Payment successfull',
+
 };

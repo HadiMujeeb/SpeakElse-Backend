@@ -94,6 +94,7 @@ export default class UserAuthController implements IuserAuthenticationController
   async requestResetPassword(req: Request, res: Response, next: NextFunction): Promise<void | never> {
     try {
       const { token, password } = req.body;
+      await this.userAuthUseCase.handleResetPassword(password,token)
       if (!token) throw { status: HttpStatus.NOT_FOUND, message: ErrorMessages.TOKEN_MISSING };
       res.status(HttpStatus.OK).json({ message: SuccessMessages.PASSWORD_CHANGED });
     } catch (error) {

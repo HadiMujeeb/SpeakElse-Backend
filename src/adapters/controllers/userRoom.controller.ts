@@ -4,6 +4,7 @@ import { IRoom } from "../../domain/entities/room.entities";
 import userRoomUseCase from "../../usecase/userRoom.usecase";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
+import { ITransaction } from "../../domain/entities/mentor.entities";
 
 export default class userRoomController implements IuserRoomController {
 
@@ -28,4 +29,16 @@ export default class userRoomController implements IuserRoomController {
             next(error)
           }
       }
+
+async requestPaymentTransation(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const data: ITransaction = req.body
+    console.log(data);
+    await this.userRoomUseCase.requestPaymentTransaction(data);
+    res.status(HttpStatus.OK).json({message: SuccessMessages.PAYMENT_SUCCESS})
+  } catch (error) {
+    next(error)
+  }
+}   
+      
 }

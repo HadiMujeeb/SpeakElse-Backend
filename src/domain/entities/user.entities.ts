@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { ReportStatus, Role } from "@prisma/client";
 
 export interface IUser {
   id: string;
@@ -35,6 +35,9 @@ export interface IComment {
   feedback: string;
   rating: number;
   givenBy: string;
+  giverName?: string;
+  createdAt: Date;
+
 }
 
 export interface IuserRating {
@@ -46,4 +49,19 @@ export interface IuserRating {
     avatar:string
   }
   createdAt: Date;
+}
+
+
+export interface IReport {
+  id: string;
+  reporterId: string;
+  reportedId: string;
+  content: string | null;
+  proof: string|null;
+  status:ReportStatus
+}
+
+export interface IResponseReport extends IReport {
+  reporter: IUser;
+  reported: IUser;
 }

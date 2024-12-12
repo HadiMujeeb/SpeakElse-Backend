@@ -1,0 +1,17 @@
+model Report {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  reporterId  String  @db.ObjectId
+  reporter    User     @relation(name: "ReportsFiled",fields: [reporterId], references: [id])
+  reportedId  String   @db.ObjectId
+  reported    User     @relation(name: "ReportsReceived",fields: [reportedId], references: [id]) 
+  content     String?
+  proof       String?  
+  status      ReportStatus @default(PENDING)
+  createdAt   DateTime @default(now())
+}
+
+enum ReportStatus {
+  PENDING
+  REVIEWED
+  CLOSED
+}

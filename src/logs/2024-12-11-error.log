@@ -1,0 +1,260 @@
+{
+  status: 404,
+  message: 'Mentor not found.',
+  level: 'error',
+  timestamp: '2024-12-10T20:18:38.603Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T06:21:55.505Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2024-12-11T06:31:26.654Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2024-12-11T06:32:06.505Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:37:50.042Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:37:57.928Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:38:25.526Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:38:52.631Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:44:03.489Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:44:08.712Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:44:47.451Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:46:47.774Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:47:23.110Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T06:58:17.951Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T06:58:26.569Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T06:58:41.452Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T06:58:52.554Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T06:59:01.026Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T06:59:07.977Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T06:59:20.095Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T06:59:31.388Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T07:13:23.160Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T07:13:27.476Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T07:24:23.740Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T07:24:35.179Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T07:25:12.709Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T07:27:02.841Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T07:29:41.777Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T07:40:38.041Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T10:24:59.323Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-11T10:25:03.850Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T10:25:14.110Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T10:25:24.253Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T10:25:32.069Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T10:25:34.075Z'
+}
+{ level: 'error', timestamp: '2024-12-11T11:19:16.894Z' }
+{ level: 'error', timestamp: '2024-12-11T11:20:13.137Z' }
+{ level: 'error', timestamp: '2024-12-11T11:20:58.316Z' }
+{
+  name: 'PrismaClientKnownRequestError',
+  code: 'P2023',
+  clientVersion: '5.21.1',
+  meta: {
+    modelName: 'Report',
+    message: `Malformed ObjectID: provided hex string representation must be exactly 12 bytes, instead got: "12345", length 5 for the field 'reporterId'.`
+  },
+  level: 'error',
+  timestamp: '2024-12-11T11:25:11.112Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T16:28:21.439Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T16:28:27.273Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T16:28:32.550Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T16:28:40.984Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-11T16:28:54.401Z'
+}
+{
+  status: 404,
+  message: 'Mentor not found.',
+  level: 'error',
+  timestamp: '2024-12-11T16:29:10.453Z'
+}

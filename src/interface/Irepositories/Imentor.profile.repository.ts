@@ -1,5 +1,7 @@
-import { IUser } from "../../domain/entities/user.entities";
+import IApplication from "../../domain/entities/mentor.entities";
+import { IComment, IUser } from "../../domain/entities/user.entities";
 
 export default interface IMentorProfileRepository {
-  updateMentorData(MemberData: IUser): Promise<void | never>;
+  updateMentorData(MentorData: IApplication): Promise<IApplication>;
+  getfeedbackRatings(mentorId: string): Promise<IComment[]>;
 }

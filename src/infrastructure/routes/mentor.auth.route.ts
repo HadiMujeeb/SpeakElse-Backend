@@ -17,5 +17,8 @@ MentorAuthRoute.post("/registerApplication",upload.fields([
     { name: "resume", maxCount: 1 },
     { name: "avatar", maxCount: 1 },
 ]),mentorAuthController.MentorApplicationRequest.bind(mentorAuthController));
+MentorAuthRoute.post("/requestMentorLogin", mentorAuthController.MentorLoginRequest.bind(mentorAuthController));
+MentorAuthRoute.get("/requestMentorAuthenticate", mentorAuthController.authenticateTokenRequest.bind(mentorAuthController));
+MentorAuthRoute.get("/requestMentorLogout", mentorAuthController.MentorLogoutRequest.bind(mentorAuthController));
 
 export default MentorAuthRoute;

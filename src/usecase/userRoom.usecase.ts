@@ -3,6 +3,7 @@ import userRoomRepository from "../infrastructure/repository/userRoom.repository
 import { IRoom } from "../domain/entities/room.entities";
 import { HttpStatus } from "../domain/responseStatus/httpcode";
 import { ErrorMessages } from "../domain/responseMessages/errorMessages";
+import { ITransaction } from "../domain/entities/mentor.entities";
 
 export default class userRoomUseCase implements IuserRoomUseCase {
   private userRoomRepository: userRoomRepository;
@@ -32,6 +33,14 @@ export default class userRoomUseCase implements IuserRoomUseCase {
       return rooms;
     } catch (error) {
       throw error;
+    }
+  }
+  async requestPaymentTransaction(data: ITransaction): Promise<void> {
+    try {
+      await this.userRoomRepository.createPaymentTransaction(data);
+      await this.userRoomRepository.bookedMentorRoom(data.sessionId,data.userId);
+    } catch (error) {
+      throw error
     }
   }
 }

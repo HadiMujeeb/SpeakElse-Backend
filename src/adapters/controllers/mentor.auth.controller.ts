@@ -4,6 +4,8 @@ import MentorAuthUseCase from "../../usecase/mentor.auth.usecase";
 import IApplication from "../../domain/entities/mentor.entities";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
+import { IAuthTokens, ILoginRequest } from "../../interface/Icontrollers/Iuser.auth.controller";
+import { ErrorMessages } from "../../domain/responseMessages/errorMessages";
 
 export default class MentorAuthController implements IMentorAuthController {
   private mentorAuthUsecase: MentorAuthUseCase;
@@ -27,7 +29,42 @@ export default class MentorAuthController implements IMentorAuthController {
     }
   }
 
-  
+  async MentorLoginRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const credentials: ILoginRequest = req.body;
+      const Token: void | IAuthTokens = await this.mentorAuthUsecase.handleMentorLogin(credentials);
+      if (Token) {
+        res.cookie("mentorRefreshToken", Token.refreshToken, { maxAge: 604800000, httpOnly: true, secure: process.env.NODE_ENV === "production" });
+        res.status(HttpStatus.OK).json({ message: SuccessMessages.LOGIN_SUCCESS, accessToken: Token.accessToken });
+      } else {
+        res.status(HttpStatus.UNAUTHORIZED).json({ message: ErrorMessages.INVALID_PASSWORD });
+      }
+    } catch (error: any) {
+      next(error);
+    }
+  }
+
+  async authenticateTokenRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const mentorAccessToken = req.header('Authorization')?.replace('Bearer ', '');
+      const mentorRefreshToken = req.cookies.mentorRefreshToken;
+      console.log("access token",mentorAccessToken,"refresh token",mentorRefreshToken);
+      if (!mentorAccessToken || !mentorRefreshToken) throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.TOKEN_MISSING };
+      const MentorData = await this.mentorAuthUsecase.validateAccessToken(mentorAccessToken, mentorRefreshToken);
+      res.status(HttpStatus.OK).json({ message: SuccessMessages.ACCESS_GRANTED, mentorData: MentorData.mentorData, accessToken: MentorData.accessToken, status: HttpStatus.OK });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async MentorLogoutRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      res.clearCookie("mentorRefreshToken", { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax" });
+      res.status(HttpStatus.OK).json({ message: SuccessMessages.LOGOUT_SUCCESS });
+    } catch (err: any) {
+      next({ status: HttpStatus.INTERNAL_SERVER_ERROR, message: err.message || ErrorMessages.INTERNAL_SERVER_ERROR });
+    }
+  }
 
 
 }

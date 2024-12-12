@@ -6,11 +6,6 @@
     "auditLog": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\.612a4fb428642fc78711568bf7a55d5ed2291d16-audit.json",
     "files": [
         {
-            "date": 1733254894394,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-04-error.log",
-            "hash": "b00cce0976f893292569ae5f03ebff3b07c329a2be03a6a08f71c790e804f05a"
-        },
-        {
             "date": 1733368582773,
             "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-05-error.log",
             "hash": "58b7d1cd572a955fd7a3f48954b3883ba6094f864c2ca23745f038e9166e34d2"
@@ -39,6 +34,16 @@
             "date": 1733816243637,
             "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-10-error.log",
             "hash": "540e69dc7c296bdaf1c2079063d9ca2dbd8b9c14351079e2ce32f32a28e411c8"
+        },
+        {
+            "date": 1733860028791,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-11-error.log",
+            "hash": "8d163fc807324b8437a1a9a9874c13838a9d7b83a499df78000f5ac034b1da51"
+        },
+        {
+            "date": 1733942235739,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-12-error.log",
+            "hash": "a7418715008f0aef54c5632aa609b4b8b9610e98af9cb66bd253e95f36f862c1"
         }
     ],
     "hashType": "sha256"

@@ -19,6 +19,9 @@ model User {
     createdRooms   Room[]   @relation("RoomCreator")
     following           String[]    @db.ObjectId
     followers           String[]    @db.ObjectId
+    reports     Report[] @relation(name: "ReportsFiled")
+    reportedBy  Report[] @relation(name: "ReportsReceived")
+    userWallet   UserWallet?
        
     @@map("users")
 }
@@ -37,7 +40,7 @@ model Comment {
     userId              String                @db.ObjectId
 
     // Relations
-    givenUser                User             @relation(fields: [givenBy], references: [id])
+    givenUser    User             @relation(fields: [givenBy], references: [id])
     mentor       Mentor       @relation(fields: [givenBy], references: [id])
     createdAt    DateTime  
     

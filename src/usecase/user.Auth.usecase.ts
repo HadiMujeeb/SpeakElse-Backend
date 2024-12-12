@@ -177,31 +177,35 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
       throw err; 
     } 
   }
+
+  async handleResetPassword(password: string, token: string): Promise<void> {
+    try {
+      const decodedResetToken = await JWT.verifyToken(token);
+      if (typeof decodedResetToken === "object" && decodedResetToken !== null && "id" in decodedResetToken) { 
+        const userId = decodedResetToken.id; 
+        const userData = await this.UserAuthRepository.findUserById(userId); 
+        if(userData){
+          const hashPassword = await this.PasswordService.hashPassword(password);
+          await this.UserAuthRepository.resetPassword(userData.id, hashPassword);
+          await this.UserAuthRepository.removeResetToken(userData.email);
+        }else{
+          throw {
+                status: HttpStatus.NOT_FOUND,
+                message: ErrorMessages.USER_NOT_FOUND,
+              };
+        }
+        }else{
+          throw  {
+                status: HttpStatus.UNAUTHORIZED,
+                message: ErrorMessages.INVALID_TOKEN,
+              };
+        } 
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 
-  // async handleResetPassword(password: string, token: string): Promise<void> {
-  //   try {
-  //     const user = await this.validateAccessToken(token,'');
-  //     if (user) {
-  //       if (user.resetToken == null) {
-  //         throw {
-  //           status: HttpStatus.UNAUTHORIZED,
-  //           message: ErrorMessages.TOKEN_MISSING,
-  //         };
-  //       }
-  //       const hashPassword = await this.PasswordService.hashPassword(password);
-
-  //       await this.UserAuthRepository.resetPassword(user.id, hashPassword);
-  //       await this.UserAuthRepository.removeResetToken(user.email);
-  //     } else {
-  //       throw {
-  //         status: HttpStatus.NOT_FOUND,
-  //         message: ErrorMessages.USER_NOT_FOUND,
-  //       };
-  //     }
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  
 
