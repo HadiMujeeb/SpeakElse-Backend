@@ -22,6 +22,7 @@ model User {
     reports     Report[] @relation(name: "ReportsFiled")
     reportedBy  Report[] @relation(name: "ReportsReceived")
     userWallet   UserWallet?
+    createdAt   DateTime @default(now())
        
     @@map("users")
 }

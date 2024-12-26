@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { MentorSessionStatus, PrismaClient } from "@prisma/client";
 import IMentorRoomRepository from "../../interface/Irepositories/Imentor.room.respository";
-import { IMentorRoom } from "../../domain/entities/mentor.entities";
+import { IMentorRoom, ITransaction } from "../../domain/entities/mentor.entities";
 
 export default class MentorRoomRepository implements IMentorRoomRepository {
     private prisma: PrismaClient
@@ -80,4 +80,93 @@ async bookedMentorRoom(roomId: string, userId: string): Promise<void> {
         throw error
     }
 }
+
+async findMentorRoomTransactions(roomId: string): Promise<ITransaction[]> {
+    try {
+        const transactions = await this.prisma.transaction.findMany({
+            where: { sessionId: roomId },
+        });
+
+        return transactions ?? [];
+    } catch (error) {
+        
+        throw error
+    }
+}
+
+
+async updateUserWallet(userId: string, amount: number): Promise<void> {
+    try {
+        await this.prisma.userWallet.update({
+            where: { userId: userId },
+            data: { balance: { increment: amount } },
+        });
+    } catch (error) {
+        throw error
+    }
+}
+
+async updateMentorWallet(mentorId: string, amount: number): Promise<void> {
+    try {
+        await this.prisma.mentorWallet.update({
+            where: { mentorId: mentorId },
+            data: { balance: { decrement: amount } },
+        });
+    } catch (error) {
+        throw error
+    }
+}
+
+async UpdateTransactionStatus(id: string, transactionId: string, status: string): Promise<void> {
+    try {
+        await this.prisma.transaction.update({
+            where: { id: id },
+            data: { status: status },
+        });
+    } catch (error) {
+        throw error
+    }
+}
+
+async updateMentorSessionStatus(roomId: string, status: string): Promise<void> {
+    try {
+        await this.prisma.mentorSession.update({
+            where: { id: roomId },
+            data: { status: MentorSessionStatus[status as keyof typeof MentorSessionStatus] },
+        });
+    } catch (error) {
+        throw error
+    }
+}
+
+
+async rescheduleMentorSession(
+    roomId: string, startTime: Date, endTime: Date,reason: string
+  ): Promise<void> {
+    try {
+      await this.prisma.mentorSession.update({
+        where: { id: roomId },
+        data: {
+         rescheduleCount: { increment: 1 },
+         rescheduleReason: { push: reason },
+          startTime: startTime,
+          endTime: endTime,
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+  
+ async getAllRoomsByMentorId(mentorId: string): Promise<IMentorRoom[]> {
+    try {
+        return await this.prisma.mentorSession.findMany({
+            where: { mentorId: mentorId },
+        });
+    } catch (error) {
+        throw error;
+    }
+  }
+
+
 }

@@ -31,17 +31,12 @@ export default class AdminUserMgmtUseCase implements IAdminUserMgmtUsecase {
   async retrieveAllMembersList(): Promise<any> {
     try {
       const members = await this.AdminUserMgmtRepo.listAllMembers();
-      if (!members) {
-        throw {
-          status: HttpStatus.NOT_FOUND,
-          message: ErrorMessages.USER_NOT_FOUND,
-        };
-      }
-      return members;
+      return members
     } catch (error) {
       throw error;
     }
   }
+  
 
   async toggleMemberBlocking(memberId: string): Promise<void | never> {
     try {

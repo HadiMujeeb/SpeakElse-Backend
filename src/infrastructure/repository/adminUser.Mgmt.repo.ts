@@ -90,21 +90,14 @@ export default class AdminUserMgmtRepository implements IAdminUserMgmtRepo {
     }
   }
 
-  async listAllMembers(): Promise<any> {
+  async listAllMembers(): Promise<IUser[]> {
     try {
       const members = await this.prisma.user.findMany({
-        select: {
-          id: true,
-          email: true,
-          name: true,
-          role: true,
-          profession: true,
-          isBlocked: true,
-        },
+        
       });
-      return members;
+      return members??[];
     } catch (error) {
       throw error;
     }
   }
-}
+}  

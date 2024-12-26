@@ -33,7 +33,7 @@ export default class AdminController {
       const refreshToken = req.cookies.adminRefreshToken;
       if (!accessToken || !refreshToken) throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.TOKEN_MISSING };
       const adminData = await this.AdminUseCase.validateAdminAccessToken(accessToken, refreshToken);
-      res.status(HttpStatus.OK).json({ message: SuccessMessages.ACCESS_GRANTED, admin: adminData, accessToken: adminData.accessToken, status: HttpStatus.OK });
+      res.status(HttpStatus.OK).json({ message: SuccessMessages.ACCESS_GRANTED, adminData: adminData, accessToken: adminData.accessToken, status: HttpStatus.OK });
     } catch (error) {
       next(error)
     }

@@ -28,6 +28,7 @@ model Mentor {
   createdAt    DateTime        @default(now())
   sessions     MentorSession[] 
   mentorWallet   MentorWallet?
+  isMailSend Int @default(0)
 }
 
 
@@ -35,16 +36,26 @@ model Mentor {
 
 
 
+enum MentorSessionStatus {
+  ACTIVE
+  CANCELED
+  COMPLETED
+}
+
 model MentorSession {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  mentorId    String   @db.ObjectId
-  language    String
-  topic       String
-  limit       Int
-  participants String[] 
-  startTime   DateTime
-  endTime     DateTime
-  createdAt   DateTime @default(now())
-  bookingFee   Float
-  mentor  Mentor @relation(fields: [mentorId],references: [id])
+  id            String               @id @default(auto()) @map("_id") @db.ObjectId
+  mentorId      String               @db.ObjectId
+  language      String
+  topic         String
+  limit         Int
+  participants  String[]
+  startTime     DateTime
+  endTime       DateTime
+  createdAt     DateTime             @default(now())
+  bookingFee    Float
+  rescheduleCount  Int                  @default(0)
+  rescheduleReason String[]
+  status        MentorSessionStatus  @default(ACTIVE) 
+  mentor        Mentor               @relation(fields: [mentorId], references: [id])
+  transactions  Transaction[]
 }

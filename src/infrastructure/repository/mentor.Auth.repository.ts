@@ -54,12 +54,13 @@ export default class mentorAuthRepository implements IMentorAuthRepository {
     }
   }
   
-  async findMentorByEmail(email: string): Promise<IApplication | null> {
+  async findMentorByEmail(email: string): Promise<IApplication|null> {
     try {
       const userData = await this.prisma.mentor.findUnique({
         where: {
           email,
         },
+        include:{mentorWallet:true}
       });
       return userData;
     } catch (err) {
@@ -73,6 +74,7 @@ export default class mentorAuthRepository implements IMentorAuthRepository {
         where: {
           id,
         },
+        include:{mentorWallet:true}
       });
       return userData;
     } catch (err) {

@@ -5,8 +5,6 @@ model MentorWallet {
   createdAt   DateTime   @default(now()) 
   mentor      Mentor     @relation(fields: [mentorId], references: [id]) 
   @@unique([mentorId])
-
-
 }
 
 
@@ -26,21 +24,18 @@ model Transaction {
   id             String      @id @default(auto()) @map("_id") @db.ObjectId
   userId         String      @db.ObjectId
   fundReceiverId String      @db.ObjectId
+  adminAmount    Float
+  mentorAmount   Float
   amount         Float       
   type           String    
   status         String
   transactionId  String     
   paymentMethod  String    
-  sessionId      String    
+  sessionId      String     @db.ObjectId
   description    String    
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
   userWallet     UserWallet  @relation(fields: [userId], references: [userId])
-}
-
-enum TransactionStatus {
-  PENDING    
-  COMPLETED 
-  FAILED  
-  REFUNDED 
-}
+  roomDetails      MentorSession @relation(fields: [sessionId], references: [id])
+  
+} 

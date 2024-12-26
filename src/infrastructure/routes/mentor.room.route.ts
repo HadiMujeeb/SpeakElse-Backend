@@ -13,5 +13,8 @@ const mentorRoomController = new MentorRoomController(mentorRoomUseCase);
 mentorRoomRoute.post("/requestcreateRoom",mentorRoomController.requestCreateRoom.bind(mentorRoomController));
 mentorRoomRoute.put("/requestupdateRoom",mentorRoomController.requestUpdateRoom.bind(mentorRoomController));
 mentorRoomRoute.get("/requestgetAllRooms",mentorRoomController.requestGetAllRooms.bind(mentorRoomController));
+mentorRoomRoute.put("/cancelMentorSession",mentorRoomController.cancelMentorSession.bind(mentorRoomController));
+mentorRoomRoute.put("/reqRescheduleMentorSession",mentorRoomController.reqRescheduleMentorSession.bind(mentorRoomController));
+mentorRoomRoute.get("/getAllRoomsByMentorId/:id",mentorRoomController.getAllRoomsANDTransactionsByMentorId.bind(mentorRoomController));
 
 export default mentorRoomRoute;

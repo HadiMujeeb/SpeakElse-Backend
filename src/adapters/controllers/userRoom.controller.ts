@@ -21,24 +21,23 @@ export default class userRoomController implements IuserRoomController {
             next(error)
          }
      }
-  async  requestRetrieveAllRooms(req: Request, res: Response, next: NextFunction): Promise<void> {
-          try {
-            const rooms = await this.userRoomUseCase.retriveUserRoom();
-            res.status(HttpStatus.OK).json(rooms)
-          } catch (error) {
-            next(error)
-          }
+     async requestRetrieveAllRooms(req: Request, res: Response, next: NextFunction): Promise<void> {
+      try {
+        const page = parseInt(req.query.page as string, 10) || 1; 
+        const pageSize = parseInt(req.query.pageSize as string, 10) || 6;
+        
+        const result = await this.userRoomUseCase.retriveUserRoom(page, pageSize);
+    
+        res.status(HttpStatus.OK).json({
+          message: 'Rooms retrieved successfully.',
+          rooms: result.rooms,  // Assuming `result` has a `rooms` field
+          total: result.total,   // Assuming `result` has a `total` field for total rooms
+          totalPages: result.totalPages, // Assuming `result` has `totalPages`
+        });
+      } catch (error) {
+        next(error);
       }
-
-async requestPaymentTransation(req: Request, res: Response, next: NextFunction): Promise<void> {
-  try {
-    const data: ITransaction = req.body
-    console.log(data);
-    await this.userRoomUseCase.requestPaymentTransaction(data);
-    res.status(HttpStatus.OK).json({message: SuccessMessages.PAYMENT_SUCCESS})
-  } catch (error) {
-    next(error)
-  }
-}   
+    }
+      
       
 }

@@ -30,5 +30,9 @@ export const SuccessMessages = {
     MENTOR_UPDATED:'Mentor updated successfully.',
     RATINGS_RETRIEVED:'Ratings retrieved successfully.',
     PAYMENT_SUCCESS:'Payment successfull',
+    APPLICATION_EMAIL_SENT:'Application email sent successfully.',
+    REFUND_SUCCESS:'Refund successfull',
+    SESSION_CANCELLED:'Session cancelled successfully.',
+    SESSION_RESCHEDULED:'Session rescheduled successfully.',
 
 };

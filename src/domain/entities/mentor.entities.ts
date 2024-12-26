@@ -18,7 +18,10 @@ export default interface IApplication {
     following?  :  string[]
     ratings?    :  string[]
     approvalStatus? : string
+    isMailSend: number
+    createdAt  :  Date
     user?:IUser
+     mentorWallet?:ImentorWallet|null
 }
 
 // id          String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -43,13 +46,27 @@ export interface IMentorRoom {
     createdAt : Date
     bookingFee : number
     mentor?:IApplication
+    rescheduleCount ?: number 
+    escheduleReason? : string[]
+    status ?: string
+   
+ 
     
 }
 
+export interface IReshedulement {
+  roomId    : string
+  startTime : Date
+  endTime   : Date
+  reason    : string
+}
 export interface ITransaction {
     id: string;
-    userId: string;   
-    fundReceiverId: string;   
+    userId: string; 
+    mentorId?: string;  
+    fundReceiverId: string; 
+    mentorAmount: number; 
+    adminAmount: number;  
     amount: number;         
     type: string;           
     status: string; 
@@ -58,11 +75,20 @@ export interface ITransaction {
     sessionId: string;    
     description: string;
     createdAt: Date
-    updatedAt: Date    
+    updatedAt: Date
   }
   
   export enum IStatus {
     PENDING = "PENDING",
-    SUCCESS = "SUCCESS"
-
+    CREDITED = "CREDITED",
+    DEBITED = "DEBITED",
+    REFUNDED = "REFUNDED",
+    CANCELLED = "CANCELLED"
+  }
+  
+export interface ImentorWallet {
+    id: string;
+    mentorId: string;
+    balance: number;
+    transactions?: ITransaction[];
   }

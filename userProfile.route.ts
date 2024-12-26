@@ -1,9 +1,8 @@
 import express, { Router } from "express";
-
-import userProfileController from "../../adapters/controllers/userProfile.controller";
-import userProfileRepository from "../repository/userProfile.repository";
-import userProfileUseCase from "../../usecase/userProfile.usecase";
-import upload from "../middlewares/multer.middleware";
+import userProfileController from "./src/adapters/controllers/userProfile.controller";
+import userProfileRepository from "./src/infrastructure/repository/userProfile.repository";
+import userProfileUseCase from "./src/usecase/userProfile.usecase";
+import { upload } from "./src/infrastructure/config/multer.config";
 
 const profileRoute: Router = express.Router();
 

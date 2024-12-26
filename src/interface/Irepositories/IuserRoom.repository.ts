@@ -6,7 +6,5 @@ import { IUser } from "../../domain/entities/user.entities";
 export default interface IuserRoomRepository {
     CreateUserRoom(data:IRoom): Promise<IRoom|void>;
     findUserById(id: string): Promise<IUser | null>;
-    retrieveAllRooms(): Promise<IRoom[]>;
-    createPaymentTransaction(data:ITransaction): Promise<void>
-    bookedMentorRoom(roomId: string, userId: string): Promise<void> 
+    retrieveAllRooms(page: number, pageSize: number): Promise<{ rooms: IRoom[]; total: number; totalPages: number }>
 }

@@ -20,10 +20,16 @@ export default class AdminUserMgmtController implements IAdminUserMgmtController
 
   async requestRetrieveAllMembersList(req: Request, res: Response, next: NextFunction): Promise<void | never> {
     try {
-      const AllMembers = await this.AdminUserMgmtUseCase.retrieveAllMembersList();
-      res.status(HttpStatus.OK).json({ message: SuccessMessages.USERS_RETRIEVED, members: AllMembers });
-    } catch (error) { next(error); }
+      const members= await this.AdminUserMgmtUseCase.retrieveAllMembersList();
+      res.status(HttpStatus.OK).json({
+        message: SuccessMessages.USERS_RETRIEVED,
+        members,
+      });
+    } catch (error) {
+      next(error);
+    }
   }
+  
 
   async requestToggleMemberBlocking(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {

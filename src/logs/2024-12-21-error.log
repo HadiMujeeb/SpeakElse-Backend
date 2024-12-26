@@ -1,0 +1,6 @@
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2024-12-21T12:50:07.143Z'
+}

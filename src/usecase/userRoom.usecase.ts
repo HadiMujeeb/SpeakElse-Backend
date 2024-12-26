@@ -23,10 +23,9 @@ export default class userRoomUseCase implements IuserRoomUseCase {
       throw error;
     }
   }
-
-  async retriveUserRoom(): Promise<IRoom[] | void> {
+  async retriveUserRoom(page: number, pageSize: number): Promise<{ rooms: IRoom[]; total: number; totalPages: number }> {
     try {
-      const rooms = await this.userRoomRepository.retrieveAllRooms();
+      const rooms = await this.userRoomRepository.retrieveAllRooms(page, pageSize);
       if (!rooms) {
         throw { message: "rooms not found", status: HttpStatus.NOT_FOUND };
       }
@@ -35,12 +34,5 @@ export default class userRoomUseCase implements IuserRoomUseCase {
       throw error;
     }
   }
-  async requestPaymentTransaction(data: ITransaction): Promise<void> {
-    try {
-      await this.userRoomRepository.createPaymentTransaction(data);
-      await this.userRoomRepository.bookedMentorRoom(data.sessionId,data.userId);
-    } catch (error) {
-      throw error
-    }
-  }
+  
 }

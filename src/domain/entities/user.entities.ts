@@ -1,4 +1,5 @@
 import { ReportStatus, Role } from "@prisma/client";
+import { ITransaction } from "./mentor.entities";
 
 export interface IUser {
   id: string;
@@ -15,6 +16,8 @@ export interface IUser {
   isBlocked?: boolean;
   resetToken?: string | null;
   comments?: IComment[];
+  userWallet?: IuserWallet|null;
+  createdAt: Date;
 }
 
 // export interface LoginRequest {
@@ -64,4 +67,11 @@ export interface IReport {
 export interface IResponseReport extends IReport {
   reporter: IUser;
   reported: IUser;
+}
+
+export interface IuserWallet {
+  id: string;
+  userId: string;
+  balance: number;
+  transactions?: ITransaction[];
 }

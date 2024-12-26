@@ -3,7 +3,7 @@ import { IResponseReport } from "../../domain/entities/user.entities";
 
 
 export default interface IAdminReportsRepository {
-    getAllReports(): Promise<IResponseReport[]|null>;
+    getAllReports(limit: number, offset: number): Promise<IResponseReport[] | null>
     updateReportStatus(reportId: string, status: string): Promise<void>
     blockUnblockUser(userId: string): Promise<void>;
     getAllTransactions(): Promise<ITransaction[]>;

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import IMentorRoomController from "../../interface/Icontrollers/Imentor.room.controller";
 import MentorRoomUseCase from "../../usecase/mentor.room.usecase";
-import { IMentorRoom } from "../../domain/entities/mentor.entities";
+import { IMentorRoom, IReshedulement } from "../../domain/entities/mentor.entities";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
 
@@ -41,4 +41,39 @@ export default class MentorRoomController implements IMentorRoomController {
             next(error);
         }
     }
+
+
+    async cancelMentorSession(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            console.log(req.body);
+            const { roomId, mentorId } = req.body;
+            await this.mentorRoomUseCase.cancelMentorSession(roomId, mentorId);
+            res.status(HttpStatus.OK).json({ message: SuccessMessages.SESSION_CANCELLED });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
+    async reqRescheduleMentorSession(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            console.log(req.body);
+            const data:IReshedulement = req.body;
+            await this.mentorRoomUseCase.requestRescheduleMentorSession(data.roomId, data.startTime, data.endTime, data.reason);
+            res.status(HttpStatus.OK).json({ message: SuccessMessages.SESSION_RESCHEDULED });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+ async getAllRoomsANDTransactionsByMentorId(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+        const mentorId = req.params.id;
+        console.log(mentorId);
+        const { rooms , transactions} = await this.mentorRoomUseCase.getAllRoomsANDTransactionsByMentorId(mentorId);
+        res.status(HttpStatus.OK).json({ message: SuccessMessages.ROOMS_RETRIEVED, rooms, transactions });
+    } catch (error) {
+        next(error);
+    }
+}
 }

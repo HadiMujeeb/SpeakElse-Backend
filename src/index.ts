@@ -8,7 +8,7 @@ import { SocketService } from "./domain/services/socket.service";
 // Routes
 import UserAuthRoutes from "./infrastructure/routes/user.auth.route";
 import adminRouter from "./infrastructure/routes/admin.route";
-import profileRoute from "./infrastructure/routes/userProfile.route";
+import profileRoute from "../userProfile.route";
 import MentorAuthRoute from "./infrastructure/routes/mentor.auth.route";
 import userRoomRoute from "./infrastructure/routes/userRoom.route";
 import FriendChatRoute from "./infrastructure/routes/user.chat.route";
@@ -16,6 +16,7 @@ import languageTestRoute from "./infrastructure/routes/admin.languageTest.route"
 import adminMentorFormRouter from "./infrastructure/routes/admin.mentorform.route";
 import adminReportsRoute from "./infrastructure/routes/admin.reports.route";
 import mentorRoomRoute from "./infrastructure/routes/mentor.room.route";
+import userWalletRoute from "./infrastructure/routes/user.Wallet.route";
 // middlewire
 import { errorHandler } from "./infrastructure/middlewares/error.middleware";
 import MentorProfileRoute from "./infrastructure/routes/mentor.profile.route";
@@ -58,6 +59,7 @@ app.use("/api/admin/languageTest",languageTestRoute)
 app.use("/api/admin/mentorform",adminMentorFormRouter)
 app.use("/api/admin/reports",adminReportsRoute);
 app.use("/api/mentor",mentorRoomRoute)
+app.use("/api/user",userWalletRoute)
 // Use error handler middleware
 app.use(errorHandler);
 

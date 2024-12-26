@@ -12,6 +12,4 @@ const UserRoomController = new userRoomController(UserRoomUseCase);
 
 userRoomRoute.post("/createRoom",UserRoomController.requestCreateRoom.bind(UserRoomController));
 userRoomRoute.get("/retrieveAllRooms",UserRoomController.requestRetrieveAllRooms.bind(UserRoomController));
-userRoomRoute.post("/requestPaymentTransation",UserRoomController.requestPaymentTransation.bind(UserRoomController));
-
 export default userRoomRoute;

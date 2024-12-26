@@ -36,4 +36,14 @@ export default class AdminMentorFormController implements IAdminMentorFormContro
             next(error);
         }
     }
+
+    async sendedApplicationMail(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const { email,status } = req.body;
+            await this.mentorFormUsecase.sendedApplicationMail(email,status);
+            res.status(HttpStatus.OK).json({ message:SuccessMessages.APPLICATION_EMAIL_SENT });
+        } catch (error) {
+            next(error);
+        }
+    }
 }

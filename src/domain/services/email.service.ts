@@ -2,6 +2,8 @@ import nodemailer from "nodemailer";
 import { otpTemplate } from "../../infrastructure/templates/otp.template";
 import { getResetPasswordEmailTemplate } from "../../infrastructure/templates/resetPassword.template";
 import { IOTPCredentials } from "../../interface/Iusecase/Iuser.auth.usecase";
+import { getRejectionEmailTemplate } from "../../infrastructure/templates/rejected.template";
+import { getApprovalEmailTemplate } from "../../infrastructure/templates/approval.template";
 export class MailerServices {
   private transporter;
 
@@ -47,4 +49,27 @@ export class MailerServices {
     };
     return await this.transporter.sendMail(mailOptions);
   }
+
+  async ApplicationFormStatusMail(email: string,status:string) {
+    
+  if(status == "REJECTED"){
+    const template = getRejectionEmailTemplate(email);
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Application Form Status",
+      html:template,
+    };
+    return await this.transporter.sendMail(mailOptions);
+  }else{
+    const template = getApprovalEmailTemplate(email,process.env.MENTOR_LOGIN_URL||"");
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Application Form Status",
+      html:template,
+    };
+    return await this.transporter.sendMail(mailOptions);
+  }
+}
 }

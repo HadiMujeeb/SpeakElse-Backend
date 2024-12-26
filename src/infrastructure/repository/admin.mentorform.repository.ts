@@ -13,6 +13,7 @@ export default class AdminMentorFormRepository implements IAdminMentorFormReposi
         try {
           const applications = await this.prisma.mentor.findMany(
             {
+              
               include: {
                 user: {
                     include:{comments:true}
@@ -55,4 +56,15 @@ export default class AdminMentorFormRepository implements IAdminMentorFormReposi
         throw error;
       }
     }
+
+  async sendedApplicationMail(email: string): Promise<void> {
+    try {
+      await this.prisma.mentor.update({
+        where: { email },
+        data: { isMailSend:1 },
+      })
+    } catch (error) {
+      throw error
+    }
+  }
 }

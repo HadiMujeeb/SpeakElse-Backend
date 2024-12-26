@@ -38,54 +38,39 @@ async CreateUserRoom(data:IRoom): Promise<IRoom|void> {
                 privacy:data.privacy,
                 maxPeople:data.maxPeople,
                 language:data.language,
-                participants:[],
-            }
+                participants:[], 
+            },
+            include:{creator:true}
         })
     return  createRoom
     } catch (error) {
         throw error
     }
 }
-async retrieveAllRooms(): Promise<IRoom[]> {
+async retrieveAllRooms(page: number = 1, pageSize: number = 10): Promise<{ rooms: IRoom[]; total: number; totalPages: number }> {
   try {
-    const roomData = await this.prisma.room.findMany({
-      include: {
-        creator: true,
-      },
-    });
-    return roomData;
+    const skip = (page - 1) * pageSize;
+
+    const [rooms, total] = await this.prisma.$transaction([
+      this.prisma.room.findMany({
+        skip,
+        take: pageSize,
+        include: {
+          creator: true,
+        },
+      }),
+      this.prisma.room.count(),
+    ]);
+
+    return {
+      rooms,
+      total,
+      totalPages: Math.ceil(total / pageSize),
+    };
   } catch (error) {
     throw error;
   }
 }
-async createPaymentTransaction(data: ITransaction): Promise<void> {
-  try {
-    await this.prisma.transaction.create({
-      data: {
-        userId: data.userId,
-        fundReceiverId: data.fundReceiverId,
-        amount: data.amount,
-        type: data.type,
-        status: data.status,
-        transactionId: data.transactionId,
-        paymentMethod: data.paymentMethod,
-        sessionId: data.sessionId,
-        description: data.description
-      }
-    })
-  } catch (error) {
-    throw error
-  }
-}
 
-async bookedMentorRoom(roomId: string, userId: string): Promise<void> {
-  try {
-    const joinMentorRoom = await this.prisma.mentorSession.update({
-      where:{ id:roomId },
-      data:{ participants: { push: userId } }
-    })  
-  } catch (error) {
-      throw error
-  }
-}
+
 }

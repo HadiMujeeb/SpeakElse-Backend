@@ -13,7 +13,6 @@ export default class AdminReportsController implements IAdminReportsController {
 
  async requestRetrieveAllReports(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-        console.log("wedw");
         const reports = await this.AdminReportsUseCase.getAllReports();
         res.status(HttpStatus.OK).json({ message: "Reports retrieved successfully.", data: reports });
     } catch (error) {

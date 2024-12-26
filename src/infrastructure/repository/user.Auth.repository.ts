@@ -35,8 +35,8 @@ export class userAuthRepository implements IUserAuthRepository {
           email: newUserData.email,
           password: newUserData.password,
           userWallet:{
-            create:{
-              balance:0
+            create: {
+              balance: 0,
             }
           }
         },
@@ -52,6 +52,7 @@ export class userAuthRepository implements IUserAuthRepository {
         where: {
           email,
         },
+        include:{userWallet:true}
       });
       return userData;
     } catch (err) {
@@ -76,6 +77,7 @@ export class userAuthRepository implements IUserAuthRepository {
         where: {
           id,
         },
+        include:{userWallet:true}
       });
       return userData;
     } catch (err) {
