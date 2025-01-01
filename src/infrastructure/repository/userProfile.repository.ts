@@ -75,7 +75,7 @@ async followUnfollow(userId: string, friendId: string): Promise<void> {
  async followerUnfollower(userId: string, friendId: string): Promise<void> {
     try {
         let friendExist = await this.findAllfollowers(userId)
-        const isExisted = friendExist.find((id)=>id==friendId)
+        const isExisted = friendExist.find((id:any)=>id==friendId)
         if(!isExisted){
            await this.prisma.user.update({
                 where:{id:userId},
@@ -153,7 +153,7 @@ async findAllRatings(userId: string): Promise<IuserRating[]> {
       include: { givenUser: true },
     });
     const ratings: IuserRating[]  = comments
-      .filter((comment) => comment.rating > 0) 
+      .filter((comment:any) => comment.rating > 0) 
       .map((comment) => ({
         feedback: comment.feedback,
         rating: comment.rating,

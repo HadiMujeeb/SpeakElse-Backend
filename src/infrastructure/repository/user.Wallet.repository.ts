@@ -91,7 +91,7 @@ constructor(prisma: PrismaClient) {
       });
   
       if (!session) throw new Error('Session not found');
-      const updatedParticipants = session.participants.filter((id) => id !== userId);
+      const updatedParticipants = session.participants.filter((id:any) => id !== userId);
       await this.prisma.mentorSession.update({
         where: { id: roomId },
         data: { participants: updatedParticipants },

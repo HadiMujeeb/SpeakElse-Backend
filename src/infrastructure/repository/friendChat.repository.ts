@@ -47,9 +47,9 @@ export default class FriendChatRepository implements IFriendChatRepository {
   
       // Map through the chats to enrich with friend details
       const enrichedChats: IChat[] = await Promise.all(
-        chats.map(async (chat) => {
+        chats.map(async (chat: any) => {
           // Get the friend's ID by excluding the current user's ID
-          const friendId = chat.participaceId.find((id) => id !== userId);
+          const friendId = chat.participaceId.find((id:any) => id !== userId);
   
           // Fetch friend's details
           const friend = friendId ? await this.findUserById(friendId) : null;

@@ -35,7 +35,7 @@ export default class mentorProfileRepository
         where: { userId: mentorId },
         include: { givenUser: true },
       });
-      const ratings = comments.forEach((comment) => {
+      const ratings = comments.forEach((comment: any) => {
         if (comment.rating > 0) {
           return {
             userId: comment.userId,
