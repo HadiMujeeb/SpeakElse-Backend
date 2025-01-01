@@ -54,7 +54,7 @@ export default class userProfileRepository implements IUserProfileRepository {
 async followUnfollow(userId: string, friendId: string): Promise<void> {
     try {
         let friendExist = await this.findFriendinFollowing(userId)
-        const isExisted = friendExist.find((id)=>id==friendId)
+        const isExisted = friendExist.find((id:any)=>id==friendId)
         if(!isExisted){
            await this.prisma.user.update({
                 where:{id:userId},
@@ -154,7 +154,7 @@ async findAllRatings(userId: string): Promise<IuserRating[]> {
     });
     const ratings: IuserRating[]  = comments
       .filter((comment:any) => comment.rating > 0) 
-      .map((comment) => ({
+      .map((comment: any) => ({
         feedback: comment.feedback,
         rating: comment.rating,
         givenBy: {
