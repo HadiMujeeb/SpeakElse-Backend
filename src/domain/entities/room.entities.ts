@@ -1,4 +1,4 @@
-import { Level, Privacy } from "@prisma/client";
+import { Level,Privacy } from "@prisma/client";
 import { IUser } from "./user.entities";
 
 
