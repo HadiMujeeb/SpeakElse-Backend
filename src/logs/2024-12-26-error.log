@@ -604,3 +604,145 @@
   level: 'error',
   timestamp: '2024-12-26T10:33:30.041Z'
 }
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-26T10:43:57.606Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-26T10:44:00.937Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-26T10:44:15.671Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-26T10:45:05.169Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-26T10:45:13.906Z'
+}
+{
+  status: 404,
+  message: 'Invalid email or password.',
+  level: 'error',
+  timestamp: '2024-12-26T10:46:17.976Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-26T10:57:40.803Z'
+}
+{
+  status: 404,
+  message: 'Mentor not found.',
+  level: 'error',
+  timestamp: '2024-12-26T10:57:48.364Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-26T10:57:55.375Z'
+}
+{
+  status: 401,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-26T10:58:01.856Z'
+}
+{
+  status: 404,
+  message: 'Invalid email or password.',
+  level: 'error',
+  timestamp: '2024-12-26T10:59:58.732Z'
+}
+{
+  status: 404,
+  message: 'Invalid email or password.',
+  level: 'error',
+  timestamp: '2024-12-26T11:00:01.233Z'
+}
+{
+  status: 400,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-26T11:00:16.941Z'
+}
+{
+  status: 400,
+  message: 'Invalid password. Please try again.',
+  level: 'error',
+  timestamp: '2024-12-26T11:00:21.689Z'
+}
+{
+  status: 404,
+  message: 'Invalid email or password.',
+  level: 'error',
+  timestamp: '2024-12-26T11:00:28.073Z'
+}
+{
+  status: 404,
+  message: 'Invalid email.',
+  level: 'error',
+  timestamp: '2024-12-26T11:02:10.669Z'
+}
+{
+  name: 'PrismaClientValidationError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2024-12-26T11:03:09.836Z'
+}
+{
+  name: 'PrismaClientKnownRequestError',
+  code: 'P2023',
+  clientVersion: '5.21.1',
+  meta: {
+    modelName: 'User',
+    message: 'Malformed ObjectID: provided hex string representation must be exactly 12 bytes, instead got: "undefined", length 9.'
+  },
+  level: 'error',
+  timestamp: '2024-12-26T11:44:24.076Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-26T11:44:31.972Z'
+}
+{
+  name: 'PrismaClientKnownRequestError',
+  code: 'P2023',
+  clientVersion: '5.21.1',
+  meta: {
+    modelName: 'User',
+    message: 'Malformed ObjectID: provided hex string representation must be exactly 12 bytes, instead got: "undefined", length 9.'
+  },
+  level: 'error',
+  timestamp: '2024-12-26T11:44:35.593Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2024-12-26T12:34:29.618Z'
+}
+{
+  status: 400,
+  message: 'Email already exists.',
+  level: 'error',
+  timestamp: '2024-12-26T12:34:47.043Z'
+}

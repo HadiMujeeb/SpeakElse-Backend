@@ -6,44 +6,19 @@
     "auditLog": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\.612a4fb428642fc78711568bf7a55d5ed2291d16-audit.json",
     "files": [
         {
-            "date": 1734587529468,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-19-error.log",
-            "hash": "3cb0c9842c8691d2aef3fea28d6b9f07aaf2a01e67923967c975c11bc3a7f0ff"
-        },
-        {
-            "date": 1734690216480,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-20-error.log",
-            "hash": "70259455879035736fd117c38c764554be783572da1c9440f7db01b961fbda45"
-        },
-        {
-            "date": 1734762344608,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-21-error.log",
-            "hash": "90b42850bab79cde84ab57757ccac92c9343b3459946bd62fb5df731ef551d2e"
-        },
-        {
-            "date": 1734841241617,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-22-error.log",
-            "hash": "a66b44ef7af6be6ffa77dbca4cec2cb6c619474d296a82546e5dbdd36abb64fe"
-        },
-        {
-            "date": 1734964525176,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-23-error.log",
-            "hash": "d1b41793fdb2b5bf7b0b4afa019609a6b0e621e55f5008a723be17a50d296480"
-        },
-        {
-            "date": 1734984875977,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-24-error.log",
-            "hash": "08fefc673c456f18041a9aae17719d26332e21f5e1a77186f02dba8b08a79068"
-        },
-        {
-            "date": 1735115765760,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-25-error.log",
-            "hash": "7961c96718bc1bb5aa059df64aaa6e149c67a0bab7e9de4fe716dc44b1fade2e"
-        },
-        {
             "date": 1735154563604,
             "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-26-error.log",
             "hash": "f4b28e8ab286e7200dbdb00ffecbbca285fa9b75233d0ed9bb5c0b8b10a9de63"
+        },
+        {
+            "date": 1735324755188,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-28-error.log",
+            "hash": "b83fd083dd66c51c9c51c1be8bffefc4dc95f5d3ee3f527f8cd1f121a9af48c1"
+        },
+        {
+            "date": 1735751295163,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2025-01-01-error.log",
+            "hash": "3e12fd209407cf4a3b95414b3c2567126ab5f97312ec3164d9760b6d227bddb0"
         }
     ],
     "hashType": "sha256"

@@ -2,7 +2,7 @@ export const ErrorMessages = {
     MENTOR_NOT_FOUND: "Mentor not found.",
     USER_ALREADY_EXISTS: "User already exists.",
     USER_NOT_FOUND: "User not found.",
-    INVALID_CREDENTIALS: "Invalid email or password.",
+    INVALID_CREDENTIALS: "Invalid email.",
     INVALID_PASSWORD: "Invalid password. Please try again.",
     OTP_EXPIRED: "Your OTP has expired. Please request a new one.",
     OTP_INCORRECT: "The OTP you entered is incorrect. Please try again.",
