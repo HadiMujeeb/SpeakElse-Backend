@@ -8,7 +8,7 @@ import { SocketService } from "./domain/services/socket.service";
 // Routes
 import UserAuthRoutes from "./infrastructure/routes/user.auth.route";
 import adminRouter from "./infrastructure/routes/admin.route";
-import profileRoute from "../userProfile.route";
+import profileRoute from "./infrastructure/routes/userProfile.route";
 import MentorAuthRoute from "./infrastructure/routes/mentor.auth.route";
 import userRoomRoute from "./infrastructure/routes/userRoom.route";
 import FriendChatRoute from "./infrastructure/routes/user.chat.route";
