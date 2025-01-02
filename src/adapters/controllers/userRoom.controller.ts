@@ -39,5 +39,15 @@ export default class userRoomController implements IuserRoomController {
       }
     }
       
+
+    async requestRetrieveRoomById(req: Request, res: Response, next: NextFunction): Promise<void> {
+      try {
+        const roomId = req.params.roomId;
+        const room = await this.userRoomUseCase.retrieveRoomById(roomId);
+        res.status(HttpStatus.OK).json(room);
+      } catch (error) {
+        next(error);
+      }
+    }
       
 }

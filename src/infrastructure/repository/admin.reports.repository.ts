@@ -1,4 +1,4 @@
-import { PrismaClient, ReportStatus } from "@prisma/client";
+import { PrismaClient} from "@prisma/client";
 import IAdminReportsRepository from "../../interface/Irepositories/Iadmin.reports.repository";
 import { IResponseReport } from "../../domain/entities/user.entities";
 import { IStatus, ITransaction } from "../../domain/entities/mentor.entities";
@@ -30,7 +30,7 @@ export default class AdminReportsRepository implements IAdminReportsRepository {
        try {
            await this.prisma.report.update({
                where: { id: reportId },
-               data: { status:ReportStatus[status as keyof typeof ReportStatus] },
+               data: { status:status },
            });
        } catch (error) {
            throw error;

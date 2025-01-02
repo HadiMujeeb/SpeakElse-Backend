@@ -1,4 +1,4 @@
-import { ReportStatus, Role } from "@prisma/client";
+
 import { ITransaction } from "./mentor.entities";
 
 export interface IUser {
@@ -6,7 +6,7 @@ export interface IUser {
   email: string;
   password: string | null;
   name: string;
-  role?: Role;
+  role?: string | null;
   avatar?: string | null;
   profession?: string | null;
   language?: string | null;
@@ -65,7 +65,7 @@ export interface IReport {
   reportedId: string;
   content: string | null;
   proof: string|null;
-  status:ReportStatus
+  status:string
 }
 
 export interface IResponseReport extends IReport {

@@ -1,4 +1,4 @@
-import { MentorSessionStatus, PrismaClient } from "@prisma/client";
+import {  PrismaClient } from "@prisma/client";
 import IMentorRoomRepository from "../../interface/Irepositories/Imentor.room.respository";
 import { IMentorRoom, ITransaction } from "../../domain/entities/mentor.entities";
 
@@ -132,7 +132,7 @@ async updateMentorSessionStatus(roomId: string, status: string): Promise<void> {
     try {
         await this.prisma.mentorSession.update({
             where: { id: roomId },
-            data: { status: MentorSessionStatus[status as keyof typeof MentorSessionStatus] },
+            data: { status: status },
         });
     } catch (error) {
         throw error

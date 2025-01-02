@@ -73,4 +73,20 @@ async retrieveAllRooms(page: number = 1, pageSize: number = 10): Promise<{ rooms
 }
 
 
+async retrieveRoomById(roomId: string): Promise<IRoom[]> {
+  try {
+    const room = await this.prisma.room.findMany({
+      where: {
+        id: roomId,
+      },
+      include: {
+        creator: true,
+      },
+    });
+    return room;
+  } catch (error) {
+    throw error;
+  }
+
+}
 }

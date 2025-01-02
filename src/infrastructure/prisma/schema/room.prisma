@@ -3,12 +3,12 @@ enum Privacy {
     PRIVATE
 }
 
-enum Level {
-  ANYLEVEL
-  BEGINNER
-  INTERMEDIATE
-  ADVANCED
-}
+// enum Level {
+//   ANYLEVEL
+//   BEGINNER
+//   INTERMEDIATE
+//   ADVANCED
+// }
 
 model Room {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -16,8 +16,8 @@ model Room {
   language     String  
   topic        String?
   maxPeople    String
-  level        Level    @default(BEGINNER)
-  privacy      Privacy  @default(PUBLIC)
+  level        String    @default("BEGINNER")
+  privacy      String  @default("PUBLIC")
   participants String[] @db.ObjectId
   moderators   String[] @db.ObjectId
   createdAt    DateTime @default(now()) 

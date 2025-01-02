@@ -3,7 +3,6 @@ import { json, NextFunction, Request, Response } from "express";
 import AdminUseCase from "../../usecase/admin.usecase";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
-import { IUser } from "../../domain/entities/user.entities";
 import { ErrorMessages } from "../../domain/responseMessages/errorMessages";
 import { IAuthTokens } from "../../interface/Icontrollers/Iuser.auth.controller";
 

@@ -6,12 +6,12 @@ model Report {
   reported    User     @relation(name: "ReportsReceived",fields: [reportedId], references: [id]) 
   content     String?
   proof       String?  
-  status      ReportStatus @default(PENDING)
+  status      String @default("PENDING")
   createdAt   DateTime @default(now())
 }
 
-enum ReportStatus {
-  PENDING
-  REVIEWED
-  CLOSED
-}
+// enum ReportStatus {
+//   PENDING
+//   REVIEWED
+//   CLOSED
+// }

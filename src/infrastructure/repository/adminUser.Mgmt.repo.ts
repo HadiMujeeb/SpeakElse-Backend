@@ -1,5 +1,4 @@
-import { PrismaClient, Role } from "@prisma/client";
-
+import { PrismaClient } from "@prisma/client";
 import { IUser } from "../../domain/entities/user.entities";
 import { IAdminControllerActions } from "../../interface/Icontrollers/Iadmin.controller";
 import { IAdminUserMgmtRepo } from "../../interface/Irepositories/IadminUser.Mgmt.repo";
@@ -35,7 +34,6 @@ export default class AdminUserMgmtRepository implements IAdminUserMgmtRepo {
           profession: newMember.profession,
           country: newMember.country,
           language: newMember.language,
-          role: newMember.role ?? Role.USER,
           isVerified: newMember.isVerified,
           description: newMember.description,
         },
@@ -52,7 +50,7 @@ export default class AdminUserMgmtRepository implements IAdminUserMgmtRepo {
         data: {
           name: MemberData.name,
           email: MemberData.email,
-          role: MemberData.role,
+          role: MemberData.role||"USER",
           avatar: MemberData.avatar,
           profession: MemberData.profession,
           country: MemberData.country,

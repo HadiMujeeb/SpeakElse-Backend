@@ -1,4 +1,4 @@
-import { Level,Privacy } from "@prisma/client";
+
 
 import { IUser } from "./user.entities";
 
@@ -17,8 +17,8 @@ export interface IRoom {
     creatorId: string;
     topic?: string|null;
     maxPeople: string;
-    level: Level;
-    privacy: Privacy;
+    level: string;
+    privacy: string;
     language: string;
     participants: string[];
     moderators: string[];

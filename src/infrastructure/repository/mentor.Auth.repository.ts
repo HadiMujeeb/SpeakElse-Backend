@@ -1,9 +1,6 @@
 import {PrismaClient } from "@prisma/client";
 import IApplication from "../../domain/entities/mentor.entities";
 import IMentorAuthRepository from "../../interface/Irepositories/Imentor.auth.repository";
-import { IComment, IUser } from "../../domain/entities/user.entities";
-import bcrypt from "bcryptjs";
-import prisma from "../config/prismaCient.config";
 export default class mentorAuthRepository implements IMentorAuthRepository {
   private prisma: PrismaClient;
   constructor(prisma: PrismaClient) {

@@ -7,4 +7,5 @@ export default interface IuserRoomRepository {
     CreateUserRoom(data:IRoom): Promise<IRoom|void>;
     findUserById(id: string): Promise<IUser | null>;
     retrieveAllRooms(page: number, pageSize: number): Promise<{ rooms: IRoom[]; total: number; totalPages: number }>
+    retrieveRoomById(roomId: string): Promise<IRoom[]> 
 }

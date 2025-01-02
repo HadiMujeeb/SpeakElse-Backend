@@ -1,7 +1,6 @@
 import IMentorRoomUseCase from "../interface/Iusecase/Imentor.room.usecase";
 import MentorRoomRepository from "../infrastructure/repository/mentor.room.repository";
 import { IMentorRoom, IStatus, ITransaction } from "../domain/entities/mentor.entities";
-import { MentorSessionStatus } from "@prisma/client";
 export default class MentorRoomUseCase implements IMentorRoomUseCase {
  private mentorRoomRepository: MentorRoomRepository
  constructor(mentorRoomRepository: MentorRoomRepository) {
@@ -44,7 +43,7 @@ export default class MentorRoomUseCase implements IMentorRoomUseCase {
            await this.mentorRoomRepository.UpdateTransactionStatus(transaction[index].id, transaction[index].transactionId, IStatus.CANCELLED);
         }
      }
-     await this.mentorRoomRepository.updateMentorSessionStatus(roomId, MentorSessionStatus.CANCELED);
+     await this.mentorRoomRepository.updateMentorSessionStatus(roomId, "CANCELED");
     } catch (error) {
         throw error
     }

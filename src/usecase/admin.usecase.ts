@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+
 import { HttpStatus } from "../domain/responseStatus/httpcode";
 import { ErrorMessages } from "../domain/responseMessages/errorMessages";
 import adminRepository from "../infrastructure/repository/admin.repository";
@@ -19,7 +19,7 @@ export default class AdminUseCase {
   async handleAdminlogin(email: string, password: string): Promise<void | IAuthTokens> {
     try {
       const isAdmin = await this.adminRepository.isAdmin(email);
-      if (!isAdmin || isAdmin.role !== Role.ADMIN) {
+      if (!isAdmin || isAdmin.role !== "ADMIN") {
         throw { status: HttpStatus.NOT_FOUND, message: ErrorMessages.INVALID_CREDENTIALS };
       }
       const isPasswordMatch = await this.PasswordService.verifyPassword(password, isAdmin.password || "");

@@ -34,5 +34,14 @@ export default class userRoomUseCase implements IuserRoomUseCase {
       throw error;
     }
   }
+
+  async retrieveRoomById(roomId: string): Promise<IRoom[]> {
+    try {
+      const room = await this.userRoomRepository.retrieveRoomById(roomId);
+      return room;
+    } catch (error) {
+      throw error;
+    }
+  }
   
 }
