@@ -1,4 +1,4 @@
-import { ApprovalStatus, PrismaClient } from "@prisma/client";
+import {PrismaClient } from "@prisma/client";
 import IApplication from "../../domain/entities/mentor.entities";
 import IMentorAuthRepository from "../../interface/Irepositories/Imentor.auth.repository";
 import { IComment, IUser } from "../../domain/entities/user.entities";
@@ -27,7 +27,6 @@ export default class mentorAuthRepository implements IMentorAuthRepository {
           description: data.description,
           resume: data.resume,
           userId: data.userId,
-          approvalStatus: ApprovalStatus.PENDING
         },
         create: {
           name: data.name,
@@ -40,7 +39,6 @@ export default class mentorAuthRepository implements IMentorAuthRepository {
           description: data.description,
           resume: data.resume,
           userId: data.userId,
-          approvalStatus: ApprovalStatus.PENDING,
           mentorWallet:{
             create:{
               balance:0

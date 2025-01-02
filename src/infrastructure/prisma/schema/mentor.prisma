@@ -1,10 +1,5 @@
 
 
-enum ApprovalStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
 
 model Mentor {
   id           String          @id @default(auto()) @map("_id") @db.ObjectId
@@ -24,7 +19,7 @@ model Mentor {
   followers    String[]        @db.ObjectId
   following    String[]        @db.ObjectId
   comments     Comment[]
-  approvalStatus ApprovalStatus @default(PENDING)
+  approvalStatus String @default("PENDING")
   createdAt    DateTime        @default(now())
   sessions     MentorSession[] 
   mentorWallet   MentorWallet?

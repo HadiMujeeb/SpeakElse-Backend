@@ -19,7 +19,11 @@ export interface IUser {
   userWallet?: IuserWallet|null;
   createdAt: Date;
 }
-
+// enum Role {
+//   USER
+//   ADMIN
+//   MENTOR
+// }
 // export interface LoginRequest {
 //   Email: string;
 //   password: string;

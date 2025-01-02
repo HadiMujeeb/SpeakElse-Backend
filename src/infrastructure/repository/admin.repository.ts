@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+
 import { IUser } from "../../domain/entities/user.entities";
 import prisma from "../config/prismaCient.config";
 import bcrypt from "bcryptjs";

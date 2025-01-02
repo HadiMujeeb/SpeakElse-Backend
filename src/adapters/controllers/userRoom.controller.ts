@@ -30,9 +30,9 @@ export default class userRoomController implements IuserRoomController {
     
         res.status(HttpStatus.OK).json({
           message: 'Rooms retrieved successfully.',
-          rooms: result.rooms,  // Assuming `result` has a `rooms` field
-          total: result.total,   // Assuming `result` has a `total` field for total rooms
-          totalPages: result.totalPages, // Assuming `result` has `totalPages`
+          rooms: result.rooms,
+          total: result.total,  
+          totalPages: result.totalPages,
         });
       } catch (error) {
         next(error);

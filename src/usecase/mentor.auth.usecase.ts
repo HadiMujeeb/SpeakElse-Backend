@@ -7,7 +7,6 @@ import mentorAuthRepository from "../infrastructure/repository/mentor.Auth.repos
 import { IUser } from "../domain/entities/user.entities";
 import { JWT } from "../domain/services/jwt.service";
 import { IAuthTokens, ILoginRequest } from "../interface/Icontrollers/Iuser.auth.controller";
-import { ApprovalStatus, Role } from "@prisma/client";
 import { PasswordService } from "../domain/services/password.services";
 
 export default class MentorAuthUseCase implements IMentorAuthUseCase {
@@ -32,7 +31,7 @@ export default class MentorAuthUseCase implements IMentorAuthUseCase {
     try { 
       const { email, password } = credentials; 
       const isEmailExisted = await this.MentorAuthRepository.findMentorByEmail(email); 
-    if ((isEmailExisted && !isEmailExisted.isVerified) || !isEmailExisted|| isEmailExisted.approvalStatus!==ApprovalStatus.APPROVED) { 
+    if ((isEmailExisted && !isEmailExisted.isVerified) || !isEmailExisted|| isEmailExisted.approvalStatus!=="APPROVED") { 
         throw { status: HttpStatus.NOT_FOUND, message: ErrorMessages.MENTOR_NOT_FOUND }; 
       }
       const isPasswordMatch = await this.PasswordService.verifyPassword(password, isEmailExisted.password || ""); 
@@ -56,7 +55,7 @@ export default class MentorAuthUseCase implements IMentorAuthUseCase {
       if (typeof decodedToken === "object" && decodedToken !== null && "id" in decodedToken) { 
         mentorData = await this.MentorAuthRepository.findMentorById(decodedToken.id); 
         console.log(mentorData,"mentorData");
-        if (mentorData && !mentorData.isBlocked && mentorData.approvalStatus == ApprovalStatus.APPROVED) { 
+        if (mentorData && !mentorData.isBlocked && mentorData.approvalStatus == "APPROVED") { 
           return { accessToken, mentorData }; 
         } else { 
           throw { status: HttpStatus.FORBIDDEN, message: ErrorMessages.USER_BLOCKED }; 

@@ -1,6 +1,7 @@
 import IApplication from "../../domain/entities/mentor.entities";
-import { ApprovalStatus, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { IAdminMentorFormRepository } from "../../interface/Irepositories/Iadmin.mentorform.repository";
+import { IApprovalStatus } from "../../domain/entities/admin.entities";
 
 export default class AdminMentorFormRepository implements IAdminMentorFormRepository {
     
@@ -50,7 +51,7 @@ export default class AdminMentorFormRepository implements IAdminMentorFormReposi
           }
           await this.prisma.mentor.update({
             where: { email },
-            data: { approvalStatus:ApprovalStatus[status as keyof typeof ApprovalStatus] }, 
+            data: { approvalStatus:status }, 
           });
       }catch (error) {
         throw error;

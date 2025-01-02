@@ -1,4 +1,5 @@
 import { Level,Privacy } from "@prisma/client";
+
 import { IUser } from "./user.entities";
 
 
@@ -24,3 +25,15 @@ export interface IRoom {
     createdAt: Date;
     creator?: IUser; 
   }
+
+//   enum Privacy {
+//     PUBLIC,
+//     PRIVATE
+// }
+
+// enum Level {
+//   ANYLEVEL,
+//   BEGINNER,
+//   INTERMEDIATE,
+//   ADVANCED
+// }
