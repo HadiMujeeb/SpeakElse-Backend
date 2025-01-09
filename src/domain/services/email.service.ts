@@ -37,7 +37,7 @@ export class MailerServices {
   }
 
   async sendRestPasswordLink(name: string, email: string, token: string) {
-    const link = `${process.env.FRONTEND_URL}?token=${token}`;
+    const link = `${process.env.RESETPASSOWRD_URL}?token=${token}`;
 
     const templates = getResetPasswordEmailTemplate(name, link);
 

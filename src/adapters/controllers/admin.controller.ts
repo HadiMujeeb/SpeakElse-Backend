@@ -16,7 +16,7 @@ export default class AdminController {
       const { email, password } = req.body;
       const Token:IAuthTokens|void = await this.AdminUseCase.handleAdminlogin(email,password);
       if (Token) {
-        res.cookie("adminRefreshToken", Token.refreshToken, { maxAge: 604800000, httpOnly: true, secure: process.env.NODE_ENV === "production" });
+        res.cookie("refreshToken", Token.refreshToken, { maxAge: 604800000, httpOnly: true, secure: process.env.NODE_ENV === "production" });
         res.status(HttpStatus.OK).json({ message: SuccessMessages.LOGIN_SUCCESS, accessToken: Token.accessToken });
       } else {
         res.status(HttpStatus.UNAUTHORIZED).json({ message: ErrorMessages.INVALID_PASSWORD });
@@ -29,7 +29,7 @@ export default class AdminController {
   async adminAuthTokenRequest(req: Request, res: Response, next: NextFunction): Promise<void>{
     try {
       const accessToken = req.header('Authorization')?.replace('Bearer ', '');
-      const refreshToken = req.cookies.adminRefreshToken;
+      const refreshToken = req.cookies.refreshToken;
       if (!accessToken || !refreshToken) throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.TOKEN_MISSING };
       const adminData = await this.AdminUseCase.validateAdminAccessToken(accessToken, refreshToken);
       res.status(HttpStatus.OK).json({ message: SuccessMessages.ACCESS_GRANTED, adminData: adminData, accessToken: adminData.accessToken, status: HttpStatus.OK });
@@ -40,7 +40,7 @@ export default class AdminController {
 
   async adminLogoutRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      res.clearCookie("adminRefreshToken", { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax" });
+      res.clearCookie("refreshToken", { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax" });
       res.status(HttpStatus.OK).json({ message: SuccessMessages.LOGOUT_SUCCESS });
     } catch (err: any) {
       next({ status: HttpStatus.INTERNAL_SERVER_ERROR, message: err.message || ErrorMessages.INTERNAL_SERVER_ERROR });

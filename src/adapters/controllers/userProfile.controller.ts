@@ -14,6 +14,7 @@ export default class userProfileController implements IuserProfileController {
       const updatedData = {
         ...req.body,avatar: req.file ? req.file.path : null,
       };
+      
       await this.profileUsecase.handleEditUserData(updatedData);
 
       res.status(HttpStatus.OK).json({ message: SuccessMessages.USER_UPDATED });
@@ -28,7 +29,7 @@ export default class userProfileController implements IuserProfileController {
       await this.profileUsecase.followUnfollow(userId, friendId);
       res.status(HttpStatus.OK).json({ message: "Following relationship updated." });
     }catch (error) {
-      next(error);
+      next(error);  
     }
   }
 

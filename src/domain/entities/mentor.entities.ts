@@ -47,7 +47,7 @@ export interface IMentorRoom {
     bookingFee : number
     mentor?:IApplication
     rescheduleCount ?: number 
-    escheduleReason? : string[]
+    rescheduleReason? : string[]
     status ?: string
    
  
@@ -72,7 +72,8 @@ export interface ITransaction {
     status: string; 
     transactionId: string;
     paymentMethod: string;   
-    sessionId: string;    
+    sessionId: string;  
+    sessionDetails?: IMentorRoom|null
     description: string;
     createdAt: Date
     updatedAt: Date

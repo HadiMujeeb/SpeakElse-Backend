@@ -6,24 +6,29 @@
     "auditLog": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\.612a4fb428642fc78711568bf7a55d5ed2291d16-audit.json",
     "files": [
         {
-            "date": 1735324755188,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2024-12-28-error.log",
-            "hash": "b83fd083dd66c51c9c51c1be8bffefc4dc95f5d3ee3f527f8cd1f121a9af48c1"
-        },
-        {
-            "date": 1735751295163,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2025-01-01-error.log",
-            "hash": "3e12fd209407cf4a3b95414b3c2567126ab5f97312ec3164d9760b6d227bddb0"
-        },
-        {
-            "date": 1735761886132,
-            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2025-01-02-error.log",
-            "hash": "6f4ec45a8e0ada931b079a61e5aaf38e588a675c6228f1eff5d27d312d6f1f49"
-        },
-        {
             "date": 1735851327349,
             "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2025-01-03-error.log",
             "hash": "611cac8292186f68b44bb22850ab540f6a951f471ffe66fc5d402b960968dd66"
+        },
+        {
+            "date": 1736093056782,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2025-01-05-error.log",
+            "hash": "ec29461f318c6011361b50db704f6ee4821f7edafcc9a47f94de3ebe55f50742"
+        },
+        {
+            "date": 1736129117096,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2025-01-06-error.log",
+            "hash": "91a35a1662b6963fd7975cdfb3e3914f733ad9dc7c44847a8f83b73092d7f317"
+        },
+        {
+            "date": 1736343908380,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2025-01-08-error.log",
+            "hash": "f754bec846c969cb0ed09db327486e2fe0ebc42b8634352baed107e6a5b65ab1"
+        },
+        {
+            "date": 1736396822839,
+            "name": "C:\\Users\\ADMIN\\Desktop\\backend\\src\\logs\\2025-01-09-error.log",
+            "hash": "84962c81ba9a1a8d8a0be9fd2517eade151f8251956539b0eb5ca91d26c13f5c"
         }
     ],
     "hashType": "sha256"

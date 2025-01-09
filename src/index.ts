@@ -38,7 +38,7 @@ app.use(morgan("dev"));
 
 app.use(
   cors({
-    origin: ["http://localhost:4200",],
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   })
 );
@@ -49,17 +49,21 @@ app.use(
 app.use(cookieParse());
 
 app.use("/api/user/auth", UserAuthRoutes);
-app.use("/api/admin", adminRouter);
-app.use("/api/user", profileRoute);
-app.use("/api/mentor", MentorProfileRoute);
 app.use("/api/mentor/auth", MentorAuthRoute);
-app.use("/api/user",userRoomRoute)
-app.use("/api/user",FriendChatRoute)
-app.use("/api/admin/languageTest",languageTestRoute)
-app.use("/api/admin/mentorform",adminMentorFormRouter)
-app.use("/api/admin/reports",adminReportsRoute);
-app.use("/api/mentor",mentorRoomRoute)
-app.use("/api/user",userWalletRoute)
+app.use("/api/admin", adminRouter);
+
+app.use("/api/user/profile", profileRoute);
+app.use("/api/mentor/profile", MentorProfileRoute);
+
+app.use("/api/user/room", userRoomRoute);
+app.use("/api/mentor/room", mentorRoomRoute);
+app.use("/api/user/chat", FriendChatRoute);
+app.use("/api/user/wallet", userWalletRoute);
+
+app.use("/api/admin/languageTest", languageTestRoute);
+app.use("/api/admin/mentorform", adminMentorFormRouter);
+app.use("/api/admin/reports", adminReportsRoute);
+
 // Use error handler middleware
 app.use(errorHandler);
 

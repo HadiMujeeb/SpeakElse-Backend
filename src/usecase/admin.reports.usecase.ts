@@ -35,6 +35,10 @@ export default class AdminReportsUseCase implements IAdminReportsUseCase {
     async gellAllTransactions(): Promise<ITransaction[]> {
         try {
             const transactions = await this.adminReportsRepository.getAllTransactions();
+            for (const transaction of transactions) {
+                const session = await this.adminReportsRepository.findSessionById(transaction.sessionId);
+                transaction.sessionDetails = session;
+            }
             return transactions
         } catch (error) {
             throw error;

@@ -1,4 +1,4 @@
-import { PrismaClient} from "@prisma/client";
+import { MentorSession, PrismaClient} from "@prisma/client";
 import IAdminReportsRepository from "../../interface/Irepositories/Iadmin.reports.repository";
 import { IResponseReport } from "../../domain/entities/user.entities";
 import { IStatus, ITransaction } from "../../domain/entities/mentor.entities";
@@ -52,13 +52,19 @@ async blockUnblockUser(userId: string): Promise<void> {
 
 async getAllTransactions(): Promise<ITransaction[]> {
     try {
-        const transactions = await this.prisma.transaction.findMany({
-        
-    });
+        const transactions = await this.prisma.transaction.findMany();
         return transactions
     } catch (error) {
         throw error
     }
 }
 
+async findSessionById(sessionId: string): Promise<MentorSession|null> {
+    try {
+        const session = await this.prisma.mentorSession.findUnique({ where: { id: sessionId } });
+        return session
+    } catch (error) {
+        throw error
+    }
+}
 }

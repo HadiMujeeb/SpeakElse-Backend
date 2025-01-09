@@ -28,8 +28,10 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
     try { 
       const { email, password } = credentials; 
       const isEmailExisted = await this.UserAuthRepository.findUserByEmail(email); 
-      if ((isEmailExisted && !isEmailExisted.isVerified) || !isEmailExisted) { 
+      if ((isEmailExisted && !isEmailExisted.isVerified ) || !isEmailExisted) { 
         throw { status: HttpStatus.NOT_FOUND, message: ErrorMessages.USER_NOT_FOUND }; 
+      }else if ( isEmailExisted.role =="ADMIN"){
+        throw { status: HttpStatus.NOT_FOUND, message: ErrorMessages.USER_NOT_FOUND };
       }
       const isPasswordMatch = await this.PasswordService.verifyPassword(password, isEmailExisted.password || ""); 
       if (isPasswordMatch) { 
@@ -113,7 +115,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
       const decodedToken = await JWT.verifyToken(accessToken); 
       if (typeof decodedToken === "object" && decodedToken !== null && "id" in decodedToken) { 
         userData = await this.UserAuthRepository.findUserById(decodedToken.id); 
-        if (userData && !userData.isBlocked) { 
+        if (userData && !userData.isBlocked && userData.role == "USER") { 
           return { accessToken, userData }; 
         } else { 
           throw { status: HttpStatus.FORBIDDEN, message: ErrorMessages.USER_BLOCKED }; 
@@ -122,7 +124,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
         const refreshResponse = await this.refreshAccessToken(refreshToken); 
         if (refreshResponse.accessToken) { 
           userData = await this.UserAuthRepository.findUserById(refreshResponse.userId); 
-          if (userData && !userData.isBlocked) { 
+          if (userData && !userData.isBlocked && userData.role == "USER") { 
             return { accessToken: refreshResponse.accessToken, userData }; 
           } 
         } 
@@ -148,7 +150,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
       if (typeof decodedRefreshToken === "object" && decodedRefreshToken !== null && "id" in decodedRefreshToken) { 
         const userId = decodedRefreshToken.id; 
         const userData = await this.UserAuthRepository.findUserById(userId); 
-        if (userData && !userData.isBlocked) { 
+        if (userData && !userData.isBlocked&& userData.role == "USER") { 
           const newAccessToken = JWT.generateToken(userId); 
           return { accessToken: newAccessToken, userId }; 
         } else { 

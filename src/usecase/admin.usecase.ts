@@ -44,7 +44,7 @@ export default class AdminUseCase {
       if (typeof decodedToken === "object" && decodedToken !== null && "id" in decodedToken){ 
         console.log(decodedToken,"decodedToken");
         adminData = await this.adminRepository.findUserById(decodedToken.id); 
-        if (adminData && !adminData.isBlocked) { 
+        if (adminData && !adminData.isBlocked && adminData.role == "ADMIN") { 
           return { accessToken, adminData }; 
         } else { 
           throw { status: HttpStatus.FORBIDDEN, message: ErrorMessages.USER_BLOCKED }; 
@@ -54,7 +54,7 @@ export default class AdminUseCase {
         const refreshResponse = await this.refreshAccessToken(refreshToken); 
         if (refreshResponse.accessToken) { 
           adminData = await this.adminRepository.findUserById(refreshResponse.userId); 
-          if (adminData && !adminData.isBlocked) { 
+          if (adminData && !adminData.isBlocked && adminData.role == "ADMIN") { 
             return { accessToken: refreshResponse.accessToken, adminData }; 
           } 
         } 
@@ -80,7 +80,7 @@ export default class AdminUseCase {
       if (typeof decodedRefreshToken === "object" && decodedRefreshToken !== null && "id" in decodedRefreshToken) { 
         const userId = decodedRefreshToken.id; 
         const adminData = await this.adminRepository.findUserById(userId); 
-        if (adminData && !adminData.isBlocked) { 
+        if (adminData && !adminData.isBlocked && adminData.role == "ADMIN") { 
           const newAccessToken = JWT.generateToken(userId); 
           return { accessToken: newAccessToken, userId }; 
         } else { 
