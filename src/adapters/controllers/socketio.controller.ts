@@ -12,7 +12,7 @@ export class SocketioController {
     this.prisma = new PrismaClient(); // Initialize PrismaClient
     this.io = new Server(httpServer, {
       cors: {
-        origin: process.env.FRONTEND_URL,
+        origin: 'http://localhost:4200',
         credentials: true,
       },
     });
