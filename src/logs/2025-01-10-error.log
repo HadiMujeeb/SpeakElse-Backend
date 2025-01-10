@@ -1,0 +1,94 @@
+{
+  status: 400,
+  message: 'Email already exists.',
+  level: 'error',
+  timestamp: '2025-01-09T18:46:30.950Z'
+}
+{
+  name: 'PrismaClientKnownRequestError',
+  code: 'P2002',
+  clientVersion: '5.21.1',
+  meta: { modelName: 'otp', target: 'otp_email_key' },
+  level: 'error',
+  timestamp: '2025-01-09T19:04:54.166Z'
+}
+{
+  name: 'PrismaClientValidationError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-01-09T19:19:39.196Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2025-01-10T02:22:51.198Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2025-01-10T02:22:57.836Z'
+}
+{
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read',
+  storageErrors: [],
+  level: 'error',
+  timestamp: '2025-01-10T02:28:38.131Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2025-01-10T02:29:18.769Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2025-01-10T02:29:35.311Z'
+}
+{
+  name: 'PrismaClientKnownRequestError',
+  code: 'P2010',
+  clientVersion: '5.21.1',
+  meta: {
+    modelName: 'Mentor',
+    code: 'unknown',
+    message: 'Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-5eefne-shard-0, Max Set Version: 170, Max Election ID: 7fffffff000000000000009f, Servers: [ { Address: ac-6t3ytfj-shard-00-00.ryxg9dt.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: No such host is known. (os error 11001), labels: {} }, { Address: ac-6t3ytfj-shard-00-01.ryxg9dt.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: No such host is known. (os error 11001), labels: {} }, { Address: ac-6t3ytfj-shard-00-02.ryxg9dt.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: No such host is known. (os error 11001), labels: {} } ] }, labels: {"TransientTransactionError"}'
+  },
+  level: 'error',
+  timestamp: '2025-01-10T02:29:38.141Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2025-01-10T02:29:47.453Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2025-01-10T02:29:48.743Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2025-01-10T02:29:49.803Z'
+}
+{
+  status: 401,
+  message: 'Invalid refresh token. Please log in again.',
+  level: 'error',
+  timestamp: '2025-01-10T03:10:38.841Z'
+}
+{
+  status: 404,
+  message: 'User not found.',
+  level: 'error',
+  timestamp: '2025-01-10T03:10:46.216Z'
+}
