@@ -29,8 +29,8 @@ import prisma from "./infrastructure/config/prismaCient.config";
 dotenv.config();
 const app = express();
 const server = createServer(app);
-// const socketService = new SocketService(server);
-const SocketioControllerInstance = new SocketioController(server);
+const socketService = new SocketService(server);
+// const SocketioControllerInstance = new SocketioController(server);
 
 
 app.use(express.json());
