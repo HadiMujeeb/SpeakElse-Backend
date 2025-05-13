@@ -1,4 +1,4 @@
-import { MentorSession, PrismaClient} from "@prisma/client";
+import {  PrismaClient} from "@prisma/client";
 import {IAdminReportsRepository} from "../../interface/Irepositories/Iadmin.reports.repository";
 import { IResponseReport } from "../../domain/entities/user.entities";
 import { IStatus, ITransaction } from "../../domain/entities/mentor.entities";
@@ -59,7 +59,7 @@ async getAllTransactions(): Promise<ITransaction[]> {
     }
 }
 
-async findSessionById(sessionId: string): Promise<MentorSession|null> {
+async findSessionById(sessionId: string): Promise<any> {
     try {
         const session = await this.prisma.mentorSession.findUnique({ where: { id: sessionId } });
         return session
