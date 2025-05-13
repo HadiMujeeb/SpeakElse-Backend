@@ -1,0 +1,45 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\.7ab416237384bd1f635fd5f88e5fc7b37188c30d-audit.json",
+    "files": [
+        {
+            "date": 1746615919854,
+            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-07-error.log",
+            "hash": "41a385ff60c99371cdc0b3280cfc744456894b2042ea1d36519ccb9c2c1ca9bc"
+        },
+        {
+            "date": 1746685377532,
+            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-08-error.log",
+            "hash": "e0d16b377eabbaebf1b18aa5217748bc1cb6049a918de037bca83337faa23d0b"
+        },
+        {
+            "date": 1746729773182,
+            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-09-error.log",
+            "hash": "e48d55209fc7dfee59918548bbbff13efe5c05de88ddd479cdd66f81032f9fac"
+        },
+        {
+            "date": 1746815484108,
+            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-10-error.log",
+            "hash": "aa85658f7d8e7632221cd8b630fbb498233ecf723344475723709c908081688d"
+        },
+        {
+            "date": 1746954172750,
+            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-11-error.log",
+            "hash": "edfd339748dffae93c3ac755ef3b3c6429b1a3c3bb98d02c4d6ae9c25cd03fdb"
+        },
+        {
+            "date": 1746989917454,
+            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-12-error.log",
+            "hash": "005b06fedc59c20ad89479c65e8cf62335066a3ae78b1138958a6aa668c51938"
+        },
+        {
+            "date": 1747115125329,
+            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-13-error.log",
+            "hash": "50dc24fb29e0e43345c4a3460bc5113cabf04193157fae9f74309d817ea89115"
+        }
+    ],
+    "hashType": "sha256"
+}

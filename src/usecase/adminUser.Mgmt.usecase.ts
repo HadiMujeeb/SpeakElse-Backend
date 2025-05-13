@@ -3,17 +3,16 @@ import { IAdminUserMgmtUsecase } from "../interface/Iusecase/IadminUser.Mgmt.use
 import { HttpStatus } from "../domain/responseStatus/httpcode";
 import { ErrorMessages } from "../domain/responseMessages/errorMessages";
 import { PasswordService } from "../domain/services/password.services";
+import adminUserMgmtRepository from "../infrastructure/repository/adminUser.Mgmt.repo";
 
-import AdminUserMgmtRepository from "../infrastructure/repository/adminUser.Mgmt.repo";
-
-export default class AdminUserMgmtUseCase implements IAdminUserMgmtUsecase {
-  private AdminUserMgmtRepo: AdminUserMgmtRepository;
+export default class adminUserMgmtUseCase implements IAdminUserMgmtUsecase {
+  private adminUserMgmtRepository: adminUserMgmtRepository;
   private PasswordService: PasswordService;
   constructor(
-    AdminUserMgmtRepo: AdminUserMgmtRepository,
+    AdminUserMgmtRepo: adminUserMgmtRepository,
     PasswordService: PasswordService
   ) {
-    this.AdminUserMgmtRepo = AdminUserMgmtRepo;
+    this.adminUserMgmtRepository = AdminUserMgmtRepo;
     this.PasswordService = PasswordService;
   }
   async addMemberToSystem(newMentor: IUser): Promise<void> {
@@ -22,7 +21,7 @@ export default class AdminUserMgmtUseCase implements IAdminUserMgmtUsecase {
         newMentor.password ?? ""
       );
       newMentor.password = hashPassword;
-      await this.AdminUserMgmtRepo.createMember(newMentor);
+      await this.adminUserMgmtRepository.createMember(newMentor);
     } catch (error) {
       throw error;
     }
@@ -30,7 +29,7 @@ export default class AdminUserMgmtUseCase implements IAdminUserMgmtUsecase {
 
   async retrieveAllMembersList(): Promise<any> {
     try {
-      const members = await this.AdminUserMgmtRepo.listAllMembers();
+      const members = await this.adminUserMgmtRepository.listAllMembers();
       return members
     } catch (error) {
       throw error;
@@ -46,7 +45,7 @@ export default class AdminUserMgmtUseCase implements IAdminUserMgmtUsecase {
           message: ErrorMessages.USER_NOT_FOUND,
         };
       }
-      await this.AdminUserMgmtRepo.blockOrUnblockMember(memberId);
+      await this.adminUserMgmtRepository.blockOrUnblockMember(memberId);
     } catch (error) {
       throw error;
     }
@@ -56,7 +55,7 @@ export default class AdminUserMgmtUseCase implements IAdminUserMgmtUsecase {
       console.log("user data", MemberData);
       let isMemberExist;
       if (MemberData.id) {
-        isMemberExist = await this.AdminUserMgmtRepo.doesUserExist(
+        isMemberExist = await this.adminUserMgmtRepository.doesUserExist(
           MemberData.id
         );
       }
@@ -68,7 +67,7 @@ export default class AdminUserMgmtUseCase implements IAdminUserMgmtUsecase {
         };
       }
 
-      await this.AdminUserMgmtRepo.editMember(MemberData);
+      await this.adminUserMgmtRepository.editMember(MemberData);
     } catch (error) {
       throw error;
     }

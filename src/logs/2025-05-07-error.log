@@ -1,0 +1,60 @@
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2025-05-07T11:05:28.780Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2025-05-07T11:05:58.274Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2025-05-07T11:07:15.480Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2025-05-07T11:07:31.167Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2025-05-07T14:09:54.690Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2025-05-07T14:10:16.200Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-07T14:14:50.227Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-07T14:16:31.148Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-07T14:17:21.570Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-07T14:17:30.598Z'
+}

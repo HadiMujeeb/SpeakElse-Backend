@@ -1,10 +1,10 @@
 import { IAdminReportsUseCase } from "../interface/Iusecase/Iadmin.reports.usecase";
-import AdminReportsRepository from "../infrastructure/repository/admin.reports.repository";
+import adminReportsRepository from "../infrastructure/repository/admin.reports.repository";
 import { IResponseReport } from "../domain/entities/user.entities";
 import { ITransaction } from "../domain/entities/mentor.entities";
-export default class AdminReportsUseCase implements IAdminReportsUseCase {
-    private adminReportsRepository: AdminReportsRepository
-    constructor(adminReportsRepository: AdminReportsRepository) {
+export default class adminReportsUseCase implements IAdminReportsUseCase {
+    private adminReportsRepository: adminReportsRepository
+    constructor(adminReportsRepository: adminReportsRepository) {
         this.adminReportsRepository = adminReportsRepository;
     }
 

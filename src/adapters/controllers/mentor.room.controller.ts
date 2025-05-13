@@ -1,21 +1,21 @@
 import { Request, Response, NextFunction } from "express";
-import IMentorRoomController from "../../interface/Icontrollers/Imentor.room.controller";
-import MentorRoomUseCase from "../../usecase/mentor.room.usecase";
+import {IMentorRoomController} from "../../interface/Icontrollers/Imentor.room.controller";
+import mentorRoomUseCase from "../../usecase/mentor.room.usecase";
 import { IMentorRoom, IReshedulement } from "../../domain/entities/mentor.entities";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
 
-export default class MentorRoomController implements IMentorRoomController {
-    private mentorRoomUseCase: MentorRoomUseCase;
+export default class mentorRoomController implements IMentorRoomController {
+    private mentorRoomUseCase: mentorRoomUseCase;
 
-    constructor(mentorRoomUseCase: MentorRoomUseCase) {
+    constructor(mentorRoomUseCase: mentorRoomUseCase) {
         this.mentorRoomUseCase = mentorRoomUseCase  
     }
 
     async requestCreateRoom(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const data: IMentorRoom = req.body;
-            const createMentorRoom = await this.mentorRoomUseCase.CreateMentorRoom(data);
+            const createMentorRoom = await this.mentorRoomUseCase.createMentorRoom(data);
             console.log(createMentorRoom);
             res.status(HttpStatus.CREATED).json({message: SuccessMessages.ROOM_CREATED,room:createMentorRoom});
         } catch (error) {

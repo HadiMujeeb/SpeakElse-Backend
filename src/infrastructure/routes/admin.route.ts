@@ -20,7 +20,7 @@ const AdminUserMgmtRepos = new AdminUserMgmtRepository(prisma);
 const AdminUserMgmtUse = new AdminUserMgmtUseCase(AdminUserMgmtRepos, passwordService);
 const AdminUserMgmtContro = new AdminUserMgmtController(AdminUserMgmtUse);
 
-adminRouter.post("/adminLogin", adminController.AdminLogin.bind(adminController));
+adminRouter.post("/adminLogin", adminController.adminLogin.bind(adminController));
 adminRouter.get("/adminAuthToken", adminController.adminAuthTokenRequest.bind(adminController));
 adminRouter.get("/adminLogout", adminController.adminLogoutRequest.bind(adminController));
 adminRouter.post("/addMember", upload.single("image"), AdminUserMgmtContro.requestAddMember.bind(AdminUserMgmtContro));

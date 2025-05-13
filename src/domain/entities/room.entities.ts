@@ -26,6 +26,37 @@ export interface IRoom {
     creator?: IUser; 
   }
 
+
+  export interface IReqestUserCreateRoom {
+    creatorId:string;
+    topic?:string;
+    maxPeople:string;
+    level:string;
+    language:string;
+    privacy:string;
+  }
+
+  export interface IUserCreatedRoom {
+  id: string;
+  language?: string;
+  topic?: string;
+  peopleCount: {
+    joined: number;
+    limit: number;
+  };
+  level: string;
+  privacy: string;
+  participants: string[];
+  createdAt: Date;
+  creator:{
+    id: string;
+    name:string;
+    country?:string;
+    profession?:string;
+    avatar?:string;
+  }
+  }
+
 //   enum Privacy {
 //     PUBLIC,
 //     PRIVATE

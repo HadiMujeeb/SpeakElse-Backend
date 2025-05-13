@@ -1,6 +1,6 @@
 import { use } from "passport";
 import IApplication from "../domain/entities/mentor.entities";
-import IMentorAuthUseCase from "../interface/Iusecase/Imentor.auth.usecase";
+import {IMentorAuthUseCase} from "../interface/Iusecase/Imentor.auth.usecase";
 import { HttpStatus } from "../domain/responseStatus/httpcode";
 import { ErrorMessages } from "../domain/responseMessages/errorMessages";
 import mentorAuthRepository from "../infrastructure/repository/mentor.Auth.repository";
@@ -9,18 +9,18 @@ import { JWT } from "../domain/services/jwt.service";
 import { IAuthTokens, ILoginRequest } from "../interface/Icontrollers/Iuser.auth.controller";
 import { PasswordService } from "../domain/services/password.services";
 
-export default class MentorAuthUseCase implements IMentorAuthUseCase {
-  private MentorAuthRepository: mentorAuthRepository;
+export default class mentorAuthUseCase implements IMentorAuthUseCase {
+  private mentorAuthRepository: mentorAuthRepository;
   private PasswordService: PasswordService
-  constructor(MentorAuthRepository: mentorAuthRepository, PasswordService: PasswordService) {
+  constructor(mentorAuthRepository: mentorAuthRepository, PasswordService: PasswordService) {
     this.PasswordService = PasswordService
-    this.MentorAuthRepository = MentorAuthRepository;
+    this.mentorAuthRepository = mentorAuthRepository;
   }
 
   async registerMentorApplication(credentials: IApplication): Promise<void> {
     try {
       credentials.password = await this.PasswordService.hashPassword(credentials.password);
-      await this.MentorAuthRepository.createMentorshipApplication(credentials);
+      await this.mentorAuthRepository.createMentorshipApplication(credentials);
     } catch (error) {
       throw error;
     }
@@ -30,7 +30,7 @@ export default class MentorAuthUseCase implements IMentorAuthUseCase {
   async handleMentorLogin(credentials: ILoginRequest): Promise<{ accessToken: string; refreshToken: string } | void> { 
     try { 
       const { email, password } = credentials; 
-      const isEmailExisted = await this.MentorAuthRepository.findMentorByEmail(email); 
+      const isEmailExisted = await this.mentorAuthRepository.findMentorByEmail(email); 
     if ((isEmailExisted && !isEmailExisted.isVerified) || !isEmailExisted|| isEmailExisted.approvalStatus!=="APPROVED") { 
         throw { status: HttpStatus.NOT_FOUND, message: ErrorMessages.MENTOR_NOT_FOUND }; 
       }
@@ -53,7 +53,7 @@ export default class MentorAuthUseCase implements IMentorAuthUseCase {
       let mentorData: IApplication | null = null; 
       const decodedToken = await JWT.verifyToken(accessToken); 
       if (typeof decodedToken === "object" && decodedToken !== null && "id" in decodedToken) { 
-        mentorData = await this.MentorAuthRepository.findMentorById(decodedToken.id); 
+        mentorData = await this.mentorAuthRepository.findMentorById(decodedToken.id); 
         console.log(mentorData,"mentorData");
         if (mentorData && !mentorData.isBlocked && mentorData.approvalStatus == "APPROVED") { 
           return { accessToken, mentorData }; 
@@ -63,7 +63,7 @@ export default class MentorAuthUseCase implements IMentorAuthUseCase {
       } else { 
         const refreshResponse = await this.refreshAccessToken(refreshToken); 
         if (refreshResponse.accessToken) { 
-          mentorData = await this.MentorAuthRepository.findMentorById(refreshResponse.userId); 
+          mentorData = await this.mentorAuthRepository.findMentorById(refreshResponse.userId); 
           if (mentorData && !mentorData.isBlocked) { 
             return { accessToken: refreshResponse.accessToken, mentorData }; 
           } 
@@ -75,7 +75,7 @@ export default class MentorAuthUseCase implements IMentorAuthUseCase {
       if (err.name === "TokenExpiredError") { 
         const refreshResponse = await this.refreshAccessToken(refreshToken); 
         if (refreshResponse.accessToken) { 
-          mentorData = await this.MentorAuthRepository.findMentorById(refreshResponse.userId); 
+          mentorData = await this.mentorAuthRepository.findMentorById(refreshResponse.userId); 
           return { accessToken: refreshResponse.accessToken, mentorData }; 
         } 
         throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.INVALID_REFRESH_TOKEN }; 
@@ -89,7 +89,7 @@ export default class MentorAuthUseCase implements IMentorAuthUseCase {
       const decodedRefreshToken = await JWT.verifyToken(refreshToken); 
       if (typeof decodedRefreshToken === "object" && decodedRefreshToken !== null && "id" in decodedRefreshToken) { 
         const userId = decodedRefreshToken.id; 
-        const userData = await this.MentorAuthRepository.findMentorById(userId); 
+        const userData = await this.mentorAuthRepository.findMentorById(userId); 
         if (userData && !userData.isBlocked) { 
           const newAccessToken = JWT.generateToken(userId); 
           return { accessToken: newAccessToken, userId }; 

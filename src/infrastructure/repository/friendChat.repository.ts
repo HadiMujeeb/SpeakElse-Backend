@@ -4,7 +4,7 @@ import { IChat, IMessage } from "../../domain/entities/chat.entities";
 import { IUser } from "../../domain/entities/user.entities";
 
 
-export default class FriendChatRepository implements IFriendChatRepository {
+export default class friendChatRepository implements IFriendChatRepository {
  private prisma: PrismaClient
  constructor(prisma: PrismaClient) {
      this.prisma = prisma

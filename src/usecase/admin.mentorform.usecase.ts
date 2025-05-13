@@ -1,12 +1,12 @@
-import IAdminMentorFormUsecase from "../interface/Iusecase/Iadmin.mentorform.usecase";
-import AdminMentorFormRepository from "../infrastructure/repository/admin.mentorform.repository";
+import {IAdminMentorFormUsecase} from "../interface/Iusecase/Iadmin.mentorform.usecase";
+import adminMentorFormRepository from "../infrastructure/repository/admin.mentorform.repository";
 import IApplication from "../domain/entities/mentor.entities";
 import { MailerServices } from "../domain/services/email.service";
-export default class AdminMentorFormUseCase implements IAdminMentorFormUsecase {
-  private adminMentorFormRepository: AdminMentorFormRepository
+export default class adminMentorFormUseCase implements IAdminMentorFormUsecase {
+  private adminMentorFormRepository: adminMentorFormRepository
   private mailerServices: MailerServices
 
-  constructor(adminMentorFormRepository: AdminMentorFormRepository, mailerServices: MailerServices) {
+  constructor(adminMentorFormRepository: adminMentorFormRepository, mailerServices: MailerServices) {
     this.adminMentorFormRepository = adminMentorFormRepository;
     this.mailerServices = mailerServices
 

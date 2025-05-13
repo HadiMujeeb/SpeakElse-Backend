@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import ILanguageTestRepository from "../../interface/Irepositories/IadminTests.repository";
+import {ILanguageTestRepository} from "../../interface/Irepositories/IadminTests.repository";
 import { IQuestions} from "../../domain/entities/tests.entites"; 
 import { json } from "express";
 
-export default class LanguageTestRepository implements ILanguageTestRepository {
+export default class anguageTestRepository implements ILanguageTestRepository {
     private prisma: PrismaClient;
 
     constructor(prisma: PrismaClient) {

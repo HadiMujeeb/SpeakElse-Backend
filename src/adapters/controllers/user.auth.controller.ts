@@ -1,17 +1,17 @@
 import { Request, Response, NextFunction } from "express";
 import { IuserAuthenticationController, ILoginRequest, IRegistrationRequest, IOtpVerification, IAuthTokens } from "../../interface/Icontrollers/Iuser.auth.controller";
-import UserAuthUseCase from "../../usecase/user.Auth.usecase";
+import userAuthUseCase from "../../usecase/user.Auth.usecase";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
 import { ErrorMessages } from "../../domain/responseMessages/errorMessages";
+export default class userAuthController implements IuserAuthenticationController {
 
-export default class UserAuthController implements IuserAuthenticationController {
-  private userAuthUseCase: UserAuthUseCase;
-  constructor(userAuthUseCase: UserAuthUseCase) {
+  private userAuthUseCase: userAuthUseCase;
+  constructor(userAuthUseCase: userAuthUseCase) {
     this.userAuthUseCase = userAuthUseCase;
   }
 
-  async UserRegistrationRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async userRegistrationRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const userData: IRegistrationRequest = req.body;
       if (userData.password !== userData.confirmPassword) throw { status: HttpStatus.BAD_REQUEST, message: ErrorMessages.PASSWORD_MISMATCH };
@@ -35,7 +35,7 @@ export default class UserAuthController implements IuserAuthenticationController
     }
   }
 
-  async UserLoginRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async userLoginRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const credentials: ILoginRequest = req.body;
       const Token: void | IAuthTokens = await this.userAuthUseCase.handleUserLogin(credentials);
@@ -62,13 +62,24 @@ export default class UserAuthController implements IuserAuthenticationController
     }
   }
 
-  async UserLogoutRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async userLogoutRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       res.clearCookie("refreshToken", { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax" });
       res.status(HttpStatus.OK).json({ message: SuccessMessages.LOGOUT_SUCCESS });
     } catch (err: any) {
       next({ status: HttpStatus.INTERNAL_SERVER_ERROR, message: err.message || ErrorMessages.INTERNAL_SERVER_ERROR });
     }
+  }
+
+  async userGoogleLoginRequest(req: Request,res: Response,next: NextFunction):Promise<void>{
+  try {
+    const {idToken} = req.body
+    const Token:IAuthTokens = await this.userAuthUseCase.handleGoogleLogin(idToken);
+      res.cookie("refreshToken", Token.refreshToken, { maxAge: 604800000, httpOnly: true, secure: process.env.NODE_ENV === "production" });
+      res.status(HttpStatus.OK).json({ message: SuccessMessages.LOGIN_SUCCESS, accessToken: Token.accessToken });
+  } catch (error) {
+    next(error)
+  }
   }
 
   async resendOTPRequest(req: Request, res: Response, next: NextFunction): Promise<void | never> {

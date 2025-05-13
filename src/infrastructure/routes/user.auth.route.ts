@@ -16,10 +16,11 @@ const userAuthUseCase = new UserAuthUseCase(UserAuthRepository, mailerServices, 
 const AuthuserController = new UserAuthController(userAuthUseCase);
 
 // Routes
-router.post("/registerUser", AuthuserController.UserRegistrationRequest.bind(AuthuserController));
+router.post("/registerUser", AuthuserController.userRegistrationRequest.bind(AuthuserController));
 router.post("/verifyOtp", AuthuserController.confirmOtpRequest.bind(AuthuserController));
-router.post("/loginUser", AuthuserController.UserLoginRequest.bind(AuthuserController));
-router.get("/logout", AuthuserController.UserLogoutRequest.bind(AuthuserController));
+router.post("/loginUser", AuthuserController.userLoginRequest.bind(AuthuserController));
+router.post("/google-login", AuthuserController.userGoogleLoginRequest.bind(AuthuserController));
+router.get("/logout", AuthuserController.userLogoutRequest.bind(AuthuserController));
 router.get("/verify-Token", AuthuserController.authenticateTokenRequest.bind(AuthuserController));
 router.post("/resend-OTP", AuthuserController.resendOTPRequest.bind(AuthuserController));
 router.post("/sendEmailReset", AuthuserController.requestSentMailResetPassword.bind(AuthuserController));

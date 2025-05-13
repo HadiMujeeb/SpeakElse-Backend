@@ -3,7 +3,7 @@ import mentorProfileUseCase from "../../usecase/mentorProfile.usecase";
 import { IUser } from "../../domain/entities/user.entities";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
-import IMentorProfileController from "../../interface/Icontrollers/ImentorProfile.controller";
+import {IMentorProfileController} from "../../interface/Icontrollers/ImentorProfile.controller";
 import IApplication from "../../domain/entities/mentor.entities";
 
 export default class mentorProfileController
@@ -22,6 +22,7 @@ export default class mentorProfileController
       res.status(HttpStatus.OK).json({ message: SuccessMessages.MENTOR_UPDATED , mentorData });
     } catch (error) {
       next(error);
+      
     }
   }
   async requestGetFeedbackRatings(req: Request, res: Response, next: NextFunction): Promise<void> {

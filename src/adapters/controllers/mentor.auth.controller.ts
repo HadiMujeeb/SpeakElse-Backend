@@ -1,19 +1,19 @@
 import { Request, Response, NextFunction } from "express";
-import IMentorAuthController from "../../interface/Icontrollers/Imentor.auth.controller";
-import MentorAuthUseCase from "../../usecase/mentor.auth.usecase";
+import {IMentorAuthController} from "../../interface/Icontrollers/Imentor.auth.controller";
+import mentorAuthUseCase from "../../usecase/mentor.auth.usecase";
 import IApplication from "../../domain/entities/mentor.entities";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
 import { IAuthTokens, ILoginRequest } from "../../interface/Icontrollers/Iuser.auth.controller";
 import { ErrorMessages } from "../../domain/responseMessages/errorMessages";
 
-export default class MentorAuthController implements IMentorAuthController {
-  private mentorAuthUsecase: MentorAuthUseCase;
-  constructor(mentorAuthUsecase: MentorAuthUseCase) {
+export default class mentorAuthController implements IMentorAuthController {
+  private mentorAuthUsecase: mentorAuthUseCase;
+  constructor(mentorAuthUsecase: mentorAuthUseCase) {
     this.mentorAuthUsecase = mentorAuthUsecase;
   }
 
-  async MentorApplicationRequest(req: Request,res: Response,next: NextFunction): Promise<void> {
+  async mentorApplicationRequest(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {
       const files = req.files as { resume: Express.Multer.File[]; avatar: Express.Multer.File[] };
       const credentials: IApplication = {
@@ -29,7 +29,7 @@ export default class MentorAuthController implements IMentorAuthController {
     }
   }
 
-  async MentorLoginRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async mentorLoginRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const credentials: ILoginRequest = req.body;
       const Token: void | IAuthTokens = await this.mentorAuthUsecase.handleMentorLogin(credentials);
@@ -57,7 +57,7 @@ export default class MentorAuthController implements IMentorAuthController {
     }
   }
 
-  async MentorLogoutRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async mentorLogoutRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       res.clearCookie("mentorRefreshToken", { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax" });
       res.status(HttpStatus.OK).json({ message: SuccessMessages.LOGOUT_SUCCESS });

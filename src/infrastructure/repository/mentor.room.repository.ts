@@ -1,15 +1,15 @@
 import {  PrismaClient } from "@prisma/client";
-import IMentorRoomRepository from "../../interface/Irepositories/Imentor.room.respository";
+import {IMentorRoomRepository} from "../../interface/Irepositories/Imentor.room.respository";
 import { IMentorRoom, ITransaction } from "../../domain/entities/mentor.entities";
 
-export default class MentorRoomRepository implements IMentorRoomRepository {
+export default class mentorRoomRepository implements IMentorRoomRepository {
     private prisma: PrismaClient
 
     constructor(prisma: PrismaClient) {
         this.prisma = prisma
     }
 
-async CreateMentorRoom(data: IMentorRoom): Promise<IMentorRoom | void> {
+async createMentorRoom(data: IMentorRoom): Promise<IMentorRoom | void> {
     return await this.prisma.mentorSession.create({
         data:{
             mentorId:data.mentorId,

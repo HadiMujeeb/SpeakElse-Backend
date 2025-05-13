@@ -10,5 +10,5 @@ export interface ISocketioUsecase {
   updateAudioStatus(socket: Socket, roomID: string): void;
   updateVideoStatus(socket: Socket, roomID: string): void;
   handleDisconnect(socket: Socket): void;
-  handleLeaveRoom(socket: Socket, roomID: string): void;
+  handleLeaveRoom(socket: Socket, roomID: string,userId:string): void;
 }

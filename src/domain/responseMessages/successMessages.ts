@@ -34,5 +34,7 @@ export const SuccessMessages = {
     REFUND_SUCCESS:'Refund successfull',
     SESSION_CANCELLED:'Session cancelled successfully.',
     SESSION_RESCHEDULED:'Session rescheduled successfully.',
+    RETRIEVE_ALL_ROOMS: 'Retrieved all rooms successfully.',
+
 
 };

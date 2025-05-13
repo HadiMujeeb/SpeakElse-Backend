@@ -14,3 +14,4 @@ export const ErrorMessages = {
     USER_BLOCKED: "Access denied. Your account has been blocked. Please contact support for further assistance.",
     PASSWORD_MISMATCH: "Password mismatch. Please make sure both passwords match."
 };
+    

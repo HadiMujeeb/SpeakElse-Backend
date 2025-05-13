@@ -2,9 +2,9 @@ import { PrismaClient } from "@prisma/client";
 const cron = require("node-cron");
 // Interface imports
 import { IUser } from "../../domain/entities/user.entities";
-import IUserAuthRepository from "../../interface/Irepositories/Iuser.auth.repository";
+import {IUserAuthRepository} from "../../interface/Irepositories/Iuser.auth.repository";
 import { IRegistrationRequest } from "../../interface/Icontrollers/Iuser.auth.controller";
-import IPasswordTokenCredentials, { IOTPCredentials } from "../../interface/Iusecase/Iuser.auth.usecase";
+import {IPasswordTokenCredentials,IOTPCredentials } from "../../interface/Iusecase/Iuser.auth.usecase";
 
 
 export class userAuthRepository implements IUserAuthRepository {
@@ -13,11 +13,11 @@ export class userAuthRepository implements IUserAuthRepository {
   constructor(prisma: PrismaClient) {
     this.prisma = prisma;
 
-    // Schedule the cron job to delete expired sessions
-    cron.schedule("*/2 * * * *", async () => {
-      console.log("Checking for expired sessions...");
-      await this.deleteExpiredOtp();
-    });
+    // // Schedule the cron job to delete expired sessions
+    // cron.schedule("*/2 * * * *", async () => {
+    //   console.log("Checking for expired sessions...");
+    //   await this.deleteExpiredOtp();
+    // });
   }
 
   async createNewUser(newUserData: IRegistrationRequest): Promise<void> {
@@ -60,6 +60,19 @@ export class userAuthRepository implements IUserAuthRepository {
     }
   }
 
+  async findUserIsExist(email:string):Promise<boolean>{
+    try {
+       const isExist = await this.prisma.user.findUnique({
+        where:{
+          email
+        }
+       })
+       return !!isExist
+    } catch (error) {
+      throw error
+    }
+  }
+
   async markUserAsVerified(email: string): Promise<void> {
     try {
       await this.prisma.user.update({
@@ -71,7 +84,7 @@ export class userAuthRepository implements IUserAuthRepository {
     }
   }
 
-  async findUserById(id: string): Promise<IUser | null> {
+  async findUserById(id: string): Promise<IUser|void> {
     try {
       const userData = await this.prisma.user.findUnique({
         where: {
@@ -79,7 +92,7 @@ export class userAuthRepository implements IUserAuthRepository {
         },
         include:{userWallet:true}
       });
-      return userData;
+      if(userData) return userData
     } catch (err) {
       throw err;
     }
@@ -103,23 +116,42 @@ export class userAuthRepository implements IUserAuthRepository {
     }
   }
 
-  async saveOTPForEmail(OtpData: IOTPCredentials): Promise<void | never> {
+  async saveOTPForEmail(OtpData: IOTPCredentials): Promise<void> {
     try {
-      await this.prisma.otp.create({
-        data: { email: OtpData.email, otp: OtpData.otp, expiresAt: OtpData.expiresAt },
+      await this.prisma.user.update({
+        where: { email: OtpData.email },
+        data: {
+          otp: OtpData.otp,
+          otpExpireTime: OtpData.expiresAt,
+        },
       });
     } catch (err) {
       throw err;
     }
   }
+  
 
-  async findOTPByEmail(email: string): Promise<IOTPCredentials | null> {
+  async findOTPByEmail(email: string): Promise<{otp: string; expiresAt: Date }|void> {
     try {
-      return await this.prisma.otp.findUnique({ where: { email } });
+      const data = await this.prisma.user.findUnique({
+        where: { email },
+        select: {
+          otp: true,
+          otpExpireTime: true,
+        },
+      });
+  
+      if (data?.otp&&data?.otpExpireTime) {
+        return {
+          otp: data.otp,
+          expiresAt: data.otpExpireTime,
+        };
+      }
     } catch (err) {
       throw err;
     }
   }
+  
 
   async removeOTPByEmail(email: string): Promise<void> {
     try {

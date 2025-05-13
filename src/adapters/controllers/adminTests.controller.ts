@@ -1,14 +1,14 @@
 import { Request, Response,NextFunction } from "express";
-import LanguageTestUseCase from "../../usecase/adminTests.usecase";
+import languageTestUseCase from "../../usecase/adminTests.usecase";
 import { IQuestions } from "../../domain/entities/tests.entites";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
 import { IAdminTestsController } from "../../interface/Icontrollers/IadminTests.controller";
 
-export default class LanguageTestController implements IAdminTestsController {
-  private languageTestUseCase: LanguageTestUseCase;
+export default class languageTestController implements IAdminTestsController {
+  private languageTestUseCase: languageTestUseCase;
 
-  constructor(languageTestUseCase: LanguageTestUseCase) {
+  constructor(languageTestUseCase: languageTestUseCase) {
     this.languageTestUseCase = languageTestUseCase;
   }
 

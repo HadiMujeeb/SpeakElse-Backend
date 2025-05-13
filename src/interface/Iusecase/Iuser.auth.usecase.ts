@@ -1,9 +1,10 @@
-import { VoidExpression } from "typescript";
+
 import { ILoginRequest } from "../Icontrollers/Iuser.auth.controller";
 import { IRegistrationRequest } from "../Icontrollers/Iuser.auth.controller";
-import { IOtpVerification } from "../Icontrollers/Iuser.auth.controller";
 import { IUser } from "../../domain/entities/user.entities";
 import { IAuthTokens } from "../Icontrollers/Iuser.auth.controller";
+
+
 export interface IUserAuthUseCase {
   registerUser(newUserData: IRegistrationRequest): Promise<void>;
   handleOtpConfirmation( email: string,enteredOtp: string): Promise<IAuthTokens | void>;
@@ -15,7 +16,7 @@ export interface IUserAuthUseCase {
   sentEmailResetPassword(email: string): Promise<void>;
 }
 
-export default interface IPasswordTokenCredentials {
+export interface IPasswordTokenCredentials {
   resetToken: string | null;
   resetTokenExpiry: Date | null;
 }

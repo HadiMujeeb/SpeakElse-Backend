@@ -1,0 +1,594 @@
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:31:24.106Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:31:24.267Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:31:25.595Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:32:06.871Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:35:41.356Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:35:46.027Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:35:58.892Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:36:05.647Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:36:49.669Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:37:12.694Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:37:14.298Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:38:27.365Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:38:32.499Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:41:26.634Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:43:53.136Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:44:45.205Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:47:16.722Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:48:40.018Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:48:57.035Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:49:09.715Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-09T18:51:01.661Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2025-05-10T06:53:08.398Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2025-05-10T06:53:10.016Z'
+}
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2025-05-10T06:53:11.107Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T06:53:34.909Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:05:24.768Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:05:35.669Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:05:55.347Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:11:02.679Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:13:59.436Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:16:00.621Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:16:48.417Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:17:15.452Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:17:46.295Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:17:47.172Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:19:28.398Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:19:45.695Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:20:02.754Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:20:28.210Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:20:36.737Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:20:44.349Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:20:50.279Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:21:06.280Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:21:08.847Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:21:18.814Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:21:20.248Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:21:21.438Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:21:23.438Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:21:50.575Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:21:52.975Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:22:01.582Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:22:04.372Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:22:15.986Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:22:21.243Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:22:28.743Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:22:38.111Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:22:51.083Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:24:13.409Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:24:18.275Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:24:25.705Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:24:28.218Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:24:30.108Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:24:32.230Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:25:32.889Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:25:33.969Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:25:50.470Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:25:52.396Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:25:58.435Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:26:12.354Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:28:57.505Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:28:58.665Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:45:57.234Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:51:43.455Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:53:43.231Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:54:01.367Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:54:37.900Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:55:24.620Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:55:30.939Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T07:55:34.805Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:13:31.730Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:14:07.917Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:14:27.689Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:14:29.406Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:14:42.153Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:14:54.672Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:15:03.942Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:17:13.858Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:17:21.498Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:18:55.741Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:23:24.640Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:25:19.489Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:25:21.623Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:28:44.226Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:31:30.990Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:33:00.817Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:33:12.652Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T08:35:45.596Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T09:01:40.632Z'
+}
+{
+  name: 'PrismaClientUnknownRequestError',
+  clientVersion: '5.21.1',
+  level: 'error',
+  timestamp: '2025-05-10T09:10:20.056Z'
+}

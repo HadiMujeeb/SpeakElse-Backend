@@ -1,7 +1,7 @@
-// src/usecase/socket.usecase.ts
-import { Socket } from 'socket.io';
-import { SocketioRepository } from '../infrastructure/repository/socketio.repository';
+import { Socket, Server } from 'socket.io';
+import { socketioRepository } from '../infrastructure/repository/socketio.repository';
 import { ISocketioUsecase } from '../interface/Iusecase/Isocketio.usecase';
+import { IMessage } from '../domain/entities/chat.entities';
 
 export interface userData {
   userId: string;
@@ -10,40 +10,32 @@ export interface userData {
   socketId: string;
 }
 
-export class socketioUseCase implements ISocketioUsecase {
-  constructor(private RoomSocketioRepository: SocketioRepository) {}
+export default class socketioUseCase implements ISocketioUsecase {
+  constructor(private RoomSocketioRepository: socketioRepository, private io: Server) {}
 
-  // Save user data
   async handleUserData(socket: Socket, userData: { userId: string; username: string; avatar: string }): Promise<void> {
     await this.RoomSocketioRepository.saveUser(socket.id, userData);
   }
 
-  // Handle user joining a room
   async handleJoinRoom(socket: Socket, roomID: string): Promise<void> {
     const user: userData | undefined = await this.RoomSocketioRepository.getUser(socket.id);
-    console.log('User data:', user);
-
     if (user) {
       const room: userData[] | undefined = await this.RoomSocketioRepository.getRoomUsers(roomID);
-      console.log('Room users:', room);
       if (room) {
         const existingUser = room.find((u) => u.userId === user.userId);
-        console.log('Existing user:', existingUser);
-
         if (existingUser) {
-          console.log(`User ${user.userId} is already in room ${roomID}. Removing and re-adding.`);
           await this.RoomSocketioRepository.removeUserFromRoom(existingUser.socketId, roomID);
+          // await this.handleRoomLeaveCountUpdated(socket, roomID, user.userId);
         }
       }
-
       await this.RoomSocketioRepository.addUserToRoom(socket, roomID);
+      await this.RoomSocketioRepository.updateJoinedCount(roomID);
     } else {
       console.error(`User with socket ID ${socket.id} not found.`);
       await this.RoomSocketioRepository.addUserToRoom(socket, roomID);
     }
   }
 
-  // Handle sending a chat message
   async handleChatMessage(socket: Socket, message: string, roomID: string): Promise<void> {
     const user = await this.RoomSocketioRepository.getUser(socket.id);
     if (user) {
@@ -52,36 +44,74 @@ export class socketioUseCase implements ISocketioUsecase {
     }
   }
 
-  // Handle sending a WebRTC signal
-  async handleSendingSignal(
-    socket: Socket,
-    payload: { userToSignal: string; signal: string; callerID: string }
-  ): Promise<void> {
+  async handleSendingSignal(socket: Socket, payload: { userToSignal: string; signal: string; callerID: string }): Promise<void> {
     await this.RoomSocketioRepository.sendSignalToUser(socket, payload);
   }
 
-  // Handle returning a WebRTC signal
   async handleReturningSignal(socket: Socket, payload: { signal: string; callerID: string }): Promise<void> {
     await this.RoomSocketioRepository.returnSignalToCaller(socket, payload);
   }
 
-  // Update audio status for a room
   async updateAudioStatus(socket: Socket, roomID: string): Promise<void> {
     await this.RoomSocketioRepository.updateAudioStatus(socket, roomID);
   }
 
-  // Update video status for a room
   async updateVideoStatus(socket: Socket, roomID: string): Promise<void> {
     await this.RoomSocketioRepository.updateVideoStatus(socket, roomID);
   }
 
-  // Handle user disconnect
   async handleDisconnect(socket: Socket): Promise<void> {
     await this.RoomSocketioRepository.removeUser(socket.id);
   }
 
-  // Handle user leaving a room
-  async handleLeaveRoom(socket: Socket, roomID: string): Promise<void> {
+  async handleLeaveRoom(socket: Socket, roomID: string, userId: string): Promise<void> {
     await this.RoomSocketioRepository.removeUserFromRoom(socket.id, roomID);
+    await this.handleRoomLeaveCountUpdated(socket, roomID, userId);
+    await this.RoomSocketioRepository.updateJoinedCount(roomID);
+    await this.RoomSocketioRepository.scheduleRoomDeletionIfEmpty(roomID);
+  }
+
+  async handleJoinPrivateChat(socket: Socket, chatId: string): Promise<void> {
+    const user = await this.RoomSocketioRepository.getUser(socket.id);
+    if (user) {
+      const room = this.io.sockets.adapter.rooms.get(chatId);
+      if (room?.size === 2) return; // max 2 users in private chat
+      socket.join(chatId);
+      socket.to(chatId).emit('friend online', 'online');
+    }
+  }
+
+  async handlePrivateChatMessage(socket: Socket, message: IMessage): Promise<void> {
+    socket.to(message.chatId).emit('private chat message', message);
+  }
+
+  async handleLeavePrivateChat(socket: Socket, chatId: string, lastTime: string): Promise<void> {
+    socket.leave(chatId);
+    socket.to(chatId).emit('friend offline', lastTime);
+  }
+
+  async handleRoomCreated(socket: Socket, roomData: any): Promise<void> {
+    socket.broadcast.emit('room-created', roomData);
+  }
+
+  async handleRoomCountUpdated(socket: Socket, roomId: string, participantId: string): Promise<void> {
+    socket.broadcast.emit('room-count-updated', { roomId, participantId, count: 1 });
+  }
+
+  async handleRoomLeaveCountUpdated(socket: Socket, roomId: string, participantId: string): Promise<void> {
+    socket.broadcast.emit('room-count-updated', { roomId, participantId, count: -1 });
+  }
+
+  async handleGetAllRoomsInfo(socket: Socket): Promise<void> {
+    const roomsInfo = await this.RoomSocketioRepository.getAllRoomsInfo();
+    socket.emit('rooms info', roomsInfo);
+  }
+
+  async handleAddRoom(socket: Socket, roomData: any): Promise<void> {
+    try {
+      await this.RoomSocketioRepository.addRoom(roomData);
+    } catch (error) {
+      console.error('Error adding room:', error);
+    }
   }
 }

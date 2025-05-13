@@ -1,4 +1,4 @@
-import winston from "winston";
+ import winston from "winston";
 import winstonDaily from "winston-daily-rotate-file";
 import path  from "path";
 

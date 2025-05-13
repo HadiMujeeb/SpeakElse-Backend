@@ -7,7 +7,7 @@ import { IUser } from "../domain/entities/user.entities";
 import { JWT } from "../domain/services/jwt.service";
 import { IAuthTokens } from "../interface/Icontrollers/Iuser.auth.controller";
 
-export default class AdminUseCase {
+export default class adminUseCase {
   constructor(
     private adminRepository: adminRepository,
     private PasswordService: PasswordService

@@ -1,13 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import ProfileUsecase from "../../usecase/userProfile.usecase";
-import IuserProfileController from "../../interface/Icontrollers/IuserProfile.controller";
+import {IuserProfileController} from "../../interface/Icontrollers/IuserProfile.controller";
 import { IComment, IReport, IUser, IuserRating } from "../../domain/entities/user.entities";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
 import { IQuestions } from "../../domain/entities/tests.entites";
 
 export default class userProfileController implements IuserProfileController {
-  constructor(private profileUsecase: ProfileUsecase) {}
+  private profileUsecase: ProfileUsecase
+  constructor(profileUsecase: ProfileUsecase) {
+    this.profileUsecase = profileUsecase
+  }
 
   async requestEditUserData(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {

@@ -1,15 +1,16 @@
-import IMentorRoomUseCase from "../interface/Iusecase/Imentor.room.usecase";
-import MentorRoomRepository from "../infrastructure/repository/mentor.room.repository";
+import {IMentorRoomUseCase} from "../interface/Iusecase/Imentor.room.usecase";
+import mentorRoomRepository from "../infrastructure/repository/mentor.room.repository";
 import { IMentorRoom, IStatus, ITransaction } from "../domain/entities/mentor.entities";
-export default class MentorRoomUseCase implements IMentorRoomUseCase {
- private mentorRoomRepository: MentorRoomRepository
- constructor(mentorRoomRepository: MentorRoomRepository) {
+
+export default class mentorRoomUseCase implements IMentorRoomUseCase {
+ private mentorRoomRepository: mentorRoomRepository
+ constructor(mentorRoomRepository: mentorRoomRepository) {
     this.mentorRoomRepository = mentorRoomRepository
  }
 
- async CreateMentorRoom(data: IMentorRoom): Promise<IMentorRoom | void> {
+ async createMentorRoom(data: IMentorRoom): Promise<IMentorRoom | void> {
     try {
-        const createMentorRoom = await this.mentorRoomRepository.CreateMentorRoom(data);
+        const createMentorRoom = await this.mentorRoomRepository.createMentorRoom(data);
         return createMentorRoom
     } catch (error) {
         throw error

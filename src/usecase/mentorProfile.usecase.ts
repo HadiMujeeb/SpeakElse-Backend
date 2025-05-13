@@ -1,5 +1,5 @@
 import { IComment, IUser } from "../domain/entities/user.entities";
-import IMentorProfileUseCase from "../interface/Iusecase/ImentorProfile.usecase";
+import {IMentorProfileUseCase} from "../interface/Iusecase/ImentorProfile.usecase";
 import { HttpStatus } from "../domain/responseStatus/httpcode";
 import { ErrorMessages } from "../domain/responseMessages/errorMessages";
 import mentorProfileRepository from "../infrastructure/repository/mentor.profileRepository";

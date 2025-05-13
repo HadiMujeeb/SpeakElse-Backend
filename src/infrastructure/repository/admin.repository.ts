@@ -4,6 +4,7 @@ import prisma from "../config/prismaCient.config";
 import bcrypt from "bcryptjs";
 
 export default class adminRepository {
+  
   private async findUserByEmail(email: string) {
     return await prisma.user.findUnique({
       where: { email },

@@ -1,11 +1,11 @@
-import LanguageTestRepository from "../infrastructure/repository/adminTests.repository";
+import languageTestRepository from "../infrastructure/repository/adminTests.repository";
 import { IQuestions } from "../domain/entities/tests.entites";
 import { IAdminTestsUseCase } from "../interface/Iusecase/IadminTests.usecase";
 
-export default class LanguageTestUseCase implements IAdminTestsUseCase {
-  private languageTestRepository: LanguageTestRepository;
+export default class languageTestUseCase implements IAdminTestsUseCase {
+  private languageTestRepository: languageTestRepository;
 
-  constructor(languageTestRepository: LanguageTestRepository) {
+  constructor(languageTestRepository: languageTestRepository) {
     this.languageTestRepository = languageTestRepository;
   }
 

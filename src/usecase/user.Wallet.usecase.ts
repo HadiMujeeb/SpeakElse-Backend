@@ -1,8 +1,9 @@
 
 import userWalletRepository from "../infrastructure/repository/user.Wallet.repository";
 import { IMentorRoom, IStatus, ITransaction } from "../domain/entities/mentor.entities";
-import IUserWalletUseCase from "../interface/Iusecase/Iuser.wallet.usecase";
-export default class UserWalletUseCase implements IUserWalletUseCase {
+import {IUserWalletUseCase} from "../interface/Iusecase/Iuser.wallet.usecase";
+
+export default class userWalletUseCase implements IUserWalletUseCase {
     private userWalletRepository: userWalletRepository;
     constructor(userWalletRepository: userWalletRepository) {
         this.userWalletRepository = userWalletRepository;

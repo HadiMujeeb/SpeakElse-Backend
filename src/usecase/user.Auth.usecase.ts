@@ -7,9 +7,10 @@ import { JWT } from "../domain/services/jwt.service";
 import { PasswordService } from "../domain/services/password.services"; 
 import { generateOTP } from "../domain/utils/generateOTP.util"; 
 import { HttpStatus } from "../domain/responseStatus/httpcode"; 
-import { ErrorMessages } from "../domain/responseMessages/errorMessages";  
-
-export default class UserAuthUseCase implements IUserAuthUseCase { 
+import { ErrorMessages } from "../domain/responseMessages/errorMessages";
+import { emailRegex } from "../domain/utils/regexFormat.util";  
+import { verifyGoogleIdToken } from "../domain/services/auth.google.services";
+export default class userAuthUseCase implements IUserAuthUseCase { 
   private UserAuthRepository: userAuthRepository; 
   private mailerServices: MailerServices; 
   private PasswordService: PasswordService;
@@ -26,7 +27,8 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
 
   async handleUserLogin(credentials: ILoginRequest): Promise<{ accessToken: string; refreshToken: string } | void> { 
     try { 
-      const { email, password } = credentials; 
+      const { email, password } = credentials;
+      if(!emailRegex.test(email)) throw {status:HttpStatus.BAD_REQUEST,message:ErrorMessages.INVALID_CREDENTIALS}
       const isEmailExisted = await this.UserAuthRepository.findUserByEmail(email); 
       if ((isEmailExisted && !isEmailExisted.isVerified ) || !isEmailExisted) { 
         throw { status: HttpStatus.NOT_FOUND, message: ErrorMessages.USER_NOT_FOUND }; 
@@ -46,8 +48,31 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
     } 
   }
 
+  async handleGoogleLogin(idToken: any): Promise<{ accessToken: string; refreshToken: string }> {
+    try {
+      const googleUser = await verifyGoogleIdToken(idToken);
+      if (!googleUser || !googleUser.email) {
+        throw {status: HttpStatus.NOT_FOUND,message: ErrorMessages.USER_NOT_FOUND};
+      }
+      const existingUser = await this.UserAuthRepository.findUserByEmail(googleUser.email);
+      if (!existingUser || !existingUser.isVerified) {
+        throw {status: HttpStatus.NOT_FOUND, message: ErrorMessages.USER_NOT_FOUND};
+      }
+      if (existingUser.role === "ADMIN") {
+        throw {status: HttpStatus.NOT_FOUND,message: ErrorMessages.USER_NOT_FOUND,};
+      }
+      const accessToken = await JWT.generateToken(existingUser.id);
+      const refreshToken = await JWT.refreshToken(existingUser.id);
+      return { accessToken, refreshToken };
+    } catch (error) {
+      throw error;
+    }
+  }
+  
+
   async registerUser(newUserData: IRegistrationRequest): Promise<void> { 
-    try { 
+    try {
+       
       const isEmailExisted = await this.UserAuthRepository.findUserByEmail(newUserData.email); 
       if (isEmailExisted && isEmailExisted.isVerified) { 
         throw { status: HttpStatus.BAD_REQUEST, message: ErrorMessages.EMAIL_ALREADY_EXISTS }; 
@@ -80,10 +105,10 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
       }
       const recordOtp = await this.UserAuthRepository.findOTPByEmail(email); 
       const userData = await this.UserAuthRepository.findUserByEmail(email);
-      if (!recordOtp) { 
-        throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.OTP_EXPIRED }; 
-      }
-      if (enteredOtp === recordOtp.otp) { 
+      if (!recordOtp || !recordOtp.otp || recordOtp.expiresAt < new Date()) {
+        throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.OTP_EXPIRED };
+      }      
+      if (enteredOtp == recordOtp.otp) { 
         await this.UserAuthRepository.markUserAsVerified(email); 
         const accessToken = await JWT.generateToken(userData!.id); 
         const refreshToken = await JWT.refreshToken(userData!.id); 
@@ -102,7 +127,6 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
       if (!user) { 
         throw new Error("User not found"); 
       }
-      await this.UserAuthRepository.removeOTPByEmail(email); 
       await this.sendVerificationOTP(user.name, email); 
     } catch (err) { 
       throw err; 
@@ -111,7 +135,7 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
 
   async validateAccessToken(accessToken: string, refreshToken: string): Promise<{ accessToken: string; userData: IUser | null }> { 
     try { 
-      let userData: IUser | null = null; 
+      let userData 
       const decodedToken = await JWT.verifyToken(accessToken); 
       if (typeof decodedToken === "object" && decodedToken !== null && "id" in decodedToken) { 
         userData = await this.UserAuthRepository.findUserById(decodedToken.id); 
@@ -130,13 +154,13 @@ export default class UserAuthUseCase implements IUserAuthUseCase {
         } 
         throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.INVALID_REFRESH_TOKEN }; 
       } 
-    } catch (err: any) { 
-      let userData: IUser | null = null; 
+    } catch (err: any) {  
+      let userData 
       if (err.name === "TokenExpiredError") { 
         const refreshResponse = await this.refreshAccessToken(refreshToken); 
         if (refreshResponse.accessToken) { 
           userData = await this.UserAuthRepository.findUserById(refreshResponse.userId); 
-          return { accessToken: refreshResponse.accessToken, userData }; 
+          if(userData) return { accessToken: refreshResponse.accessToken, userData }; 
         } 
         throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.INVALID_REFRESH_TOKEN }; 
       }

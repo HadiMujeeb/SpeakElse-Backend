@@ -1,9 +1,8 @@
 import IApplication from "../../domain/entities/mentor.entities";
 import { PrismaClient } from "@prisma/client";
 import { IAdminMentorFormRepository } from "../../interface/Irepositories/Iadmin.mentorform.repository";
-import { IApprovalStatus } from "../../domain/entities/admin.entities";
 
-export default class AdminMentorFormRepository implements IAdminMentorFormRepository {
+export default class adminMentorFormRepository implements IAdminMentorFormRepository {
     
     private prisma: PrismaClient;
 

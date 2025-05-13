@@ -1,6 +1,6 @@
 import {Request,Response, NextFunction } from "express";
 
-export default interface IMentorRoomController {
+export interface IMentorRoomController {
     requestCreateRoom(req: Request, res: Response, next: NextFunction): Promise<void>;
     requestUpdateRoom(req: Request, res: Response, next: NextFunction): Promise<void>;
     requestGetAllRooms(req: Request, res: Response, next: NextFunction): Promise<void>;

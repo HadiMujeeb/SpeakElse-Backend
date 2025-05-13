@@ -1,9 +1,8 @@
-import { Request, response, NextFunction } from "express";
 import { IComment, IReport, IUser, IuserRating } from "../../domain/entities/user.entities";
 
-export default interface IUserProfileRepository {
-  updateUserData(MemberData: IUser): Promise<void> | never;
-  followUnfollow(userId: string, friendId: string): Promise<void>;
+export interface IUserProfileRepository {
+    updateUserData(MemberData: IUser): Promise<void> | never;
+    followUnfollow(userId: string, friendId: string): Promise<void>;
     followerUnfollower(userId: string, friendId: string): Promise<void>;
     findFriendinFollowing(userId: string, friendId: string): Promise<string[]>;
     findAllfollowings(userId: string): Promise<string[]>

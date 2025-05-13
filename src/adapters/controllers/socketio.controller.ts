@@ -1,10 +1,11 @@
 import { Server as HttpServer } from 'http';
 import { Server } from 'socket.io';
 import { PrismaClient } from '@prisma/client';
-import { SocketioRepository } from '../../infrastructure/repository/socketio.repository';
-import { socketioUseCase } from '../../usecase/socketio.usecase';
+import { socketioRepository } from '../../infrastructure/repository/socketio.repository';
+import socketioUseCase  from '../../usecase/socketio.usecase';
+import { IMessage } from '../../domain/entities/chat.entities';
 
-export class SocketioController {
+export class socketioController {
   private io: Server;
   private prisma: PrismaClient;
 
@@ -16,9 +17,9 @@ export class SocketioController {
         credentials: true,
       },
     });
-
-    const roomSocketioRepository = new SocketioRepository(this.io, this.prisma); // Pass prisma instance
-    const roomSocketioUseCase = new socketioUseCase(roomSocketioRepository);
+    
+    const roomSocketioRepository = new socketioRepository(this.io, this.prisma,); // Pass prisma instance
+    const roomSocketioUseCase = new socketioUseCase(roomSocketioRepository,this.io);
 
     this.initializeSocketEvents(roomSocketioUseCase);
   }
@@ -35,7 +36,19 @@ export class SocketioController {
       socket.on('update audio status', (roomID) => roomSocketioUseCase.updateAudioStatus(socket, roomID));
       socket.on('update video status', (roomID) => roomSocketioUseCase.updateVideoStatus(socket, roomID));
       socket.on('disconnect', () => roomSocketioUseCase.handleDisconnect(socket));
-      socket.on('leave room', (roomID) => roomSocketioUseCase.handleLeaveRoom(socket, roomID));
+      socket.on('leave room', (roomID,userId) => roomSocketioUseCase.handleLeaveRoom(socket, roomID,userId));
+
+
+      socket.on('join private chat', (chatId: string) => roomSocketioUseCase.handleJoinPrivateChat(socket, chatId));
+      socket.on('private chat message', (message: IMessage) => roomSocketioUseCase.handlePrivateChatMessage(socket, message));
+      socket.on('leave private chat', (chatId: string, lastTime: string) => roomSocketioUseCase.handleLeavePrivateChat(socket, chatId, lastTime));
+
+      socket.on('room-created', (roomData) => roomSocketioUseCase.handleRoomCreated(socket, roomData));
+      socket.on('update-room-count', ({ roomId, participantId }) => roomSocketioUseCase.handleRoomCountUpdated(socket, roomId, participantId));
+      socket.on('get all rooms info', () => roomSocketioUseCase.handleGetAllRoomsInfo(socket));
+
+      socket.on('add-room', (roomData) => roomSocketioUseCase.handleAddRoom(socket, roomData));
+
     });
   }
 }

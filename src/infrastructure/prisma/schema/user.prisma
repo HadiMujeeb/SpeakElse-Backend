@@ -13,6 +13,8 @@ model User {
     isBlocked           Boolean               @default(false)
     resetToken          String?
     resetTokenExpiry    DateTime?
+    otp                 String?               // OTP code for verification
+    otpExpireTime       DateTime?
     comments            Comment[] 
     rooms               Room[]                @relation("RoomParticipants")
     mentorApplications  Mentor[]     

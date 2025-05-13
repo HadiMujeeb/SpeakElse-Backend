@@ -34,6 +34,7 @@ export class SocketService {
           }));
           console.log("other users",otherUsers);
         socket.emit('all users', otherUsers, roomID);
+        this.sendRoomInfoToAllUsers(roomID);
         // socket.to(roomID).emit('user joined',  this.users[socket.id] );
       });
 
@@ -81,6 +82,7 @@ export class SocketService {
       socket.on('leave room', (roomID: string) => {
         socket.leave(roomID);
         socket.to(roomID).emit('user left', { userId: socket.id });
+        this.sendRoomInfoToAllUsers(roomID);
       });
    
 
@@ -102,6 +104,60 @@ export class SocketService {
       socket.to(chatId).emit('friend offline',lastTime);
     });
 
+    socket.on('room-created', (roomData) => {
+      console.log('Room created:', roomData);
+      socket.broadcast.emit('room-created', roomData); // broadcast to all others
+    });
+
+    socket.on('update-room-count', ({ roomId, participantId }) => {
+      socket.broadcast.emit('room-count-updated', { roomId, participantId });
+      console.log(`Broadcasted room update: roomId=${roomId}, new participant=${participantId}`);
+    });
+
+    socket.on('get all rooms info', () => {
+      const roomsInfo: {
+        roomId: string;
+        memberCount: number;
+        members: string[]; // Array of userIds
+      }[] = [];
+    
+      const rooms = this.io.sockets.adapter.rooms;
+      const sids = this.io.sockets.adapter.sids;
+    
+      for (const [roomId, sockets] of rooms.entries()) {
+        // Skip individual socket rooms
+        if (sids.get(roomId)) continue;
+    
+        const members = Array.from(sockets)
+          .map((socketId) => this.users[socketId]?.userId)
+          .filter((userId): userId is string => Boolean(userId)); // filter out undefined
+    
+        roomsInfo.push({
+          roomId,
+          memberCount: members.length,
+          members,
+        });
+      }
+    
+      socket.emit('rooms info', roomsInfo);
+    });
     });
   }
+
+  private sendRoomInfoToAllUsers(roomID: string): void {
+    const room = this.io.sockets.adapter.rooms.get(roomID);
+    const members = Array.from(room || [])
+      .map((socketId) => this.users[socketId]?.userId)
+      .filter((userId): userId is string => Boolean(userId));
+
+    const memberCount = members.length;
+    
+    // Emit the updated room info to all users in the room
+    this.io.emit('rooms info', {
+      roomId: roomID,
+      memberCount,
+      members,
+    });
+  }
+
 }

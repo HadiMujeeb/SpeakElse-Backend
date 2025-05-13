@@ -1,5 +1,5 @@
 import { IComment, IReport, IUser, IuserRating } from "../domain/entities/user.entities";
-import IUserProfileUseCase from "../interface/Iusecase/IuserProfile.usecase";
+import {IUserProfileUseCase} from "../interface/Iusecase/IuserProfile.usecase";
 import ProfileRepository from "../infrastructure/repository/userProfile.repository";
 import cloudinaryServices from "../domain/services/cloudinary.services";
 import { HttpStatus } from "../domain/responseStatus/httpcode";
@@ -78,7 +78,9 @@ export default class userProfileUseCase implements IUserProfileUseCase {
 
   async retrieveRatings(userId: string): Promise<IuserRating[]> {
     try {
-      return await this.profileRepository.findAllRatings(userId);
+      const rating = await this.profileRepository.findAllRatings(userId);
+      console.log(rating);
+      return rating
     } catch (error) {
       throw error;
     }

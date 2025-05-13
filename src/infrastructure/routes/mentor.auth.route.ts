@@ -16,9 +16,9 @@ const MentorAuthRoute: Router = express.Router();
 MentorAuthRoute.post("/registerApplication",upload.fields([
     { name: "resume", maxCount: 1 },
     { name: "avatar", maxCount: 1 },
-]),mentorAuthController.MentorApplicationRequest.bind(mentorAuthController));
-MentorAuthRoute.post("/requestMentorLogin", mentorAuthController.MentorLoginRequest.bind(mentorAuthController));
+]),mentorAuthController.mentorApplicationRequest.bind(mentorAuthController));
+MentorAuthRoute.post("/requestMentorLogin", mentorAuthController.mentorLoginRequest.bind(mentorAuthController));
 MentorAuthRoute.get("/requestMentorAuthenticate", mentorAuthController.authenticateTokenRequest.bind(mentorAuthController));
-MentorAuthRoute.get("/requestMentorLogout", mentorAuthController.MentorLogoutRequest.bind(mentorAuthController));
+MentorAuthRoute.get("/requestMentorLogout", mentorAuthController.mentorLogoutRequest.bind(mentorAuthController));
 
 export default MentorAuthRoute;

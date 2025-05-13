@@ -5,15 +5,15 @@ import FriendChatUseCase from "../../usecase/friendChat.usecase";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
 
-export default class FriendChatController implements IFriendChatController {
-    private FriendChatUsecase: FriendChatUseCase
+export default class friendChatController implements IFriendChatController {
+    private friendChatUsecase: FriendChatUseCase
     constructor(FriendChatUsecase: FriendChatUseCase) {
-        this.FriendChatUsecase = FriendChatUsecase
+        this.friendChatUsecase = FriendChatUsecase
     }
    async requestCreateChat(req: Request, res: Response, next: NextFunction): Promise<void> {
        try {
            const { userId, friendId } = req.body;
-           const chat = await this.FriendChatUsecase.createChat(userId, friendId);
+           const chat = await this.friendChatUsecase.createChat(userId, friendId);
            res.status(HttpStatus.CREATED).json({message:SuccessMessages.CHAT_CREATED,chat});
        } catch (error) {
            next(error);
@@ -23,7 +23,7 @@ export default class FriendChatController implements IFriendChatController {
        try {
            const  {userId } = req.query as {userId: string};
         //    console.log("working",userId);
-           const chats: IChat[] = await this.FriendChatUsecase.retrieveAllChats(userId);
+           const chats: IChat[] = await this.friendChatUsecase.retrieveAllChats(userId);
            res.status(HttpStatus.OK).json({message:SuccessMessages.CHATS_RETRIEVED,chats});
        } catch (error) {
            next(error);
@@ -32,7 +32,7 @@ export default class FriendChatController implements IFriendChatController {
 async requestRetrieveChat(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
         const { userId, friendId } = req.body;
-        const chat: IChat|void = await this.FriendChatUsecase.retrieveChat(userId, friendId);
+        const chat: IChat|void = await this.friendChatUsecase.retrieveChat(userId, friendId);
         res.status(HttpStatus.OK).json({message:SuccessMessages.CHAT_RETRIEVED,chat});
     } catch (error) {
         next(error);
@@ -41,7 +41,7 @@ async requestRetrieveChat(req: Request, res: Response, next: NextFunction): Prom
 async requestSendMessage(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
         const messageData:IMessage = req.body;
-        await this.FriendChatUsecase.sendMessage(messageData);
+        await this.friendChatUsecase.sendMessage(messageData);
         res.status(HttpStatus.OK).json({message:SuccessMessages.MESSAGE_SENT});
     } catch (error) {
         next(error);

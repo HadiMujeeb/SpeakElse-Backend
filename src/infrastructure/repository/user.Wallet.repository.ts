@@ -1,7 +1,7 @@
 import { IMentorRoom, ITransaction } from "../../domain/entities/mentor.entities";
 import { IWalletRepository } from "../../interface/Irepositories/Iuser.Wallet.repository";
 import { PrismaClient } from "@prisma/client";
-export default class UserWalletRepository implements IWalletRepository {
+export default class userWalletRepository implements IWalletRepository {
 private prisma: PrismaClient;
 constructor(prisma: PrismaClient) {
     this.prisma = prisma;

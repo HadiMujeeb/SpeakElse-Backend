@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
- "scripts": {
+  "scripts": {
     "build": "tsc",
     "start": "node ./dist/index.js",
     "dev": "nodemon"
@@ -20,6 +20,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
+    "google-auth-library": "^9.15.1",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",

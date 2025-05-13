@@ -1,11 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import { IUser } from "../../domain/entities/user.entities";
-import { IAdminControllerActions } from "../../interface/Icontrollers/Iadmin.controller";
 import { IAdminUserMgmtRepo } from "../../interface/Irepositories/IadminUser.Mgmt.repo";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { ErrorMessages } from "../../domain/responseMessages/errorMessages";
 
-export default class AdminUserMgmtRepository implements IAdminUserMgmtRepo {
+export default class adminUserMgmtRepository implements IAdminUserMgmtRepo {
   private prisma: PrismaClient;
 
   constructor(prisma: PrismaClient) {

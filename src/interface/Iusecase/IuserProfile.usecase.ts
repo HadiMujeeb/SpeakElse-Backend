@@ -1,6 +1,6 @@
 import { IComment, IReport, IUser, IuserRating } from "../../domain/entities/user.entities";
 
-export default interface IUserProfileUseCase {
+export interface IUserProfileUseCase {
   handleEditUserData(memberData: IUser): Promise<void>;
   followUnfollow(userId: string, friendId: string): Promise<void>;
   // followerUnfollower(userId: string, friendId: string): Promise<void>;

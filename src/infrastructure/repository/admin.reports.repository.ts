@@ -1,9 +1,9 @@
 import { MentorSession, PrismaClient} from "@prisma/client";
-import IAdminReportsRepository from "../../interface/Irepositories/Iadmin.reports.repository";
+import {IAdminReportsRepository} from "../../interface/Irepositories/Iadmin.reports.repository";
 import { IResponseReport } from "../../domain/entities/user.entities";
 import { IStatus, ITransaction } from "../../domain/entities/mentor.entities";
 
-export default class AdminReportsRepository implements IAdminReportsRepository {
+export default class adminReportsRepository implements IAdminReportsRepository {
 
     private prisma: PrismaClient;
 

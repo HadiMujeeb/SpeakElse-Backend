@@ -1,15 +1,16 @@
 import { IChat, IMessage } from "../domain/entities/chat.entities";
 import { IFriendChatUsecase } from "../interface/Iusecase/IfriendChat.usecase";
-import FriendChatRepository from "../infrastructure/repository/friendChat.repository";
-export default class FriendChatUseCase implements IFriendChatUsecase {
-    private FriendChatRepository: FriendChatRepository
-    constructor(FriendChatRepository: FriendChatRepository) {
-        this.FriendChatRepository = FriendChatRepository
+import friendChatRepository from "../infrastructure/repository/friendChat.repository";
+
+export default class friendChatUseCase implements IFriendChatUsecase {
+    private friendChatRepository: friendChatRepository
+    constructor(friendChatRepository: friendChatRepository) {
+        this.friendChatRepository = friendChatRepository
     }
    async createChat(userId: string, friendId: string): Promise<IChat> {
         try {
-            const chat = await this.FriendChatRepository.createChat(userId, friendId);
-            const user= await this.FriendChatRepository.findUserById(friendId);
+            const chat = await this.friendChatRepository.createChat(userId, friendId);
+            const user= await this.friendChatRepository.findUserById(friendId);
             if(!user){
                 throw new Error("User not found")
             }
@@ -22,7 +23,7 @@ export default class FriendChatUseCase implements IFriendChatUsecase {
 
     async retrieveAllChats(userId: string): Promise<IChat[]> {
         try {
-            const chats = await this.FriendChatRepository.retrieveAllChats(userId);
+            const chats = await this.friendChatRepository.retrieveAllChats(userId);
             return chats
         } catch (error) {
             throw error
@@ -31,7 +32,7 @@ export default class FriendChatUseCase implements IFriendChatUsecase {
 
     async retrieveChat(userId: string, friendId: string): Promise<IChat | void> {
         try {
-            const chat = await this.FriendChatRepository.retrieveChat(userId, friendId);            
+            const chat = await this.friendChatRepository.retrieveChat(userId, friendId);            
             return chat
         } catch (error) {
             throw error
@@ -40,7 +41,7 @@ export default class FriendChatUseCase implements IFriendChatUsecase {
    }
   async sendMessage(messageData:IMessage): Promise<void> {
        try {
-        await this.FriendChatRepository.sendMessage(messageData);
+        await this.friendChatRepository.sendMessage(messageData);
        } catch (error) {
         throw error
        }

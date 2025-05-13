@@ -1,4 +1,3 @@
-import { Request, Response, NextFunction } from "express";
 import { IUser } from "../../domain/entities/user.entities";
 
 export interface IAdminUserMgmtRepo {

@@ -1,6 +1,6 @@
 import {Request,Response, NextFunction } from "express"
 
-export default  interface IAdminReportsController {
+export interface IAdminReportsController {
     requestRetrieveAllReports(req: Request, res: Response, next: NextFunction): Promise<void>
     requestStatusUpdate(req: Request, res: Response, next: NextFunction): Promise<void>
     requestBlockUnblockUser(req: Request, res: Response, next: NextFunction): Promise<void>

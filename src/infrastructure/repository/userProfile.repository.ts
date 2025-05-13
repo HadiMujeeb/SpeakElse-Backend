@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import IUserProfileRepository from "../../interface/Irepositories/IuserProfile.repository";
+import {IUserProfileRepository} from "../../interface/Irepositories/IuserProfile.repository";
 import { IComment, IReport, IUser, IuserRating } from "../../domain/entities/user.entities";
 
 export default class userProfileRepository implements IUserProfileRepository {
@@ -164,6 +164,7 @@ async findAllRatings(userId: string): Promise<IuserRating[]> {
         },
         createdAt: comment.createdAt,
       }));
+      console.log('rating',ratings)
     return ratings;
   } catch (error) {
     throw error;

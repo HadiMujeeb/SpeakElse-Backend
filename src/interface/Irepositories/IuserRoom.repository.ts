@@ -1,11 +1,11 @@
-import { ITransaction } from "../../domain/entities/mentor.entities";
-import { IRoom } from "../../domain/entities/room.entities";
+import { IReqestUserCreateRoom, IRoom } from "../../domain/entities/room.entities";
 import { IUser } from "../../domain/entities/user.entities";
 
 
-export default interface IuserRoomRepository {
-    CreateUserRoom(data:IRoom): Promise<IRoom|void>;
+export interface IuserRoomRepository {
+    CreateUserRoom(data:IReqestUserCreateRoom): Promise<IRoom|void>;
     findUserById(id: string): Promise<IUser | null>;
-    retrieveAllRooms(page: number, pageSize: number): Promise<{ rooms: IRoom[]; total: number; totalPages: number }>
-    retrieveRoomById(roomId: string): Promise<IRoom[]> 
+    retrieveAllRooms(): Promise<IRoom[]|void>
+    retrieveRoomById(roomId: string): Promise<IRoom[]>;
+    deleteRoom(roomId: string): Promise<void>; 
 }

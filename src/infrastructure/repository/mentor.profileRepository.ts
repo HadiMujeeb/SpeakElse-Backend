@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { IComment, IUser } from "../../domain/entities/user.entities";
-import IMentorProfileRepository from "../../interface/Irepositories/Imentor.profile.repository";
+import {IMentorProfileRepository} from "../../interface/Irepositories/Imentor.profile.repository";
 import IApplication from "../../domain/entities/mentor.entities";
 
 export default class mentorProfileRepository

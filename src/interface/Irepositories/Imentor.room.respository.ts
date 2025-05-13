@@ -1,7 +1,7 @@
 import { IMentorRoom, ITransaction } from "../../domain/entities/mentor.entities";
 
-export default interface IMentorRoomRepository {
-    CreateMentorRoom(data: IMentorRoom): Promise<IMentorRoom | void>;
+export   interface IMentorRoomRepository {
+    createMentorRoom(data: IMentorRoom): Promise<IMentorRoom | void>;
     updateMentorRoom(data: IMentorRoom): Promise<IMentorRoom | void>;
     getAllRooms(): Promise<IMentorRoom[]>;
     joinMentorRoom(roomId: string): Promise<void>;

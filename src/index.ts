@@ -20,17 +20,17 @@ import userWalletRoute from "./infrastructure/routes/user.Wallet.route";
 // middlewire
 import { errorHandler } from "./infrastructure/middlewares/error.middleware";
 import MentorProfileRoute from "./infrastructure/routes/mentor.profile.route";
-import { SocketioRepository } from "./infrastructure/repository/socketio.repository";
-import { socketioUseCase } from "./usecase/socketio.usecase";
-import { SocketioController } from "./adapters/controllers/socketio.controller";
+import { socketioRepository } from "./infrastructure/repository/socketio.repository";
+import socketioUseCase from "./usecase/socketio.usecase";
+import { socketioController } from "./adapters/controllers/socketio.controller";
 import prisma from "./infrastructure/config/prismaCient.config";
 
 
 dotenv.config();
 const app = express();
 const server = createServer(app);
-const socketService = new SocketService(server);
-// const SocketioControllerInstance = new SocketioController(server);
+// const socketService = new SocketService(server);
+const SocketioControllerInstance = new socketioController(server);
 
 
 app.use(express.json());

@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import IAdminMentorFormController from "../../interface/Icontrollers/Iadmin.mentorform.controller";
+import {IAdminMentorFormController} from "../../interface/Icontrollers/Iadmin.mentorform.controller";
 import adminMentorFormUsecase from "../../usecase/admin.mentorform.usecase";
 import { http } from "winston";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { SuccessMessages } from "../../domain/responseMessages/successMessages";
-export default class AdminMentorFormController implements IAdminMentorFormController {
+export default class adminMentorFormController implements IAdminMentorFormController {
     private mentorFormUsecase: adminMentorFormUsecase;
     constructor(mentorFormUsecase: adminMentorFormUsecase) {
         this.mentorFormUsecase = mentorFormUsecase;        
