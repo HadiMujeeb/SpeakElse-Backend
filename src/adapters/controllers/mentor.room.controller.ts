@@ -36,6 +36,7 @@ export default class mentorRoomController implements IMentorRoomController {
     async requestGetAllRooms(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const allRooms = await this.mentorRoomUseCase.requestGetAllRooms();
+            console.log("mentor----")
             res.status(HttpStatus.OK).json({message: SuccessMessages.ROOMS_RETRIEVED,mentorRooms:allRooms});
         } catch (error) {
             next(error);

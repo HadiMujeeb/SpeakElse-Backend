@@ -28,6 +28,7 @@ export default class mentorRoomUseCase implements IMentorRoomUseCase {
   async requestGetAllRooms(): Promise<IMentorRoom[]> {
     try {
         const getAllRooms = await this.mentorRoomRepository.getAllRooms();
+        
         return getAllRooms
     } catch (error) {
         throw error
