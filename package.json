@@ -5,8 +5,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/index.js",
-    "dev": "nodemon",
-     "postinstall": "prisma generate"
+    "dev": "nodemon"
 
   },
   "keywords": [],
