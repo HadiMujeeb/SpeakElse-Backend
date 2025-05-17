@@ -31,9 +31,11 @@ export default class userWalletUseCase implements IUserWalletUseCase {
 
   async refundSessionAmount(data: ITransaction): Promise<void> {
     try {
+
       await this.userWalletRepository.refundSessionAmount(data.userId, data.amount);
       await this.userWalletRepository.refundAmountFromMentor(data.mentorId!, data.amount);
       await this.userWalletRepository.updateTransactionStatus(data.id,  data.transactionId,IStatus.REFUNDED );
+      await this.userWalletRepository.unbookedMentorRoom(data.sessionId,data.userId)
     } catch (error) {
       throw error;
     }

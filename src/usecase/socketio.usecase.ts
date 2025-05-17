@@ -72,13 +72,12 @@ export default class socketioUseCase implements ISocketioUsecase {
   }
 
   async handleJoinPrivateChat(socket: Socket, chatId: string): Promise<void> {
-    const user = await this.RoomSocketioRepository.getUser(socket.id);
-    if (user) {
-      const room = this.io.sockets.adapter.rooms.get(chatId);
-      if (room?.size === 2) return; // max 2 users in private chat
+    const user = this.io.sockets.adapter.rooms.get(chatId);
+      if(user?.size === 2){
+        return;
+      }
       socket.join(chatId);
-      socket.to(chatId).emit('friend online', 'online');
-    }
+      socket.to(chatId).emit('friend online',"online");
   }
 
   async handlePrivateChatMessage(socket: Socket, message: IMessage): Promise<void> {

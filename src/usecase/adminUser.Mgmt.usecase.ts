@@ -4,6 +4,7 @@ import { HttpStatus } from "../domain/responseStatus/httpcode";
 import { ErrorMessages } from "../domain/responseMessages/errorMessages";
 import { PasswordService } from "../domain/services/password.services";
 import adminUserMgmtRepository from "../infrastructure/repository/adminUser.Mgmt.repo";
+import { IMember, IResponseAdminAddMember } from "../domain/entities/admin.entities";
 
 export default class adminUserMgmtUseCase implements IAdminUserMgmtUsecase {
   private adminUserMgmtRepository: adminUserMgmtRepository;
@@ -15,13 +16,14 @@ export default class adminUserMgmtUseCase implements IAdminUserMgmtUsecase {
     this.adminUserMgmtRepository = AdminUserMgmtRepo;
     this.PasswordService = PasswordService;
   }
-  async addMemberToSystem(newMentor: IUser): Promise<void> {
+  async addMemberToSystem(newMentor: IMember): Promise<void|IResponseAdminAddMember> {
     try {
       const hashPassword = await this.PasswordService.hashPassword(
         newMentor.password ?? ""
       );
       newMentor.password = hashPassword;
-      await this.adminUserMgmtRepository.createMember(newMentor);
+      const data =await this.adminUserMgmtRepository.createMember(newMentor);
+      return data
     } catch (error) {
       throw error;
     }

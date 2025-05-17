@@ -48,7 +48,6 @@ export default class mentorAuthController implements IMentorAuthController {
     try {
       const mentorAccessToken = req.header('Authorization')?.replace('Bearer ', '');
       const mentorRefreshToken = req.cookies.mentorRefreshToken;
-      console.log("access token",mentorAccessToken,"refresh token",mentorRefreshToken);
       if (!mentorAccessToken || !mentorRefreshToken) throw { status: HttpStatus.UNAUTHORIZED, message: ErrorMessages.TOKEN_MISSING };
       const MentorData = await this.mentorAuthUsecase.validateAccessToken(mentorAccessToken, mentorRefreshToken);
       res.status(HttpStatus.OK).json({ message: SuccessMessages.ACCESS_GRANTED, mentorData: MentorData.mentorData, accessToken: MentorData.accessToken, status: HttpStatus.OK });

@@ -4,3 +4,21 @@
   level: 'error',
   timestamp: '2025-05-14T07:32:14.967Z'
 }
+{
+  status: 401,
+  message: 'Invalid token. Please try again or log in.',
+  level: 'error',
+  timestamp: '2025-05-14T16:58:50.391Z'
+}
+{
+  status: 404,
+  message: 'User not found.',
+  level: 'error',
+  timestamp: '2025-05-14T16:59:02.758Z'
+}
+{
+  status: 401,
+  message: 'Access denied. Your Cookie has expired. Please log in again to continue.',
+  level: 'error',
+  timestamp: '2025-05-14T16:59:27.022Z'
+}

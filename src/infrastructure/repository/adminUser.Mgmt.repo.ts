@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { IUser } from "../../domain/entities/user.entities";
+import {  IUser } from "../../domain/entities/user.entities";
 import { IAdminUserMgmtRepo } from "../../interface/Irepositories/IadminUser.Mgmt.repo";
 import { HttpStatus } from "../../domain/responseStatus/httpcode";
 import { ErrorMessages } from "../../domain/responseMessages/errorMessages";
+import { IMember, IResponseAdminAddMember } from "../../domain/entities/admin.entities";
 
 export default class adminUserMgmtRepository implements IAdminUserMgmtRepo {
   private prisma: PrismaClient;
@@ -22,21 +23,35 @@ export default class adminUserMgmtRepository implements IAdminUserMgmtRepo {
     }
   }
 
-  async createMember(newMember: IUser): Promise<void | never> {
+  async createMember(newMember: IMember): Promise<void | IResponseAdminAddMember> {
     try {
-      await this.prisma.user.create({
+     const data = await this.prisma.user.create({
         data: {
           email: newMember.email,
           password: newMember.password,
           name: newMember.name,
-          avatar: newMember.avatar,
           profession: newMember.profession,
           country: newMember.country,
           language: newMember.language,
           isVerified: newMember.isVerified,
-          description: newMember.description,
+          role:newMember.role,
         },
       });
+        const response: IResponseAdminAddMember = {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      role: data.role,
+      profession: data.profession??'',
+      country: data.country??'',
+      language: data.language??'',
+      isBlocked: data.isBlocked,
+      isVerified:data.isVerified,
+      avatar:data.avatar??'',
+      createdAt: data.createdAt.toISOString(),
+    };
+
+    return response;
     } catch (error) {
       throw error;
     }

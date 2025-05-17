@@ -27,7 +27,7 @@ export default class languageTestController implements IAdminTestsController {
       const data: IQuestions = req.body;   
       const question: IQuestions = await this.languageTestUseCase.addQuestion(data);
 
-      res.status(HttpStatus.OK).json({ message:SuccessMessages.QUESTION_ADDED,data: question });
+      res.status(HttpStatus.OK).json({ message:SuccessMessages.QUESTION_ADDED,question });
     } catch (error) {
       next(error);
     }

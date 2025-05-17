@@ -67,11 +67,27 @@ constructor(prisma: PrismaClient) {
         throw error
     }
   }
+  async unbookedMentorRoom(roomId: string, userId: string): Promise<void> {
+  try {
+    const room = await this.prisma.mentorSession.findUnique({
+      where: { id: roomId },
+      select: { participants: true }
+    });
+    if (!room) throw new Error('Room not found');
+    const updatedParticipants = room.participants.filter(id => id !== userId);
+    await this.prisma.mentorSession.update({
+      where: { id: roomId },
+      data: { participants: updatedParticipants }
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
 
   
   async paymentofMentor(mentorId: string, amount: number): Promise<void> {
     try {
-      console.log(amount,"wroingggg");
       const mentorAmount = amount * 0.4;
      await this.prisma.mentorWallet.update({
        where:{ mentorId:mentorId },
@@ -110,7 +126,7 @@ constructor(prisma: PrismaClient) {
     } catch (error) {
       throw error;
     }
-}
+} 
 
 async refundAmountFromMentor(mentorId: string, amount: number): Promise<void> {
   try {
@@ -134,6 +150,8 @@ async refundAmountFromMentor(mentorId: string, amount: number): Promise<void> {
       throw error
     }
   }
+
+  
 
 
 }

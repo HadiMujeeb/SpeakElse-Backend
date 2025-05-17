@@ -79,3 +79,4 @@ export interface IuserWallet {
   balance: number;
   transactions?: ITransaction[];
 }
+
