@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config()
+
 import nodemailer from "nodemailer";
 import { otpTemplate } from "../../infrastructure/templates/otp.template";
 import { getResetPasswordEmailTemplate } from "../../infrastructure/templates/resetPassword.template";

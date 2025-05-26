@@ -88,8 +88,8 @@ export default class userAuthUseCase implements IUserAuthUseCase {
 
   async sendVerificationOTP(name: string, email: string): Promise<void> { 
     try { 
-      const otp = await generateOTP.generate(); 
-      const expiresAt = await generateOTP.ExpireDate(); 
+      const otp =  generateOTP.generate(); 
+      const expiresAt = generateOTP.ExpireDate(); 
       const otpData: IOTPCredentials = { name, email, otp, expiresAt }; 
       await this.UserAuthRepository.saveOTPForEmail(otpData); 
       await this.mailerServices.sendEmail(otpData); 

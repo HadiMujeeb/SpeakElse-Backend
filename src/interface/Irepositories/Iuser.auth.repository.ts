@@ -7,7 +7,6 @@ export interface IUserAuthRepository {
   findUserByEmail(email: string): Promise<IUser | null>;
   markUserAsVerified(email: string): Promise<void>;
   findUserById(id: string): Promise<IUser | void>;
-
   saveOTPForEmail(OtpData: IOTPCredentials): Promise<void | never>;
   findOTPByEmail(email: string): Promise<{otp: string; expiresAt: Date }|void>;
   removeOTPByEmail(email: string): Promise<void | never>;

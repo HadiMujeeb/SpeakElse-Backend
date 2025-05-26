@@ -6,44 +6,9 @@
     "auditLog": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\.7ab416237384bd1f635fd5f88e5fc7b37188c30d-audit.json",
     "files": [
         {
-            "date": 1746815484108,
-            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-10-error.log",
-            "hash": "aa85658f7d8e7632221cd8b630fbb498233ecf723344475723709c908081688d"
-        },
-        {
-            "date": 1746954172750,
-            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-11-error.log",
-            "hash": "edfd339748dffae93c3ac755ef3b3c6429b1a3c3bb98d02c4d6ae9c25cd03fdb"
-        },
-        {
-            "date": 1746989917454,
-            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-12-error.log",
-            "hash": "005b06fedc59c20ad89479c65e8cf62335066a3ae78b1138958a6aa668c51938"
-        },
-        {
-            "date": 1747115125329,
-            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-13-error.log",
-            "hash": "50dc24fb29e0e43345c4a3460bc5113cabf04193157fae9f74309d817ea89115"
-        },
-        {
-            "date": 1747207843177,
-            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-14-error.log",
-            "hash": "7995dbf46529bbb665d165568446c67ade291ffcdc036cce6e8608294d66e2d7"
-        },
-        {
-            "date": 1747284319436,
-            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-15-error.log",
-            "hash": "48bfa18a4de2daaf929fb491f9237e21d7ad7f2f9cbe1f8008bc22e4350c9e89"
-        },
-        {
-            "date": 1747333810575,
-            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-16-error.log",
-            "hash": "6bec3920043e84e3851def9692d4e4ded294998fe380af33807705a59ade40d0"
-        },
-        {
-            "date": 1747420237796,
-            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-17-error.log",
-            "hash": "c2a161308a2f73d050a83e70621edd6a2edb9f70b972822c6b3f9dde150c4754"
+            "date": 1748198345191,
+            "name": "C:\\Users\\ADMIN\\Desktop\\PROJECT-2\\backend\\src\\logs\\2025-05-26-error.log",
+            "hash": "ef01c4e6a085fbc29b3456bfd8e7a4b433626438a899ac82ab875e3ca6598ca0"
         }
     ],
     "hashType": "sha256"
