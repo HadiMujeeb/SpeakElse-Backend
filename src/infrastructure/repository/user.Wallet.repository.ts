@@ -74,7 +74,7 @@ constructor(prisma: PrismaClient) {
       select: { participants: true }
     });
     if (!room) throw new Error('Room not found');
-    const updatedParticipants = room.participants.filter(id => id !== userId);
+    const updatedParticipants = room.participants.filter((id: string) => id !== userId);
     await this.prisma.mentorSession.update({
       where: { id: roomId },
       data: { participants: updatedParticipants }
